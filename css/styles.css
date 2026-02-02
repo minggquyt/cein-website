@@ -1,0 +1,281 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    border-bottom: 1px solid lightgray;
+
+}
+
+.header-top {
+    width: 100%;
+    height: 45px;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-top>p {
+    text-align: center;
+}
+
+.header-bottom {
+    background-color: white;
+    padding-inline: 1.875em;
+}
+
+.header-bottom-list {
+    display: flex;
+    gap: 1.25em;
+}
+
+.header-bottom-list li a,
+.header-bottom-left-menu a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.header-bottom-left-menu {
+    display: flex;
+    align-items: center;
+    gap: 1.25em;
+}
+
+.header-bottom-left-menu img {
+    cursor: pointer;
+}
+
+.header-bottom-menu-icon {
+    color: black;
+    font-size: 1.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-product {
+    height: 120px;
+    border-bottom: 1px solid lightgray;
+    padding-top: 35px;
+    padding-left: 20px;
+    display: flex;
+    position: relative;
+}
+
+.filter-product h3 {
+    font-weight: 400;
+}
+
+.filter-options .btn-filter {
+    background-color: white;
+    border-radius: 20px;
+    padding: 2px 20px;
+    border: 1px solid black;
+}
+
+.action-filter {
+    margin-right: 100px;
+}
+
+.action-filter button {
+    background-color: white;
+    border: 0;
+    padding: 0px 10px;
+}
+
+.sort-option {
+    margin-left: 2000px;
+    margin-right: 100px;
+    cursor: pointer;
+}
+
+.sort-option,
+.action-filter button {
+    margin-top: 50px;
+    position: absolute;
+    right: 150px;
+    bottom: 10px;
+}
+
+.btn-filter:hover {
+    background-color: black;
+    color: white;
+    transition: 0.3s;
+}
+
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.product-item {
+    margin-top: 50px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+}
+
+.product-item h3 {
+    padding-top: 10px;
+
+}
+
+.product-item h3,
+.product-item p {
+    text-align: start;
+    margin-left: 20px;
+    font-weight: 550;
+    font-size: 12px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.heart-icon,
+.plus-icon {
+    position: absolute;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.heart-icon {
+    top: 20px;
+    right: 30px;
+
+}
+
+.plus-icon {
+    bottom: 65px;
+    right: 30px;
+}
+
+.heart-icon:hover,
+.plus-icon:hover {
+    border-radius: 100%;
+    background-color: lightgray;
+
+}
+
+.heart-icon:hover {
+    transform: scale(1.4);
+    transition: 0.5s;
+}
+
+.plus-icon:hover {
+    transform: scale(1.4);
+    transition: 0.3s;
+}
+
+/* Large Screen */
+@media screen and (max-width: 2560px) {
+    #product-list {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .sort-option {
+        margin-left: 680px;
+    }
+}
+
+/* Laptop */
+@media screen and (max-width: 1680px) {
+    #product-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .sort-option {
+        margin-left: 500px;
+    }
+
+    .filter-product {
+        height: auto;
+    }
+
+    .filter-options {
+        margin-right: 280px;
+    }
+
+    .btn-filter {
+        margin-bottom: 10px;
+    }
+}
+
+/* Tablet */
+@media screen and (max-width: 1023px) {
+    .filter-product {
+        height: auto;
+    }
+
+    .btn-filter {
+        margin-bottom: 10px;
+    }
+
+    #product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sort-option {
+        margin-left: 120px;
+    }
+
+    .sort-option,
+    .action-filter button {
+        margin-top: 50px;
+        position: absolute;
+        right: 100px;
+        bottom: 10px;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+    #product-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .filter-product {
+        display: block;
+    }
+
+    .filter-options {
+        width: 90%;
+        padding-right: 20px;
+    }
+
+    .sort-option {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .action-filter button {
+        padding: 0;
+        margin-top: 20px;
+    }
+
+    .option {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sort-option,
+    .action-filter button {
+        position: static;
+        padding-bottom: 20px;
+    }
+
+}
