@@ -1,0 +1,76 @@
+@import url(../../css/variable.css);
+footer{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+    flex-wrap: wrap;
+    background-color: var(--secondary-color);
+    padding: 4.6875em 1.875em 8.75em 1.875em;
+}
+.footer-logo{
+    position: absolute;
+    left: 1.875rem;
+    bottom: 1.875rem;
+}
+.left-side{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5625em;
+}
+.left-side > div{
+    width: 192px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.left-side > div > h3{
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: #565656;
+}
+.left-side > div > ul{
+    list-style-type: none;  
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+    gap: 5px;
+    padding: 0;
+}
+
+.right-side{
+    display: flex;
+    flex-direction: column;
+    gap: 0.625em;
+}
+
+.right-side::first-letter{
+    text-transform: uppercase;
+}
+.right-side > form{
+    max-width: 445px;
+    width: 100%;
+    height: 45px;
+    border: 2px solid #D3D4D5;
+}
+.right-side > form > input{
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+}
+.right-side > p > span{
+    text-decoration: underline;
+} 
+.right-side > button{
+    color: white;
+    background-color: var(--accent-color);
+    padding: 0.625em  1.25em 0.625em 1.25em;
+}
+
+@media (min-width: 320px) and (max-width: 1110px) {
+    .right-side{
+        margin: auto;
+    }
+}
