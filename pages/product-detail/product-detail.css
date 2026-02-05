@@ -112,7 +112,9 @@ header {
     justify-content: space-between;
     padding-bottom: 5px;
 }
-
+.pagination li a{
+    color: black;
+}
 .style-with{
     padding-inline: 1.875em;
     display: flex;
