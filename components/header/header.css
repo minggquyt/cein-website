@@ -7,13 +7,16 @@
     align-items: center;
     justify-content: center;
 }
-.header-top > p{
+
+.header-top>p {
     text-align: center;
 }
+
 .header-bottom {
     background-color: var(--primary-color);
     padding-inline: 1.875em;
 }
+
 .header-bottom-list {
     display: flex;
     gap: 1.25em;
@@ -37,10 +40,53 @@
     justify-content: center;
 }
 
+.modal-footer {
+    position: relative;
+}
+
+.modal-footer>a {
+    position: absolute;
+    text-decoration: underline;
+    color: blue;
+    left: 1rem;
+}
+
+.modal-footer>button {
+    width: 100px;
+    height: 40px;
+    border-radius: 0.5rem;
+}
+
+.sign-up-button {
+    background-color: white;
+    color: black;
+}
+
+.sign-in-button {
+    background-color: black;
+    color: white;
+    transition: background-color 0.3s ease-in-out,
+        color 0.3s ease-in-out;
+}
+
+.sign-in-button:hover {
+    background-color: white;
+    color: black;
+}
+
 /* Mobile */
 @media (min-width: 320px) and (max-width: 768px) {
     .header-bottom {
         padding-inline: 1.25em;
     }
+    .modal-footer{
+        justify-content: center;
+    }
+    .modal-footer>button {
+        width: 100%;
+    }
 
+    .modal-footer>a {
+        position: relative;
+    }
 }

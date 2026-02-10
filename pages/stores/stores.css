@@ -1,0 +1,119 @@
+.stores-sections{
+    padding-inline: 1.875em;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.stores-section-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6.25em 0;
+    gap: 1.25em;
+}
+.stores-section-1 > p{
+    max-width: 600px;
+    text-align: center;
+}
+.stores-section-2{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.25em;
+}
+.stores-section-2-leftcontent{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.875em;
+}
+.stores-section-2-leftcontent  > p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.stores-section-2-rightimage{
+    width: 55%;
+    aspect-ratio: 3/2;
+    background-image: url(/assets/images/section6-item3.jpg);
+    background-position: center;
+    background-size: cover;
+}
+.stores-section-3{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
+    gap: 1.25em;
+}
+.stores-section-3-item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625em;
+}
+.stores-section-3-item > img{
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 3/2;
+}
+.stores-section-4{
+    display: flex;
+    gap: 1.25em;
+    padding-bottom: 1.875em;
+}
+.stores-section-4-rightimage{
+    width: 50%;
+    aspect-ratio: 3/2;
+    background-position: center;
+    background-size: cover;
+    background-image: url(/assets/images/section6-item3.jpg);
+
+}
+.stores-section-4-leftcontent{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+}
+.stores-section-4-leftcontent > button{
+    padding: 0.625em 1.25em;
+    max-width: 200px;
+    border: none;
+    outline: none;
+}
+
+/* Table */
+@media (min-width: 768px) and (max-width: 1260px) {
+   
+
+}
+
+/* Mobile */
+@media (min-width: 320px) and (max-width: 768px) {
+    .stores-section-2{
+        flex-direction: column;
+        align-items: center;
+    }
+    .stores-section-2 > div{
+        width: 100%;
+    }
+    .stores-section-3{
+        grid-template-columns: auto;
+        grid-template-rows: none;
+    }
+    .stores-section-4{
+        flex-direction: column;
+        align-items: center;
+    }
+    .stores-section-4 > div{
+        width: 100%;
+    }
+    .stores-section-4-leftcontent{
+        align-items: center;
+    }
+    .stores-section-4-leftcontent > p{
+        text-align: center;
+    }
+}
