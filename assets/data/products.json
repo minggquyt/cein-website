@@ -1,0 +1,113 @@
+[
+  {
+    "id": 1,
+    "product_name": "Relaxed blazer",
+    "price": 348,
+    "currency": "USD",
+    "color": "Beige/Oatmeal",
+    "category": "Outerwear",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 2,
+    "product_name": "Alpaca Wool Cropped Cardigan",
+    "price": 248,
+    "currency": "USD",
+    "color": "Tan/Camel",
+    "category": "Outerwear",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 3,
+    "product_name": "Silk Wide-Leg Pant",
+    "price": 24,
+    "currency": "USD",
+    "color": "Black",
+    "category": "Pants",
+    "image": "../../assets/images/demo.jpg"
+
+  },
+  {
+    "id": 4,
+    "product_name": "Classic Pant",
+    "price": 58,
+    "currency": "USD",
+    "color": ["Black", "Grey", "Beige"],
+    "selected_color": "Black",
+    "category": "Pants",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 5,
+    "product_name": "Maxi Skirt",
+    "price": 248,
+    "currency": "USD",
+    "color": "Black",
+    "category": "Skirts",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 6,
+    "product_name": "Single-Origin Cashmere Cropped Sweater",
+    "price": 298,
+    "currency": "USD",
+    "color": "Caramel/Brown",
+    "category": "Outerwear",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 7,
+    "product_name": "Poplin Oversized Shirt",
+    "price": 168,
+    "currency": "USD",
+    "color": "White",
+    "category": "Stretch",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 8,
+    "product_name": "Cashmere Funnel Neck Sweater",
+    "price": 278,
+    "currency": "USD",
+    "color": "Oatmeal/Beige",
+    "category": "Outerwear",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 9,
+    "product_name": "Cashmere Cardigan",
+    "price": 248,
+    "currency": "USD",
+    "color": "Cream",
+    "details": "Embellished buttons",
+    "category": "Outerwear",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 10,
+    "product_name": "Slim Back Slit Turleneck Tee",
+    "price": 118,
+    "currency": "USD",
+    "color": "Dark Brown/Black",
+    "category": "Outerwear",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 11,
+    "product_name": "Silk Draped Skirt",
+    "price": 348,
+    "currency": "USD",
+    "color": "Champagne/Beige",
+    "category": "Skirts",
+    "image": "../../assets/images/demo.jpg"
+  },
+  {
+    "id": 12,
+    "product_name": "Charmeuse Shorts",
+    "price": 78,
+    "currency": "USD",
+    "color": "Light Beige",
+    "category": "Pants",
+    "image": "../../assets/images/demo.jpg"
+  }
+]
