@@ -1,0 +1,499 @@
+.filter-product {
+    height: 120px;
+    border-bottom: 1px solid lightgray;
+    padding-top: 35px;
+    padding-left: 20px;
+    display: flex;
+    position: relative;
+}
+
+.filter-product h3 {
+    font-weight: 400;
+}
+
+.filter-options .btn-filter {
+    background-color: white;
+    border-radius: 20px;
+    padding: 2px 20px;
+    border: 1px solid black;
+}
+
+.action-filter {
+    margin-right: 100px;
+}
+
+.action-filter button {
+    background-color: white;
+    border: 0;
+    padding: 0px 10px;
+}
+
+.sort-option {
+    margin-left: 2000px;
+    margin-right: 100px;
+    cursor: pointer;
+}
+
+.sort-option,
+.action-filter button {
+    margin-top: 50px;
+    position: absolute;
+    right: 150px;
+    bottom: 10px;
+}
+
+.btn-filter:hover {
+    background-color: black;
+    color: white;
+    transition: 0.3s;
+}
+
+.sort-option span button {
+    background-color: white;
+    border: 0;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.sort-option span ul {
+    display: none;
+    padding: 30px 0px;
+    list-style: none;
+    position: absolute;
+    left: -200px;
+    width: 250px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.sort-option span ul li {
+    padding: 0;
+}
+
+.sort-option span ul li a {
+    display: block;
+    padding: 15px 30px;
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sort-option span ul li a:hover {
+    color: black;
+    font-weight: 600;
+}
+
+.sort-option span:hover ul {
+    display: block;
+}
+
+.sort-header {
+    display: none;
+}
+
+#overlay-filter {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 12;
+}
+
+#overlay-filter.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.filter-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    width: 25%;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 13;
+    padding: 16px 0;
+    float: right;
+}
+
+.filter-header {
+    border-bottom: 1px solid lightgray;
+    position: relative;
+}
+
+.filter-header h3 {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.filter-header #btn-close-filter {
+    position: absolute;
+    top: -60px;
+    right: 16px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.filter-content {
+    padding: 0 20px;
+    margin-bottom: 60px;
+}
+
+.filter-panel.active {
+    transform: translateX(0);
+}
+
+.filter-content h5 {
+    margin: 16px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.color-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+}
+
+.color-list input {
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
+}
+
+.color-list span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 150%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+}
+
+.color-list span:hover {
+    transform: scale(1.1);
+}
+
+.color-list input:checked+span {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #000;
+}
+
+.material-option ul,
+.size-option ul {
+    list-style: none;
+    padding: 0;
+}
+
+.material-option ul li a,
+.size-option ul li a {
+    text-decoration: none;
+    color: gray;
+    display: block;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 0.75rem;
+    width: 100%;
+    ;
+}
+
+.material-option ul li a:hover,
+.size-option ul li a:hover {
+    color: black;
+    font-weight: 600;
+}
+
+.filter-footer {
+    border-top: 1px solid lightgray;
+    height: 100%;
+}
+
+#btn-see-results {
+    width: 100%;
+    margin-left: 10px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    position: static;
+}
+
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.product-item {
+    margin-top: 50px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+}
+
+.product-item h3 {
+    padding-top: 10px;
+
+}
+
+.product-item h3,
+.product-item p {
+    text-align: start;
+    font-weight: 550;
+    font-size: 0.75rem;
+}
+
+.heart-icon,
+.plus-icon {
+    position: absolute;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.heart-icon {
+    top: 20px;
+    right: 30px;
+
+}
+
+.plus-icon {
+    bottom: 65px;
+    right: 30px;
+}
+
+.heart-icon:hover,
+.plus-icon:hover {
+    border-radius: 100%;
+    background-color: lightgray;
+
+}
+
+.heart-icon:hover {
+    transform: scale(1.4);
+    transition: 0.5s;
+}
+
+.plus-icon:hover {
+    transform: scale(1.4);
+    transition: 0.3s;
+}
+
+footer {
+    margin-top: 80px;
+}
+
+/* Large Screen */
+@media screen and (max-width: 2560px) {
+    #product-list {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .sort-option {
+        margin-left: 680px;
+    }
+}
+
+/* Laptop */
+@media screen and (max-width: 1680px) {
+    #product-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .sort-option {
+        margin-left: 500px;
+    }
+
+    .filter-product {
+        height: auto;
+    }
+
+    .filter-options {
+        margin-right: 280px;
+    }
+
+    .btn-filter {
+        margin-bottom: 10px;
+    }
+}
+
+/* Tablet */
+@media screen and (max-width: 1023px) {
+    .filter-product {
+        height: auto;
+    }
+
+    .btn-filter {
+        margin-bottom: 10px;
+    }
+
+    #product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sort-option {
+        margin-left: 120px;
+    }
+
+    .sort-option,
+    .action-filter button {
+        margin-top: 50px;
+        position: absolute;
+        right: 100px;
+        bottom: 10px;
+    }
+    .filter-panel{
+        width: 40%;
+    }
+
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+    #product-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .filter-product {
+        display: block;
+    }
+
+    .filter-options {
+        width: 90%;
+        padding-right: 20px;
+    }
+
+    .sort-option {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .action-filter button {
+        padding: 0;
+        margin-top: 20px;
+    }
+
+    .option {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sort-option,
+    .action-filter button {
+        position: static;
+        padding-bottom: 20px;
+    }
+
+    .sort-option span:hover ul {
+        display: none;
+    }
+
+    #overlay-sort {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.3s;
+        z-index: 9;
+    }
+
+    #overlay-sort.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .sort-panel {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #fff;
+        height: 45%;
+        border-radius: 16px 16px 0 0;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        z-index: 10;
+        padding: 16px;
+    }
+
+    .sort-option span ul {
+        display: block !important;
+        width: 100%;
+        box-shadow: none;
+        padding: 0;
+        position: absolute;
+        left: 0;
+    }
+
+    .sort-option span ul li {
+        border-bottom: 1px solid #eee;
+        padding: 0;
+    }
+
+    .sort-panel.active {
+        transform: translateY(0);
+    }
+
+    .sort-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    .sort-header #btn-close-sort {
+        position: absolute;
+        top: 0;
+        right: 16px;
+        padding-top: 30px;
+        padding-right: 20px;
+        color: #212529;
+    }
+    #overlay-filter.active {
+        opacity: 0;
+        pointer-events: auto;
+    }
+
+    .filter-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: #fff;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 13;
+        padding: 16px 0;
+    }
+
+    .filter-header #btn-close-filter {
+        top: -32px;
+    }
+    #btn-see-results {
+        margin: 0;
+    }
+}

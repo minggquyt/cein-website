@@ -106,6 +106,7 @@ a {
 .section-3-items{
     display: flex;
     gap: 1.25em;
+    width: 100%;
 }
 .section-3-item{
     flex: 1;
