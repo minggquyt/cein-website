@@ -1,0 +1,19 @@
+[
+    {
+        "_id": "order_01",
+        "userId": "user_01",
+        "items": [
+            {
+                "productId": "prod_001",
+                "name": "Alpaca Wool Crewneck Sweater",
+                "price": 248,
+                "quantity": 2,
+                "color": "Beige",
+                "size": "M"
+            }
+        ],
+        "totalPrice": 496,
+        "status": "completed",
+        "createdAt": "2026-03-10"
+    }
+]

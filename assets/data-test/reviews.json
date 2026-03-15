@@ -1,0 +1,11 @@
+[
+    {
+        "_id": "review_01",
+        "productId": "prod_001",
+        "userId": "user_01",
+        "rating": 5,
+        "title": "Perfect Essential",
+        "comment": "Amazing staple for my wardrobe",
+        "createdAt": "2026-01-12"
+    }
+]

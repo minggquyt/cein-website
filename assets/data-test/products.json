@@ -1,0 +1,482 @@
+[
+    {
+        "_id": "prod_001",
+        "name": "Alpaca Wool Crewneck Sweater",
+        "slug": "alpaca-wool-crewneck-sweater",
+        "description": "A contemporary and feminine interpretation of the classic crewneck sweater, crafted in an airy and plush cable knit pattern using a luxurious blend of baby alpaca and virgin wool.",
+        "price": 248,
+        "categoryId": "cat_01",
+        "material": "Alpaca Wool",
+        "images": [
+            {
+                "url": "../../assets/images/product-1.png",
+                "public_id": "products/p1",
+                "isThumbnail": true
+            },
+            {
+                "url": "../../assets/images/product-2.png",
+                "public_id": "products/p1-3"
+            },
+            {
+                "url": "../../assets/images/product-3.png",
+                "public_id": "products/p1-2"
+            },
+            {
+                "url": "../../assets/images/product-4.png",
+                "public_id": "products/p1-4"
+            }
+        ],
+        "colors": [
+            {
+                "name": "Beige",
+                "hex": "#e8decb"
+            },
+            {
+                "name": "Black",
+                "hex": "#000000"
+            }
+        ],
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "variants": [
+            {
+                "color": "Beige",
+                "size": "M",
+                "stock": 20
+            },
+            {
+                "color": "Black",
+                "size": "L",
+                "stock": 12
+            }
+        ],
+        "rating": 5.0,
+        "reviewCount": 14,
+        "createdAt": "2026-03-10"
+    },
+    {
+        "_id": "prod_002",
+        "name": "Alpaca Wool Crewneck Sweater",
+        "slug": "alpaca-wool-crewneck-sweater",
+        "description": "A contemporary and feminine interpretation of the classic crewneck sweater, crafted in an airy and plush cable knit pattern using a luxurious blend of baby alpaca and virgin wool.",
+        "price": 248,
+        "categoryId": "cat_01",
+        "material": "Alpaca Wool",
+        "images": [
+            {
+                "url": "../../assets/images/product-1.png",
+                "public_id": "products/p1",
+                "isThumbnail": true
+            },
+            {
+                "url": "../../assets/images/product-2.png",
+                "public_id": "products/p1-3"
+            },
+            {
+                "url": "../../assets/images/product-3.png",
+                "public_id": "products/p1-2"
+            },
+            {
+                "url": "../../assets/images/product-4.png",
+                "public_id": "products/p1-4"
+            }
+        ],
+        "colors": [
+            {
+                "name": "Beige",
+                "hex": "#e8decb"
+            },
+            {
+                "name": "Black",
+                "hex": "#000000"
+            }
+        ],
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "variants": [
+            {
+                "color": "Beige",
+                "size": "M",
+                "stock": 20
+            },
+            {
+                "color": "Black",
+                "size": "L",
+                "stock": 12
+            }
+        ],
+        "rating": 5.0,
+        "reviewCount": 14,
+        "createdAt": "2026-03-10"
+    },
+    {
+        "_id": "prod_003",
+        "name": "Alpaca Wool Crewneck Sweater",
+        "slug": "alpaca-wool-crewneck-sweater",
+        "description": "A contemporary and feminine interpretation of the classic crewneck sweater, crafted in an airy and plush cable knit pattern using a luxurious blend of baby alpaca and virgin wool.",
+        "price": 248,
+        "categoryId": "cat_01",
+        "material": "Alpaca Wool",
+        "images": [
+            {
+                "url": "../../assets/images/product-1.png",
+                "public_id": "products/p1",
+                "isThumbnail": true
+            },
+            {
+                "url": "../../assets/images/product-2.png",
+                "public_id": "products/p1-3"
+            },
+            {
+                "url": "../../assets/images/product-3.png",
+                "public_id": "products/p1-2"
+            },
+            {
+                "url": "../../assets/images/product-4.png",
+                "public_id": "products/p1-4"
+            }
+        ],
+        "colors": [
+            {
+                "name": "Beige",
+                "hex": "#e8decb"
+            },
+            {
+                "name": "Black",
+                "hex": "#000000"
+            }
+        ],
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "variants": [
+            {
+                "color": "Beige",
+                "size": "M",
+                "stock": 20
+            },
+            {
+                "color": "Black",
+                "size": "L",
+                "stock": 12
+            }
+        ],
+        "rating": 5.0,
+        "reviewCount": 14,
+        "createdAt": "2026-03-10"
+    },
+    {
+        "_id": "prod_004",
+        "name": "Alpaca Wool Crewneck Sweater",
+        "slug": "alpaca-wool-crewneck-sweater",
+        "description": "A contemporary and feminine interpretation of the classic crewneck sweater, crafted in an airy and plush cable knit pattern using a luxurious blend of baby alpaca and virgin wool.",
+        "price": 248,
+        "categoryId": "cat_01",
+        "material": "Alpaca Wool",
+        "images": [
+            {
+                "url": "../../assets/images/product-1.png",
+                "public_id": "products/p1",
+                "isThumbnail": true
+            },
+            {
+                "url": "../../assets/images/product-2.png",
+                "public_id": "products/p1-3"
+            },
+            {
+                "url": "../../assets/images/product-3.png",
+                "public_id": "products/p1-2"
+            },
+            {
+                "url": "../../assets/images/product-4.png",
+                "public_id": "products/p1-4"
+            }
+        ],
+        "colors": [
+            {
+                "name": "Beige",
+                "hex": "#e8decb"
+            },
+            {
+                "name": "Black",
+                "hex": "#000000"
+            }
+        ],
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "variants": [
+            {
+                "color": "Beige",
+                "size": "M",
+                "stock": 20
+            },
+            {
+                "color": "Black",
+                "size": "L",
+                "stock": 12
+            }
+        ],
+        "rating": 5.0,
+        "reviewCount": 14,
+        "createdAt": "2026-03-10"
+    },
+    {
+        "_id": "prod_005",
+        "name": "Alpaca Wool Crewneck Sweater",
+        "slug": "alpaca-wool-crewneck-sweater",
+        "description": "A contemporary and feminine interpretation of the classic crewneck sweater, crafted in an airy and plush cable knit pattern using a luxurious blend of baby alpaca and virgin wool.",
+        "price": 248,
+        "categoryId": "cat_01",
+        "material": "Alpaca Wool",
+        "images": [
+            {
+                "url": "../../assets/images/product-1.png",
+                "public_id": "products/p1",
+                "isThumbnail": true
+            },
+            {
+                "url": "../../assets/images/product-2.png",
+                "public_id": "products/p1-3"
+            },
+            {
+                "url": "../../assets/images/product-3.png",
+                "public_id": "products/p1-2"
+            },
+            {
+                "url": "../../assets/images/product-4.png",
+                "public_id": "products/p1-4"
+            }
+        ],
+        "colors": [
+            {
+                "name": "Beige",
+                "hex": "#e8decb"
+            },
+            {
+                "name": "Black",
+                "hex": "#000000"
+            }
+        ],
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "variants": [
+            {
+                "color": "Beige",
+                "size": "M",
+                "stock": 20
+            },
+            {
+                "color": "Black",
+                "size": "L",
+                "stock": 12
+            }
+        ],
+        "rating": 5.0,
+        "reviewCount": 14,
+        "createdAt": "2026-03-10"
+    },
+    {
+        "_id": "prod_006",
+        "name": "Alpaca Wool Crewneck Sweater",
+        "slug": "alpaca-wool-crewneck-sweater",
+        "description": "A contemporary and feminine interpretation of the classic crewneck sweater, crafted in an airy and plush cable knit pattern using a luxurious blend of baby alpaca and virgin wool.",
+        "price": 248,
+        "categoryId": "cat_01",
+        "material": "Alpaca Wool",
+        "images": [
+            {
+                "url": "../../assets/images/product-1.png",
+                "public_id": "products/p1",
+                "isThumbnail": true
+            },
+            {
+                "url": "../../assets/images/product-2.png",
+                "public_id": "products/p1-3"
+            },
+            {
+                "url": "../../assets/images/product-3.png",
+                "public_id": "products/p1-2"
+            },
+            {
+                "url": "../../assets/images/product-4.png",
+                "public_id": "products/p1-4"
+            }
+        ],
+        "colors": [
+            {
+                "name": "Beige",
+                "hex": "#e8decb"
+            },
+            {
+                "name": "Black",
+                "hex": "#000000"
+            }
+        ],
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "variants": [
+            {
+                "color": "Beige",
+                "size": "M",
+                "stock": 20
+            },
+            {
+                "color": "Black",
+                "size": "L",
+                "stock": 12
+            }
+        ],
+        "rating": 5.0,
+        "reviewCount": 14,
+        "createdAt": "2026-03-10"
+    },
+    {
+        "_id": "prod_007",
+        "name": "Alpaca Wool Crewneck Sweater",
+        "slug": "alpaca-wool-crewneck-sweater",
+        "description": "A contemporary and feminine interpretation of the classic crewneck sweater, crafted in an airy and plush cable knit pattern using a luxurious blend of baby alpaca and virgin wool.",
+        "price": 248,
+        "categoryId": "cat_01",
+        "material": "Alpaca Wool",
+        "images": [
+            {
+                "url": "../../assets/images/product-1.png",
+                "public_id": "products/p1",
+                "isThumbnail": true
+            },
+            {
+                "url": "../../assets/images/product-2.png",
+                "public_id": "products/p1-3"
+            },
+            {
+                "url": "../../assets/images/product-3.png",
+                "public_id": "products/p1-2"
+            },
+            {
+                "url": "../../assets/images/product-4.png",
+                "public_id": "products/p1-4"
+            }
+        ],
+        "colors": [
+            {
+                "name": "Beige",
+                "hex": "#e8decb"
+            },
+            {
+                "name": "Black",
+                "hex": "#000000"
+            }
+        ],
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "variants": [
+            {
+                "color": "Beige",
+                "size": "M",
+                "stock": 20
+            },
+            {
+                "color": "Black",
+                "size": "L",
+                "stock": 12
+            }
+        ],
+        "rating": 5.0,
+        "reviewCount": 14,
+        "createdAt": "2026-03-10"
+    },
+    {
+        "_id": "prod_008",
+        "name": "Alpaca Wool Crewneck Sweater",
+        "slug": "alpaca-wool-crewneck-sweater",
+        "description": "A contemporary and feminine interpretation of the classic crewneck sweater, crafted in an airy and plush cable knit pattern using a luxurious blend of baby alpaca and virgin wool.",
+        "price": 248,
+        "categoryId": "cat_01",
+        "material": "Alpaca Wool",
+        "images": [
+            {
+                "url": "../../assets/images/product-1.png",
+                "public_id": "products/p1",
+                "isThumbnail": true
+            },
+            {
+                "url": "../../assets/images/product-2.png",
+                "public_id": "products/p1-3"
+            },
+            {
+                "url": "../../assets/images/product-3.png",
+                "public_id": "products/p1-2"
+            },
+            {
+                "url": "../../assets/images/product-4.png",
+                "public_id": "products/p1-4"
+            }
+        ],
+        "colors": [
+            {
+                "name": "Beige",
+                "hex": "#e8decb"
+            },
+            {
+                "name": "Black",
+                "hex": "#000000"
+            }
+        ],
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "variants": [
+            {
+                "color": "Beige",
+                "size": "M",
+                "stock": 20
+            },
+            {
+                "color": "Black",
+                "size": "L",
+                "stock": 12
+            }
+        ],
+        "rating": 5.0,
+        "reviewCount": 14,
+        "createdAt": "2026-03-10"
+    }
+]

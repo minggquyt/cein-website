@@ -21,53 +21,55 @@
 <body>
 
   <header>
-  <!-- Login Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
+    <!-- Login Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
 
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">
-            Login
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          </button>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">
+              Login
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                  else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1"
+                  placeholder="Password">
+              </div>
+              <div class="form-check">
+                <input name="isrember" type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="sign-in-button">
+              Sign In
+            </button>
+            <button type="button" class="sign-up-button">
+              <a href="./components/sign-up-box/sign-up-box.html">Sign up</a>
+            </button>
+            <a href="#">forgot password ?</a>
+          </div>
+
         </div>
-
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Remember me</label>
-            </div>
-          </form>
-        </div>
-
-       <div class="modal-footer">
-          <button type="button" class="sign-in-button">
-            Sign In
-          </button>
-          <button type="button" class="sign-up-button" >
-            Sign Up
-          </button>
-          <a href="#">forgot pass word ?</a>
-        </div>
-
       </div>
     </div>
-  </div>
 
     <div class="header-top">
       <p clas="roboto-400">Complimentary U.S. No-Rush Shipping on orders of $95 or more. Shop now</p>
@@ -111,7 +113,7 @@
 
             <img src="/assets/images/search.png" width="20px" height="20px" alt="">
             <a href="./pages/stores/stores.html" class="roboto-400">Stores</a>
-            <img src="/assets/images/account.png" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+            <img src="/assets/images/account.png" id="login-icon" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
               width="20px" height="20px" alt="">
             <div class="left-menu-wishlist">
               <img src="/assets/images/wishlist.png" width="20px" height="20px" alt="">
@@ -131,7 +133,9 @@
   <section>
 
     <section class="herosection">
-      <img src="/assets/images/herosecion.png" alt="">
+      <a href="/pages/shop/shop.html">
+        <img src="/assets/images/herosecion.png" alt="">
+      </a>
       <div>
         <h1 class="roboto-500">
           Elevate Your Style <br>
@@ -146,68 +150,73 @@
         Our range is crafted sustainably with longevity in mind.
       </p>
       <div class="section-2-items roboto-400">
-        <div class="section-2-items-item">
+        <a href="/pages/shop/shop.html" class="section-2-items-item">
           <img src="/assets/images/banner.png" alt="">
           <p>New Arrivals</p>
-        </div>
-        <div class="section-2-items-item">
+        </a>
+        <a href="/pages/shop/shop.html" class="section-2-items-item">
           <img src="/assets/images/banner-1.jpg" alt="">
           <p>The Casual Edit</p>
-        </div>
-        <div class="section-2-items-item">
+        </a>
+        <a href="/pages/shop/shop.html" class="section-2-items-item">
           <img src="/assets/images/banner-2.jpg" alt="">
           <p>Best-Sellers</p>
-        </div>
+        </a>
       </div>
     </section>
     <section class="section-3">
       <h3 class="roboto-400">What to wear now</h3>
       <div class="section-3-items">
-        <div class="section-3-item">
+        <a class="section-3-item">
           <div class="section-3-item-upper">
+            <img src="/assets/images/section3-item1.png" alt="">
             <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
           </div>
           <div class="section-3-item-lower roboto-400">
             <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
             <p class="section-3-item-lower-itemcost">$298</p>
           </div>
-        </div>
-        <div class="section-3-item">
+        </a>
+        <a class="section-3-item">
           <div class="section-3-item-upper">
+            <img src="/assets/images/section3-item2.png" alt="">
             <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
           </div>
           <div class="section-3-item-lower roboto-400">
             <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
             <p class="section-3-item-lower-itemcost">$298</p>
           </div>
-        </div>
-        <div class="section-3-item">
+        </a>
+        <a class="section-3-item">
           <div class="section-3-item-upper">
+            <img src="/assets/images/section3-item3.png" alt="">
             <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
           </div>
           <div class="section-3-item-lower roboto-400">
             <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
             <p class="section-3-item-lower-itemcost">$298</p>
           </div>
-        </div>
-        <div class="section-3-item">
+        </a>
+        <a class="section-3-item">
           <div class="section-3-item-upper">
+            <img src="/assets/images/section3-item4.png" alt="">
             <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
           </div>
           <div class="section-3-item-lower roboto-400">
             <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
             <p class="section-3-item-lower-itemcost">$298</p>
           </div>
-        </div>
-        <div class="section-3-item">
+        </a>
+        <a class="section-3-item">
           <div class="section-3-item-upper">
+            <img src="/assets/images/section3-item5.png" alt="">
             <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
           </div>
           <div class="section-3-item-lower roboto-400">
             <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
             <p class="section-3-item-lower-itemcost">$298</p>
           </div>
-        </div>
+        </a>
       </div>
     </section>
     <section class="section-4">
@@ -295,7 +304,7 @@
   </footer>
 
   <script src="/assets/dist/js/bootstrap.bundle.min.js" class="astro-vvvwv3sm"></script>
-  <script src="./main.js"></script>
+  <script type="module" src="./main.js"></script>
 </body>
 
 </html>

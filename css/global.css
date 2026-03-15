@@ -11,17 +11,49 @@ a {
     color: var(--accent-color);
 }
 
+body{
+    position: relative;
+}
+
+.pop-up-modal{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    padding: 10px 20px;
+    top: 10%;
+    left: calc((100% - 300px)/2);
+    background-color: white;
+    border: 2px solid black;
+    z-index: 4;
+}
+/* start: custom login modal */
+.modal-backdrop.show{
+    z-index: 2;
+}
+#exampleModalCenter{
+    z-index: 3;
+}
+/* end */
+
 .herosection {
     width: 100%;
     height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 
-.herosection>img {
+.herosection>a>img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     position: absolute;
+    transition: scale 0.25s ease-in-out;
+}
+.herosection>a>img:hover{
+    scale: 1.05;
+    cursor: pointer;
 }
 
 .herosection {
@@ -85,6 +117,11 @@ a {
     height: 100%;
     left: 0;
     bottom: 0;
+    transition: scale 0.25s ease-in-out
+}
+.section-2-items-item>img:hover{
+    scale: 1.05;
+    cursor: pointer;
 }
 
 .section-2-items-item>p {
@@ -110,35 +147,27 @@ a {
 }
 .section-3-item{
     flex: 1;
+    overflow: hidden;
 }
 .section-3-item>.section-3-item-upper {
     position: relative;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    aspect-ratio: 3/4;
+    overflow: hidden;
 }
-.section-3-item>.section-3-item-upper >img{
+.section-3-item>.section-3-item-upper >img:first-child{
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 3/4;
+    transition: scale 0.25s ease-in-out;
+}
+.section-3-item>.section-3-item-upper >img:first-child:hover{
+    scale: 1.05;
+    cursor: pointer;
+}
+.section-3-item>.section-3-item-upper >img:last-child{
     position: absolute;
     right: 15px;
-    bottom: 15px;
+    bottom: 15px;   
 }
-
-.section-3-item:nth-child(1)>.section-3-item-upper {
-    background-image: url(/assets/images/section3-item1.png);
-}
-.section-3-item:nth-child(2)>.section-3-item-upper {
-    background-image: url(/assets/images/section3-item2.png);
-}
-.section-3-item:nth-child(3)>.section-3-item-upper {
-    background-image: url(/assets/images/section3-item3.png);
-}
-.section-3-item:nth-child(4)>.section-3-item-upper {
-    background-image: url(/assets/images/section3-item4.png);
-}
-.section-3-item:nth-child(5)>.section-3-item-upper {
-    background-image: url(/assets/images/section3-item5.png);
-}   
 .section-3-item-lower{
     padding: 0.9375em 0;
 }

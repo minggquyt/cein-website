@@ -1,0 +1,26 @@
+[
+    {
+        "_id": "user_01",
+        "name": "Nguyen Van A",
+        "email": "user@gmail.com",
+        "password": "hashed_password",
+        "role": "customer",
+        "createdAt": "2026-03-10"
+    },
+    {
+        "_id": "user_02",
+        "name": "Nguyen Van B",
+        "email": "user@gmail.com",
+        "password": "hashed_password",
+        "role": "customer",
+        "createdAt": "2026-03-10"
+    },
+    {
+        "_id": "user_02",
+        "name": "Nguyễn Mai Minh Quý",
+        "email": "mainminhquyn@gmail.com",
+        "password": "hashed_password", 
+        "role": "admin",
+        "createdAt": "2026-03-10"
+    }
+]

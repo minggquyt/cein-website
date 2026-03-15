@@ -1,0 +1,14 @@
+[
+    {
+        "_id": "cart_01",
+        "userId": "user_01",
+        "items": [
+            {
+                "productId": "prod_001",
+                "quantity": 1,
+                "color": "Beige",
+                "size": "M"
+            }
+        ]
+    }
+]

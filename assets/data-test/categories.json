@@ -1,0 +1,27 @@
+[
+    {
+        "_id": "cat_01",
+        "name": "Outerwear",
+        "slug": "outerwear"
+    },
+    {
+        "_id": "cat_02",
+        "name": "Dresses",
+        "slug": "dresses"
+    },
+    {
+        "_id": "cat_03",
+        "name": "Skirts",
+        "slug": "skirts"
+    },
+    {
+        "_id": "cat_04",
+        "name": "Pants",
+        "slug": "pants"
+    },
+    {
+        "_id": "cat_05",
+        "name": "Lounge",
+        "slug": "lounge"
+    }
+]

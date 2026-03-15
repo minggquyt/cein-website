@@ -1,0 +1,10 @@
+[
+    {
+        "_id": "wishlist_01",
+        "userId": "user_01",
+        "products": [
+            "prod_001",
+            "prod_004"
+        ]
+    }
+]
