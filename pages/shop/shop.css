@@ -4,59 +4,6 @@
     padding: 0;
 }
 
-header {
-    border-bottom: 1px solid lightgray;
-}
-
-.header-top {
-    width: 100%;
-    height: 2.8125em;
-    background-color: black;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.header-top>p {
-    text-align: center;
-}
-
-.header-bottom {
-    background-color: white;
-    padding-inline: 1.875em;
-}
-
-.header-bottom-list {
-    display: flex;
-    gap: 1.25em;
-}
-
-.header-bottom-list li a,
-.header-bottom-left-menu a {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-
-.header-bottom-left-menu {
-    display: flex;
-    align-items: center;
-    gap: 1.25em;
-}
-
-.header-bottom-left-menu img {
-    cursor: pointer;
-}
-
-.header-bottom-menu-icon {
-    color: black;
-    font-size: 1.875rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .filter-product {
     border-bottom: 1px solid lightgray;
     padding-top: 2.1875em;
