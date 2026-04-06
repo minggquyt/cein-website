@@ -3,9 +3,59 @@
     margin: 0;
     padding: 0;
 }
+@keyframes fadeInUp{
+    from{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInRight{
+    from{
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.row{
+    animation: fadeInUp 1s ease;
+}
+
+.member-item:nth-child(2){
+    animation-delay: 0.2s;
+}
+
+.member-item:nth-child(3){
+    animation-delay: 0.4s;
+}
+
+.member-item:nth-child(4){
+    animation-delay: 0.6s;
+}
+
+.member-item{
+    animation: fadeInRight 0.6s ease-out forwards;
+}
+
 .group-members{
     background-image: url(../../assets/images/IUH.png);
     background-size: cover;
+}
+
+.member-item{
+    padding: 0.5em;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.member-item:hover{
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Tablet */
