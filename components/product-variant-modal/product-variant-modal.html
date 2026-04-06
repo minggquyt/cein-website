@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./product-variant-modal.css">
+</head>
+<body>
+    <!-- Nút dấu cộng hiện tại của bạn (Thêm class để trigger) -->
+<button class="add-variant-btn">+</button>
+
+<!-- Giao diện Box chọn Variant (Mặc định ẩn) -->
+<div class="variant-modal-pseudoclass"></div>
+
+<div class="variant-modal" id="variantBox">
+    <div class="variant-content">
+        <button class="close-btn-variant">&times;</button>
+        
+        <h3>Select Options</h3>
+        
+        <!-- Chọn màu sắc -->
+        <div class="variant-group">
+            <label>Color</label>
+            <div class="option-list">
+                <input type="radio" name="color" id="red" hidden checked>
+                <label for="red" class="color-swatch" style="background-color: #ff4d4d;"></label>
+                
+                <input type="radio" name="color" id="blue" hidden>
+                <label for="blue" class="color-swatch" style="background-color: #4d79ff;"></label>
+            </div>
+        </div>
+
+        <!-- Chọn kích thước -->
+        <div class="variant-group">
+            <label>Size</label>
+            <div class="option-list">
+                <input type="radio" name="size" id="size-s" hidden>
+                <label for="size-s" class="size-box">S</label>
+
+                <input type="radio" name="size" id="size-m" hidden checked>
+                <label for="size-m" class="size-box">M</label>
+
+                <input type="radio" name="size" id="size-l" hidden>
+                <label for="size-l" class="size-box">L</label>
+
+                <input type="radio" name="size" id="size-xl" hidden>
+                <label for="size-xl" class="size-box">XL</label>
+            </div>
+        </div>
+
+        <button class="add-to-cart-submit">ADD TO CART</button>
+    </div>
+</div>
+</body>
+</html>

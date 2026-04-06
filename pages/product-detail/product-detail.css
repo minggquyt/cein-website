@@ -1,50 +1,5 @@
-.header-top {
-    width: 100%;
-    height: 45px;
-    background-color: black;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.header-top>p {
-    text-align: center;
-}
-
-.header-bottom {
-    background-color: white;
-    padding-inline: 1.875em;
-}
-
-.header-bottom-list {
-    display: flex;
-    gap: 1.25em;
-}
-
-.header-bottom-list li a,
-.header-bottom-left-menu a {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-
-.header-bottom-left-menu {
-    display: flex;
-    align-items: center;
-    gap: 1.25em;
-}
-
-.header-bottom-left-menu img {
-    cursor: pointer;
-}
-
-.header-bottom-menu-icon {
-    color: black;
-    font-size: 1.875rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.product-detail-page-section-1{
+    margin-top: 95px;
 }
 .carousel{
     position: relative;
@@ -200,6 +155,34 @@
 }
 .recently-view-item-lower{
     padding: 0.9375em 0;
+}
+
+/* select color & size button effect */
+
+/* Style cho Color Button khi được chọn */
+.color-radio:checked + .color-swatch {
+    border: 2px solid #000 !important; 
+    transform: scale(1.1);
+}
+
+/* Style cho Size Button khi được chọn */
+.size-radio:checked + .size-label {
+    background-color: #000 !important; 
+    color: #fff !important;      
+}
+
+/* Hiệu ứng hover nhẹ cho người dùng dễ nhận biết */
+.color-swatch:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+.size-label {
+    min-width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 /* Large Screen */

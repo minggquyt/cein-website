@@ -1,5 +1,6 @@
 .cart-section{
     padding-inline: 1.875em;
+    margin-top: 100px;
 }
 
 /* section 1 */
@@ -27,6 +28,8 @@
 .cart-section-1-content-left{
     flex: 1;
     display: flex;
+    text-align: center;
+    justify-content: center;
     gap: 1.25em;
 }
 .cart-section-1-content-right{
@@ -74,6 +77,11 @@
     align-items: center;
     gap: 0.625em;
 }
+
+.unactive-remove-item{
+    visibility: hidden;
+}
+
 .card-shopping-cart-page-section-2 > div > span:first-child,
 .card-shopping-cart-page-section-2 > div > span:last-child{
     color: #CCCCCC;

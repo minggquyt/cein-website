@@ -250,6 +250,7 @@
 .product-item img {
     width: 100%;
     height: auto;
+    aspect-ratio: 3/4;
 }
 
 .product-item h3 {

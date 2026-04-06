@@ -10,11 +10,31 @@ a {
     text-decoration: none;
     color: var(--accent-color);
 }
+.homepage-body{
+    margin-top: 100px;
+}
+.visibility-inherit{
+    visibility: inherit !important;
+}
 
 body{
     position: relative;
 }
 
+.user-setting-modal{
+    position: absolute;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding: 10px 20px;
+    right: 5%;
+    background-color: antiquewhite;
+    border: 2px solid black;
+    display: none;
+}
+
+/* start: custom login modal */
 .pop-up-modal{
     width: 300px;
     display: flex;
@@ -28,7 +48,6 @@ body{
     border: 2px solid black;
     z-index: 4;
 }
-/* start: custom login modal */
 .modal-backdrop.show{
     z-index: 2;
 }

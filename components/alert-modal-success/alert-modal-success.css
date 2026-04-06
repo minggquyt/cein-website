@@ -1,0 +1,10 @@
+.alert-modal-success{
+    position: fixed;
+    width: 100%;
+    top: -100%;
+    z-index: 7;
+    transition: top 0.5s ease-in-out;
+}
+.alert-modal-success-active{
+    top: 0;
+}

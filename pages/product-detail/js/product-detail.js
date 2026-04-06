@@ -1,49 +1,97 @@
-import { getProductsDataBySlug } from "../../../services/getData.js";
+import { getProductDetailData } from "../../../services/getData.js";
+import renderNumberProductsInCart from "../../../services/cart-services.js";
+import { renderNumberProductsInWishlist } from "../../../services/wishlist-services.js";
+import { initEventPopUpWishlistModal } from "../../../services/wishlist-services.js";
+import showSuccessAlert from "../../../services/alert.js";
+import { showDangerAlert, showWarningAlert } from "../../../services/alert.js";
+import { postProductDetailToCart } from "../../../services/postData.js";
 
-const params = new URLSearchParams(window.location.search);
-const slug = params.get("slug");
-
-function renderProductDataToView(productData){
-    console.log(productData);
-
+document.addEventListener('DOMContentLoaded', async () => {
     const productDetailContainer = document.querySelector('.product-detail-page-section-1');
 
-    productDetailContainer.innerHTML = `
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const slug = urlParams.get('slug');
+
+    if (!slug) {
+        productDetailContainer.innerHTML = "<p>Không tìm thấy sản phẩm!</p>";
+        return;
+    }
+
+    try {
+
+        getProductDetailData(slug)
+            .then(result => {
+                if (result.success == true) {
+                    // 3. Render dữ liệu
+                    renderProductDetail(result.data, productDetailContainer);
+                }
+                else {
+                    console.warn("Lỗi trong quá trình truy vấn")
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    } catch (error) {
+        console.error("Lỗi:", error);
+        productDetailContainer.innerHTML = `<div class="container mt-5"><h3>Đã xảy ra lỗi khi tải sản phẩm.</h3></div>`;
+    }
+});
+
+function renderProductDetail(productData, container) {
+
+    // Xử lý danh sách ảnh cho Carousel
+    const indicatorsHTML = productData.images.map((img, index) => `
+        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="${index}" 
+        class="${index === 0 ? 'active' : ''} border rounded-circle mb-2" style="width: 8px; height: 8px;"></button>
+    `).join('');
+
+    const imagesHTML = productData.images.map((img, index) => `
+        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <img src="${img.url}" class="d-block w-100" alt="${productData.name}">
+        </div>
+    `).join('');
+
+    // Xử lý danh sách màu sắc
+    const colorsHTML = productData.colors.map((color, index) => `
+    <div class="color-option">
+        <input type="radio" name="productColor" id="color-${index}" value="${color.name}" 
+               class="d-none color-radio" ${index === 0 ? 'checked' : ''}>
+        <label for="color-${index}" class="color-swatch rounded-circle" 
+               style="background-color: ${color.hex}; width: 24px; height: 24px; cursor: pointer; display: block; border: 2px solid transparent;">
+        </label>
+    </div>
+    `).join('');
+
+    // Xử lý danh sách size
+    const sizesHTML = productData.sizes.map((size, index) => `
+    <div class="size-option">
+        <input type="radio" name="productSize" id="size-${index}" value="${size}" 
+               class="d-none size-radio" ${index === 0 ? 'checked' : ''}>
+        <label for="size-${index}" class="btn btn-outline-dark size-label">
+            ${size}
+        </label>
+    </div>
+    `).join('');
+
+    // Đổ toàn bộ HTML vào container
+    container.innerHTML = `
+    <div class="container">
+        <div class="row">
             <div class="col-lg-8">
                 <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators flex-column m-0 justify-content-center h-100 left-0 ms-3"
-                        style="width: fit-content; right: auto;">
-                        <button type="" data-bs-target="#productCarousel" data-bs-slide-to="0"
-                            class="active border rounded-circle mb-2" style="width: 8px; height: 8px;"></button>
-                        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1"
-                            class="border rounded-circle mb-2" style="width: 8px; height: 8px;"></button>
-                        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2"
-                            class="border rounded-circle mb-2" style="width: 8px; height: 8px;"></button>
-                        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="3"
-                            class="border rounded-circle mb-2" style="width: 8px; height: 8px;"></button>
+                    <div class="carousel-indicators flex-column m-0 justify-content-center h-100 left-0 ms-3" style="width: fit-content; right: auto;">
+                        ${indicatorsHTML}
                     </div>
-
                     <div class="carousel-inner bg-light">
-                        <div class="carousel-item active">
-                            <img src=${productData.images[0].url} class="d-block w-100" alt="Product Image 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src=${productData.images[1].url} class="d-block w-100" alt="Product Image 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src=${productData.images[2].url} class="d-block w-100" alt="Product Image 3">
-                        </div>
-                        <div class="carousel-item">
-                            <img src=${productData.images[3].url} class="d-block w-100" alt="Product Image 4">
-                        </div>
+                        ${imagesHTML}
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
-                        data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
-                        data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -53,28 +101,20 @@ function renderProductDataToView(productData){
             <div class="col-lg-4 ps-lg-5">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb small text-muted mb-2">
-                        <li class="breadcrumb-item"><a href="#" class="text-reset text-decoration-none">Shop</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Clothing</li>
+                        <li class="breadcrumb-item"><a href="/shop.html" class="text-reset text-decoration-none">Shop</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">${productData.material}</li>
                     </ol>
                 </nav>
 
                 <p class="h4 fw-normal mb-1">${productData.name}</p>
                 <p class="fs-5 mb-4">$${productData.price}</p>
 
-                <p class="text-muted small mb-4 lh-lg">
-                    ${productData.description}
-                </p>
+                <p class="text-muted small mb-4 lh-lg">${productData.description}</p>
 
                 <div class="mb-4">
-                    <p class="small mb-2">Product Color: <span class="fw-bold">Beige</span></p>
                     <p class="small mb-1">Color:</p>
                     <div class="d-flex gap-2">
-                        <div class="color-swatch active rounded-circle"
-                            style="background-color: #e8decb; width: 24px; height: 24px; cursor: pointer;"></div>
-                        <div class="color-swatch rounded-circle"
-                            style="background-color: #000000; width: 24px; height: 24px; cursor: pointer;"></div>
-                        <div class="color-swatch rounded-circle"
-                            style="background-color: #96b3c2; width: 24px; height: 24px; cursor: pointer;"></div>
+                        ${colorsHTML}
                     </div>
                 </div>
 
@@ -84,37 +124,22 @@ function renderProductDataToView(productData){
                         <a href="#" class="small text-muted text-decoration-underline">Size Chart</a>
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-outline-dark size-btn">XS</button>
-                        <button class="btn btn-outline-dark size-btn">S</button>
-                        <button class="btn btn-outline-dark size-btn active">M</button>
-                        <button class="btn btn-outline-dark size-btn">L</button>
-                        <button class="btn btn-outline-dark size-btn">XL</button>
+                        ${sizesHTML}
                     </div>
                 </div>
 
-                <button class="btn btn-dark w-100 py-3 rounded-0 fw-bold mb-5">Add to Bag</button>
+                <button class="btn btn-dark w-100 py-3 rounded-0 fw-bold mb-5" id="addToCartBtn">Add to Cart</button>
 
+                <!-- Accordion giữ nguyên phần tĩnh của bạn -->
                 <div class="accordion accordion-flush border-top" id="productInfo">
-                    <div class="accordion-item">
+                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 shadow-none small fw-bold" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#check">
-                                Check In-Store Availability
-                            </button>
-                        </h2>
-                        <div id="check" class="accordion-collapse collapse" data-bs-parent="#productInfo">
-                            <div class="accordion-body px-0 py-2 small">Availability info here...</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 shadow-none small fw-bold" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#fit">
+                            <button class="accordion-button collapsed px-0 shadow-none small fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#fit">
                                 Fit Details
                             </button>
                         </h2>
                         <div id="fit" class="accordion-collapse collapse" data-bs-parent="#productInfo">
-                            <div class="accordion-body px-0 py-2 small text-muted">Model is 1m75 wearing size M.</div>
+                            <div class="accordion-body px-0 py-2 small text-muted">Rating: ${productData.rating} ⭐ (${productData.reviewCount} reviews)</div>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -142,22 +167,65 @@ function renderProductDataToView(productData){
                     </div>
                 </div>
             </div>
-    `
-    
+        </div>
+    </div>`;
+
+    setupAddToCart(productData._id);
+
 }
 
-function initProductsDataBySlug(){
-    getProductsDataBySlug()
-        .then((products) => {
-            let findingProductIndex = 0;
-            products.forEach((product,index) => {
-                if(product.slug === slug)
-                    findingProductIndex = index;
-            });
+function setupAddToCart(productId) {
+    const addBtn = document.getElementById('addToCartBtn');
 
-            renderProductDataToView(products[findingProductIndex]);
+    addBtn.addEventListener('click', async () => {
 
-        })
+        const token = JSON.parse(localStorage.getItem('userInfo')).usertoken;
+        if (!token) {
+            showWarningAlert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng");
+            return;
+        }
+
+        // 2. Thu thập dữ liệu từ các Radio Input đã chọn
+        const selectedColor = document.querySelector('input[name="productColor"]:checked')?.value;
+        const selectedSize = document.querySelector('input[name="productSize"]:checked')?.value;
+
+        // Bạn có thể thêm input số lượng nếu có, ở đây mình mặc định là 1
+        const quantity = 1;
+
+        // 3. Kiểm tra dữ liệu hợp lệ
+        if (!selectedColor || !selectedSize) {
+            showWarningAlert("Vui lòng chọn màu sắc và kích cỡ");
+            return;
+        }
+
+        // 4. Hiệu ứng Loading (Optional nhưng nên có)
+        addBtn.innerText = 'Adding...';
+        addBtn.disabled = true;
+        // 5. Gửi request POST lên Server
+        postProductDetailToCart(productId, quantity, selectedSize, selectedColor, token)
+            .then(result => {
+                if (result.success) {
+                    showSuccessAlert(result.message);
+                    renderNumberProductsInCart();
+                } else {
+                    showDangerAlert(result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Cart Error:', error);
+                showDangerAlert("Không thể kết nối đến server");
+            })
+            .finally(() => {
+                addBtn.innerText = 'Add to Cart';
+                addBtn.disabled = false;
+            })
+    });
 }
 
-initProductsDataBySlug();
+// init header wishlist & cart effect 
+
+renderNumberProductsInCart();
+
+renderNumberProductsInWishlist();
+
+initEventPopUpWishlistModal();

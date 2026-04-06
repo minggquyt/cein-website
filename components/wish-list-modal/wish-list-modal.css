@@ -1,0 +1,136 @@
+/* 1. Lớp phủ nền tối (Overlay) */
+.wish-list-modal {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    z-index: 5;
+    background-color: black;
+    opacity: 0.4;
+}
+
+.wish-list-modal-active {
+    left: 0 !important;
+}
+
+.wish-list-modal-box {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 400px;
+    height: 100vh;
+    z-index: 10;
+    background-color: white;
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+}
+
+.wish-list-modal-box-active {
+    right: 0 !important;
+}
+
+/* 3. Danh sách các item */
+.wish-list-modal-box-items {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 20px;
+}
+
+/* 4. Từng Item cụ thể */
+.wish-list-modal-box-item {
+    display: flex;
+    gap: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+}
+
+/* Hình ảnh sản phẩm */
+.wish-list-modal-box-item-card-image {
+    width: 120px;
+    aspect-ratio: 3/4;
+    background-color: #f7f7f7;
+    flex-shrink: 0;
+}
+
+.wish-list-modal-box-item-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Nội dung text bên phải */
+.wish-list-modal-box-item-card-description {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: sans-serif;
+}
+
+/* Tiêu đề và Nút xóa */
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 5px;
+}
+
+.item-title {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+    color: #222;
+    line-height: 1.4;
+}
+
+.remove-btn-wishlist {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #999;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.remove-btn:hover { color: #000; }
+
+
+.item-price {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Nút Add to Cart dùng chung */
+.wishlist-btn-add-to-cart {
+    background-color: black;
+    padding: 12px 20px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+.wishlist-btn-add-to-cart:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 770px) {
+    .wish-list-modal-box {
+        width: 300px;
+    }
+    .wish-list-modal-box-item-card-image {
+        width: 90px;
+    }
+    .item-title {
+        font-size: 14px;
+    }
+}

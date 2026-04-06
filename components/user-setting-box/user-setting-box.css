@@ -1,0 +1,10 @@
+.user-setting-box{
+    position: absolute;
+    visibility: hidden;
+    top: 35px;
+    left: 32.5%;
+    max-width: 200px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,6 +1,15 @@
+header{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 6;
+}
 header a {
     text-decoration: none;
     color: var(--accent-color);
+}
+#login-icon{
+    border-radius: 50%;
 }
 
 .header-top {
@@ -26,6 +35,7 @@ header a {
 }
 
 .header-bottom-left-menu {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 1.25em;
@@ -75,6 +85,7 @@ header a {
     background-color: white;
     color: black;
 }
+
 /* Mobile */
 @media (min-width: 320px) and (max-width: 768px) {
     .header-bottom {

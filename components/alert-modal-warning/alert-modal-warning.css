@@ -1,0 +1,10 @@
+.alert-modal-warning{
+    position: fixed;
+    width: 100%;
+    top: -100%;
+    z-index: 7;
+    transition: top 0.5s ease-in-out;
+}
+.alert-modal-warning-active{
+    top: 0;
+}

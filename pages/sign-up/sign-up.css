@@ -1,0 +1,23 @@
+body{
+    height: 100vh;
+    background-color: #eee;
+}
+.sign-up-button{
+    color: white;
+    background-color: black;
+}
+.sign-up-button:hover{
+    border: 2px solid black;
+}
+.alert-modal{
+    position: fixed;
+    z-index: 5;
+    top: -10%;
+    width: 100%;
+    transition: top 0.3s ease;
+}
+
+.active-alert-modal{
+    top: 0;
+}
+
