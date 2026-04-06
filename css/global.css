@@ -54,7 +54,6 @@ body{
 #exampleModalCenter{
     z-index: 3;
 }
-/* end */
 
 .herosection {
     width: 100%;
@@ -69,10 +68,6 @@ body{
     object-fit: cover;
     position: absolute;
     transition: scale 0.25s ease-in-out;
-}
-.herosection>a>img:hover{
-    scale: 1.05;
-    cursor: pointer;
 }
 
 .herosection {

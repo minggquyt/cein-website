@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.group-members{
+    background-image: url(../../assets/images/IUH.png);
+    background-size: cover;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1260px){
+    html{
+        font-size: 1.875rem;
+    }
+
+    .member-list {
+        max-width: 50% !important;
+    }
+
+    .group-member-image img {
+        width: 100% !important;
+        right: 0 !important;
+    }
+
+    .member-item img {
+        max-width: 80px !important;
+    }
+}
+
+/* Mobile */
+@media (min-width: 320px) and (max-width: 768px){
+    html{
+        font-size: 1.25rem;
+    }
+
+    .member-list {
+        width: 50% !important;
+
+    }
+
+    .group-member-image img {
+        width: 100% !important;
+        right: 0 !important;
+    }
+
+    .member-item img {
+        max-width: 80px !important;
+    }
+}

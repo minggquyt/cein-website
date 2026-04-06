@@ -1,17 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>CEIN</title>
-</head>
-<body>
-     <canvas id="myChart" width="400" height="200"></canvas>
-     <script src="./dashboard.js"></script>
-</body>
-=======
 
 <head>
     <meta charset="UTF-8">
@@ -23,13 +11,13 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="my-account.css">
     <link rel="stylesheet" href="../../assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/variable.css">
     <link rel="stylesheet" href="../../components/header/header.css">
     <link rel="stylesheet" href="../../components/footer/footer.css">
-    <title>CEIN Dashboard</title>
+    <title>CEIN My Account</title>
 </head>
 
 <body>
@@ -92,48 +80,84 @@
     </header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-9 m-lg-5 m-sm-3 px-lg-5 px-sm-2 py-3">
-                <div class="row mb-2 me-4">
-                    <p class="fw-bold my-2">Revenue Analytics</p>
-                    <div class="data-analysis d-flex gap-4 border border-1 border-dark rounded align-items-center justify-content-center">
-                        <div class="data-analysis-item">
-                            Daily
+            <div class="col-9 m-lg-5 m-sm-3 px-5 py-3">
+                <div class="row">
+                    <div class="col-4 d-flex flex-column avatar-section">
+                        <p class="fw-bold mb-5">General Information</p>
+                        <img src="../../assets/images/avatarUser.png" class="img-fluid rounded-circle ms-lg-4 ms-sm-2" alt=""
+                            style="width: 100px; " />
+                        <div class="my-3 ms-3 upload-img">
+                            <input type="file" name="uploadImage" id="uploadImage" class="d-none" />
+
+                            <label for="uploadImage" class="btn border text-secondary px-4 py-2">
+                                Chọn Ảnh
+                            </label>
                         </div>
-                        <div class="data-analysis-item">
-                            Monthly
-                        </div>
-                        <div class="data-analysis-item">
-                            Yearly
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-2 me-4 data-chart-top-selling-inventory">
-                    <div class="col">
-                        <p class="fw-bold my-2">Top Selling Items</p>
-                        <div class="top-selling-data d-flex align-items-center justify-content-center">
-                            <img src="../../assets/images/avatarUser.png" alt="">
-                        </div>
+                        <small class="text-secondary m-0 p-0">Dung lượng file tối đa 1MB <br> Định dạng: .JPEG,
+                            .PNG</small>
+
                     </div>
                     <div class="col">
-                        <p class="fw-bold my-2">Iventory Overview</p>
-                        <div class="circle-chart d-flex align-items-center justify-content-center">
-                            <img src="../../assets/images/avatarUser.png" alt="" class="rounded-circle">
+                        <div class="mb-3 d-flex form-data">
+                            <label for="" class="form-label mt-1" style="width: 28%;">Tên đăng nhập</label>
+                            <div class="d-flex flex-column w-100">
+                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                                    placeholder="" />
+                                <small id="helpId" class="form-text text-muted">Tên đăng nhập chỉ có thể thay đổi 1
+                                    lần.</small>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mb-2 me-4">
-                    <p class="fw-bold my-2">Low Stock Alert</p>
-                    <div class="low-stock border border-1 border-dark rounded d-flex align-items-center justify-content-center">
-                        <img src="../../assets/images/avatarUser.png" alt="">
+                        <div class="mb-3 d-flex form-data">
+                            <label for="" class="form-label mt-2" style="width: 28%;">Tên</label>
+                            <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                                placeholder="" />
+                        </div>
+                        <div class="mb-3 d-flex form-data">
+                            <label for="" class="form-label mt-2" style="width: 22%;">Email</label>
+                            <p class="email-text pt-2">ceinaccount@gmail.com</p>
+                            <a name="" id="" class="btn border ms-3 edit" href="#" role="button">Thay Đổi</a>
+                        </div>
+                        <div class="mb-3 d-flex form-data">
+                            <label for="" class="form-label mt-2" style="width: 20%;">Số điện thoại</label>
+                            <p class="email-text pt-2"></p>
+                            <a name="" id="" class="btn border ms-3 edit" href="#" role="button">Thêm</a>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label mt-2" style="width: 22%;">Giới tính</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender"
+                                    value="{3:option1}" />
+                                <label class="form-check-label" for="">Nam</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender"
+                                    value="option2" />
+                                <label class="form-check-label" for="">Nữ</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender"
+                                    value="option2" />
+                                <label class="form-check-label" for="">Khác</label>
+                            </div>
+                        </div>
+                        <div class="w-100 align-items-center d-flex justify-content-center">
+                            <button type="submit" class="btn btn-dark m-auto px-5">
+                                Save
+                            </button>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
-            <div class="col p-4 manage-bar" style="background-color: #f5f4f4;">
-                <p class="fw-bold my-3">System Management</p>
+            <div class="col p-4 option-bar" style="background-color: #f5f4f4;">
+                <img src="../../assets/images/avatarUser.png" class="img-fluid rounded-circle" alt=""
+                    style="width: 100px; " />
+                <p class="fw-bold my-3">My Account</p>
                 <!-- Hover added -->
-                <div class="d-flex flex-column gap-3 mt-3 ms-5 manage-list">
-                    <a href="../dashboard/dashboard.html" class="manage-option-item active">Dashboard</a>
-                    <a href="#" class="manage-option-item">System Management</a>
+                <div class="d-flex flex-column gap-3 mt-3 ms-5 option-list">
+                    <a href="../my-account/my-account.html" class="account-option-item active">Personal Profile</a>
+                    <a href="#" class="account-option-item">Security Settings</a>
 
                 </div>
 
@@ -183,5 +207,4 @@
     <script src="../../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
->>>>>>> b97a84a659f5a525aeaff5fb7c1baaf3b28de3dd
 </html>

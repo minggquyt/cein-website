@@ -2,8 +2,9 @@
     margin-top: 100px;
     height: 120px;
     border-bottom: 1px solid lightgray;
-    padding-top: 35px;
-    padding-left: 20px;
+    padding-top: 2.1875em;
+    padding-left: 1.25em;
+    padding-bottom: 0.625em;
     display: flex;
     position: relative;
 }
@@ -12,35 +13,44 @@
     font-weight: 400;
 }
 
+.filter-options{
+    display: flex;
+    gap: 0.3125em;
+    flex-wrap: wrap;
+    max-width:100%;
+}
+
 .filter-options .btn-filter {
     background-color: white;
-    border-radius: 20px;
-    padding: 2px 20px;
+    border-radius: 1.25em;
+    padding: 0.125em 1.25em;
+    margin-bottom: 0.3125em;
     border: 1px solid black;
 }
 
 .action-filter {
-    margin-right: 100px;
+    margin-right: 6.25em;
 }
 
 .action-filter button {
     background-color: white;
     border: 0;
-    padding: 0px 10px;
+    padding: 0 0.625em;
 }
 
 .sort-option {
-    margin-left: 2000px;
-    margin-right: 100px;
+    margin-right: 6.25em;
+    display: inline;
+    position: relative;
     cursor: pointer;
 }
 
 .sort-option,
 .action-filter button {
-    margin-top: 50px;
+    margin-top: 3.125em;
     position: absolute;
-    right: 150px;
-    bottom: 10px;
+    right: 9.375em;
+    bottom: 0.625em;
 }
 
 .btn-filter:hover {
@@ -58,13 +68,13 @@
 
 .sort-option span ul {
     display: none;
-    padding: 30px 0px;
+    padding: 1.875em 0;
     list-style: none;
     position: absolute;
-    left: -200px;
-    width: 250px;
+    left: -12.5em;
+    width: 15.625em;
     background-color: rgb(255, 255, 255);
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 1.25em 0 rgba(0, 0, 0, 0.1);
     z-index: 1;
 }
 
@@ -74,7 +84,7 @@
 
 .sort-option span ul li a {
     display: block;
-    padding: 15px 30px;
+    padding: 0.9375em 1.875em;
     color: gray;
     text-decoration: none;
     cursor: pointer;
@@ -118,7 +128,7 @@
     transform: translateX(100%);
     transition: transform 0.3s ease;
     z-index: 13;
-    padding: 16px 0;
+    padding: 1em 0;
     float: right;
 }
 
@@ -135,16 +145,16 @@
 
 .filter-header #btn-close-filter {
     position: absolute;
-    top: -60px;
-    right: 16px;
-    padding: 10px;
+    top: -3.75em;
+    right: 1em;
+    padding: 0.625em;
     cursor: pointer;
     font-weight: 600;
 }
 
 .filter-content {
-    padding: 0 20px;
-    margin-bottom: 60px;
+    padding: 0 1.25em;
+    margin-bottom: 3.75em;
 }
 
 .filter-panel.active {
@@ -160,8 +170,7 @@
 .color-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-
+    gap: 0.5em;
 }
 
 .color-list input {
@@ -172,8 +181,8 @@
 
 .color-list span {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 1.25em;
+    height: 1.25em;
     border-radius: 150%;
     border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -186,7 +195,7 @@
 }
 
 .color-list input:checked+span {
-    box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #000;
+    box-shadow: 0 0 0 0.125em #fff, 0 0 0 0.21875em #000;
 }
 
 .material-option ul,
@@ -204,7 +213,6 @@
     padding: 5px;
     font-size: 0.75rem;
     width: 100%;
-    ;
 }
 
 .material-option ul li a:hover,
@@ -220,8 +228,8 @@
 
 #btn-see-results {
     width: 100%;
-    margin-left: 10px;
-    padding: 10px;
+    margin-left: 0.625em;
+    padding: 0.625em;
     background-color: black;
     color: white;
     cursor: pointer;
@@ -230,19 +238,19 @@
 
 #product-list {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     text-align: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 1.25em;
+    padding-right: 1.25em;
 }
 
 .product-item {
-    margin-top: 50px;
+    margin-top: 3.125em;
     width: 100%;
     position: relative;
     overflow: hidden;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0.625em;
+    padding-right: 0.625em;
     cursor: pointer;
     text-decoration: none;
     color: black;
@@ -256,8 +264,7 @@
 }
 
 .product-item h3 {
-    padding-top: 10px;
-
+    padding-top: 0.625em;
 }
 
 .product-item h3,
@@ -278,21 +285,19 @@
 }
 
 .heart-icon {
-    top: 20px;
-    right: 30px;
-
+    top: 1.25em;
+    right: 1.875em;
 }
 
 .plus-icon {
-    bottom: 65px;
-    right: 30px;
+    bottom: 4.0625em;
+    right: 1.875em;
 }
 
 .heart-icon:hover,
 .plus-icon:hover {
     border-radius: 100%;
     background-color: lightgray;
-
 }
 
 .heart-icon:hover {
@@ -306,115 +311,72 @@
 }
 
 footer {
-    margin-top: 80px;
+    margin-top: 5em;
 }
 
-/* Large Screen */
-@media screen and (max-width: 2560px) {
-    #product-list {
-        grid-template-columns: repeat(6, 1fr);
+@media (min-width: 768px) and (max-width: 1260px) {
+    html {
+        font-size: 14px;
     }
-
-    .sort-option {
-        margin-left: 680px;
+    .filter-product {
+        height: auto;
     }
-}
-
-/* Laptop */
-@media screen and (max-width: 1680px) {
+    .btn-filter {
+        margin-bottom: 0.714em;
+    }
     #product-list {
         grid-template-columns: repeat(4, 1fr);
     }
-
     .sort-option {
-        margin-left: 500px;
+        margin-left: 8.571em;
     }
-
-    .filter-product {
-        height: auto;
-    }
-
-    .filter-options {
-        margin-right: 280px;
-    }
-
-    .btn-filter {
-        margin-bottom: 10px;
-    }
-}
-
-/* Tablet */
-@media screen and (max-width: 1023px) {
-    .filter-product {
-        height: auto;
-    }
-
-    .btn-filter {
-        margin-bottom: 10px;
-    }
-
-    #product-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .sort-option {
-        margin-left: 120px;
-    }
-
     .sort-option,
     .action-filter button {
-        margin-top: 50px;
+        margin-top: 3.571em;
         position: absolute;
-        right: 100px;
-        bottom: 10px;
+        right: 7.143em;
+        bottom: 0.714em;
     }
     .filter-panel{
         width: 40%;
     }
-
 }
 
-/* Mobile */
-@media screen and (max-width: 600px) {
-    #product-list {
-        grid-template-columns: repeat(1, 1fr);
+@media (min-width: 320px) and (max-width: 768px) {
+    html {
+        font-size: 12px;
     }
-
+    #product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .filter-product {
         display: block;
     }
-
     .filter-options {
         width: 90%;
-        padding-right: 20px;
+        padding-right: 1.667em;
     }
-
     .sort-option {
         margin-left: 0;
-        margin-top: 20px;
+        margin-top: 1.667em;
     }
-
     .action-filter button {
         padding: 0;
-        margin-top: 20px;
+        margin-top: 1.667em;
     }
-
     .option {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-
     .sort-option,
     .action-filter button {
         position: static;
-        padding-bottom: 20px;
+        padding-bottom: 1.667em;
     }
-
     .sort-option span:hover ul {
         display: none;
     }
-
     #overlay-sort {
         position: fixed;
         inset: 0;
@@ -424,12 +386,10 @@ footer {
         transition: 0.3s;
         z-index: 9;
     }
-
     #overlay-sort.active {
         opacity: 1;
         pointer-events: auto;
     }
-
     .sort-panel {
         position: fixed;
         left: 0;
@@ -437,13 +397,12 @@ footer {
         bottom: 0;
         background: #fff;
         height: 45%;
-        border-radius: 16px 16px 0 0;
+        border-radius: 1.333em 1.333em 0 0;
         transform: translateY(100%);
         transition: transform 0.3s ease;
         z-index: 10;
-        padding: 16px;
+        padding: 1.333em;
     }
-
     .sort-option span ul {
         display: block !important;
         width: 100%;
@@ -452,36 +411,31 @@ footer {
         position: absolute;
         left: 0;
     }
-
     .sort-option span ul li {
         border-bottom: 1px solid #eee;
         padding: 0;
     }
-
     .sort-panel.active {
         transform: translateY(0);
     }
-
     .sort-header {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 10px 0;
+        padding: 0.833em 0;
     }
-
     .sort-header #btn-close-sort {
         position: absolute;
         top: 0;
-        right: 16px;
-        padding-top: 30px;
-        padding-right: 20px;
+        right: 1.333em;
+        padding-top: 2.5em;
+        padding-right: 1.667em;
         color: #212529;
     }
     #overlay-filter.active {
         opacity: 0;
         pointer-events: auto;
     }
-
     .filter-panel {
         position: fixed;
         top: 0;
@@ -492,11 +446,10 @@ footer {
         transform: translateX(100%);
         transition: transform 0.3s ease;
         z-index: 13;
-        padding: 16px 0;
+        padding: 1.333em 0;
     }
-
     .filter-header #btn-close-filter {
-        top: -32px;
+        top: -2.667em;
     }
     #btn-see-results {
         margin: 0;

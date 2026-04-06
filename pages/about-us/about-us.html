@@ -1,17 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>CEIN</title>
-</head>
-<body>
-     <canvas id="myChart" width="400" height="200"></canvas>
-     <script src="./dashboard.js"></script>
-</body>
-=======
 
 <head>
     <meta charset="UTF-8">
@@ -23,13 +11,13 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="about-us.css">
     <link rel="stylesheet" href="../../assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/variable.css">
     <link rel="stylesheet" href="../../components/header/header.css">
     <link rel="stylesheet" href="../../components/footer/footer.css">
-    <title>CEIN Dashboard</title>
+    <title>CEIN</title>
 </head>
 
 <body>
@@ -91,53 +79,50 @@
         </nav>
     </header>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-9 m-lg-5 m-sm-3 px-lg-5 px-sm-2 py-3">
-                <div class="row mb-2 me-4">
-                    <p class="fw-bold my-2">Revenue Analytics</p>
-                    <div class="data-analysis d-flex gap-4 border border-1 border-dark rounded align-items-center justify-content-center">
-                        <div class="data-analysis-item">
-                            Daily
-                        </div>
-                        <div class="data-analysis-item">
-                            Monthly
-                        </div>
-                        <div class="data-analysis-item">
-                            Yearly
-                        </div>
+        <div class="row group-members">
+            <div class="col-4 p-lg-5 p-sm-3 member-list" style="background-color: rgba(0, 0, 0, 0.4);">
+                <h1 class="text-light text-center">Group members</h1>
+                <div class="member-item d-flex justify-content-start align-items-start mt-5 ps-lg-3">
+                    <div class="">
+                        <img src="../../assets/images/avatarUser.png" alt="" class="rounded rounded-circle"
+                            style="width: 120px;">
                     </div>
+                    <p class="text-light ms-5 mt-lg-5 mt-sm-4">Nguyễn Mai Minh Quý</p>
                 </div>
-                <div class="row mb-2 me-4 data-chart-top-selling-inventory">
-                    <div class="col">
-                        <p class="fw-bold my-2">Top Selling Items</p>
-                        <div class="top-selling-data d-flex align-items-center justify-content-center">
-                            <img src="../../assets/images/avatarUser.png" alt="">
-                        </div>
+                <div class="member-item d-flex justify-content-start align-items-start mt-5 ps-lg-3">
+                    <div class="">
+                        <img src="../../assets/images/avatarUser.png" alt="" class="rounded rounded-circle"
+                            style="width: 120px;">
                     </div>
-                    <div class="col">
-                        <p class="fw-bold my-2">Iventory Overview</p>
-                        <div class="circle-chart d-flex align-items-center justify-content-center">
-                            <img src="../../assets/images/avatarUser.png" alt="" class="rounded-circle">
-                        </div>
-                    </div>
+                    <p class="text-light ms-5 mt-lg-5 mt-sm-4">Nguyễn Ngọc Thuỳ Dương</p>
                 </div>
-                <div class="row mb-2 me-4">
-                    <p class="fw-bold my-2">Low Stock Alert</p>
-                    <div class="low-stock border border-1 border-dark rounded d-flex align-items-center justify-content-center">
-                        <img src="../../assets/images/avatarUser.png" alt="">
+                <div class="member-item d-flex justify-content-start align-items-start mt-5 ps-lg-3">
+                    <div class="">
+                        <img src="../../assets/images/avatarUser.png" alt="" class="rounded rounded-circle"
+                            style="width: 120px;">
                     </div>
+                    <p class="text-light ms-5 mt-lg-5 mt-sm-4">Nguyễn Ngọc Hậu</p>
                 </div>
             </div>
-            <div class="col p-4 manage-bar" style="background-color: #f5f4f4;">
-                <p class="fw-bold my-3">System Management</p>
-                <!-- Hover added -->
-                <div class="d-flex flex-column gap-3 mt-3 ms-5 manage-list">
-                    <a href="../dashboard/dashboard.html" class="manage-option-item active">Dashboard</a>
-                    <a href="#" class="manage-option-item">System Management</a>
-
-                </div>
-
+            <div class="col group-member-image" style="position: relative;">
+                <img src="../../assets/images/group_image.png" alt=""
+                    style="position: absolute; bottom: 0; width: 800px; right: 20px;">
             </div>
+        </div>
+        <div class="row mt-5 px-4">
+            <p class="fw-bold text-dark text-center py-3" style="font-size: 3rem;">Purpose & Significance</p>
+            <p style="font-size: 2rem; text-align: justify;"> In today's digital age, e-commerce has become an
+                indispensable part of the fashion industry. Online
+                shopping not only offers convenience to customers but also helps businesses expand their market,
+                reaching consumers 24/7 without geographical limitations.
+                <br>
+                Based on this practical need, our group decided to undertake the project "Building a website to showcase
+                and sell men's and women's fashion clothing online".
+            </p>
+
+        </div>
+        <div class="row my-5">
+            <img src="../../assets/images/shop.png" alt="">
         </div>
     </div>
     <footer>
@@ -183,5 +168,4 @@
     <script src="../../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
->>>>>>> b97a84a659f5a525aeaff5fb7c1baaf3b28de3dd
 </html>
