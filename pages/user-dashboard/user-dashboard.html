@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao diện Thông tin Cá nhân - Bootstrap 5</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./user-dashboard.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="container-fluid profile-container shadow-sm bg-white rounded">
+        <div class="row h-100">
+            <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar border-end p-0">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase fw-bold text-dark disabled" href="#">
+                                My Account
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active fw-medium py-3" href="#">
+                                <span data-feather="home" class="align-text-bottom"></span>
+                                Personal Profile
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-5">
+                <!-- profile -->
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2 fw-semibold">General Information</h1>
+                </div>
+
+                <form id="profileForm">
+                    <div class="mb-5 d-flex align-items-center gap-4 avatar-section">
+                        <div class="position-relative overflow-hidden rounded-circle"
+                            style="width: 120px; height: 120px;">
+                            <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774757993/default-avatar_ufjtdl.webp"
+                                alt="User Avatar" id="avatarPreview"
+                                class="w-100 h-100 object-fit-cover border shadow-sm">
+                            <input type="file" id="avatarInput" accept="image/*"
+                                class="position-absolute top-0 start-0 opacity-0 w-100 h-100 cursor-pointer">
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3"
+                                onclick="document.getElementById('avatarInput').click();">
+                                Change Avatar
+                            </button>
+                            <div class="text-muted small mt-2">Dung lượng file tối đa 1 MB.<br>Định dạng: .JPEG, .PNG
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 col-md-8">
+                        <label for="fullName" class="form-label fw-medium text-dark">Full Name</label>
+                        <input type="text" class="form-control form-control-lg border-dark-subtle" id="fullName"
+                            placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="mb-4 col-md-8">
+                        <label for="email" class="form-label roboto-500 text-dark">Email Address</label>
+                        <!-- Thêm thuộc tính readonly và đổi class background để người dùng biết không thể sửa -->
+                        <input type="email" class="form-control form-control-lg border-dark-subtle roboto-400 bg-light"
+                            id="email" value="ga********@gmail.com" readonly>
+                        <small class="roboto-300 text-muted">Email address cannot be changed.</small>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="form-label roboto-500 mb-3">Gender</label>
+                        <div class="d-flex gap-4">
+                            <!-- Male -->
+                            <div class="form-check custom-radio">
+                                <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male"
+                                    checked>
+                                <label class="form-check-label roboto-400" for="genderMale">
+                                    Male
+                                </label>
+                            </div>
+                            <!-- Female -->
+                            <div class="form-check custom-radio">
+                                <input class="form-check-input" type="radio" name="gender" id="genderFemale"
+                                    value="female">
+                                <label class="form-check-label roboto-400" for="genderFemale">
+                                    Female
+                                </label>
+                            </div>
+                            <!-- Other -->
+                            <div class="form-check custom-radio">
+                                <input class="form-check-input" type="radio" name="gender" id="genderOther"
+                                    value="other">
+                                <label class="form-check-label roboto-400" for="genderOther">
+                                    Other
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <button type="submit"
+                            class="btn btn-dark btn-lg w-100 rounded-0 text-uppercase fw-bold letter-spacing-1 shadow">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+                <!--  -->
+
+                <!-- change password -->
+                <main class="dashboard-main my-5">
+                    <div class="content-header mb-5">
+                        <h2 class="roboto-600 mb-2">Security Settings</h2>
+                        <p class="roboto-300 text-muted">For your account's security, please do not share your password
+                            with others.</p>
+                    </div>
+
+                    <form id="changePasswordForm" class="col-lg-8">
+                        <!-- Mật khẩu hiện tại -->
+                        <div class="form-group mb-4">
+                            <label class="form-label roboto-500">Current Password</label>
+                            <div class="position-relative">
+                                <input type="password" id="currentPassword" class="form-input roboto-400"
+                                    placeholder="Enter current password" required>
+                            </div>
+                        </div>
+
+                        <!-- Mật khẩu mới -->
+                        <div class="form-group mb-4">
+                            <label class="form-label roboto-500">New Password</label>
+                            <input type="password" id="newPassword" class="form-input roboto-400"
+                                placeholder="Minimum 6 characters" required>
+                        </div>
+
+                        <!-- Xác nhận mật khẩu mới -->
+                        <div class="form-group mb-5">
+                            <label class="form-label roboto-500">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" class="form-input roboto-400"
+                                placeholder="Confirm your new password" required>
+                        </div>
+
+                        <!-- Nút xác nhận -->
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn-save roboto-600 px-5">
+                                UPDATE PASSWORD
+                            </button>
+                            <button type="button" class="btn-cancel roboto-400">
+                                Forgot Password?
+                            </button>
+                        </div>
+                    </form>
+                </main>
+                <!--  -->
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="./js/user-dashboard.js"></script>
+
+</body>
+
+</html>

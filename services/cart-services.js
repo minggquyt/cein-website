@@ -1,13 +1,13 @@
 import { getCartData } from "./getData.js";
 
 export default function renderNumberProductsInCart() {
-    const token = JSON.parse(localStorage.getItem("userInfo")).usertoken;
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    if (!token) {
+    if (!userInfo) {
         console.warn("User chưa đăng nhập");
     }
     else {
-        getCartData(token)
+        getCartData(userInfo.usertoken)
             .then((products) => {
                 if (products.success == true) {
                     let totalProducts = products.data.length;

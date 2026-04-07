@@ -140,10 +140,11 @@ function renderProducts(products) {
     // User chưa login
     if (!userInfoInLS) {
         products.data.forEach(product => {
-            console.log(product);
             html += `
-        <a href="../product-detail/product-detail.html?slug=${product.slug}" class="product-item">
+        <a data-productid="${product._id}" href="../product-detail/product-detail.html?slug=${product.slug}" class="product-item">
+            <img src="/assets/icon/Heart.png" class="heart-icon" style="visibility: hidden" width="36px" height="36px">
             <img src="${product.images[0].url}">
+            <img src="/assets/icon/Plus.png" style="visibility: hidden" class="plus-icon add-variant-btn" width="36px" height="36px" >
             <h3>${product.name}</h3>
             <p>$${product.price}</p>
         </a>`;

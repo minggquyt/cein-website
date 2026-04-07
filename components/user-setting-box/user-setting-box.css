@@ -1,10 +1,32 @@
 .user-setting-box{
+    width: 250px;
     position: absolute;
     visibility: hidden;
-    top: 35px;
-    left: 32.5%;
+    top: 32.5px;
+    left: 5%;
     max-width: 200px;
     z-index: 5;
     display: flex;
     flex-direction: column;
+}
+.user-setting-box-pseudoclass{
+    position: fixed;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 94px;
+    left: 0;
+    background-color: black;
+    opacity: 0.3;
+    visibility: hidden;
+}
+.user-setting-box button{
+    background-color: white;
+    border: none;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 20px;
+}
+.visibility-inherit{
+    visibility: inherit !important;
 }

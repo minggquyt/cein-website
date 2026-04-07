@@ -1,6 +1,8 @@
 import { getProductsDataFromDb } from "../../../services/getData.js";
 import showLoading from "../../../components/loading/loading.js";
 import { hideLoading } from "../../../components/loading/loading.js";
+import renderNumberProductsInCart from "../../../services/cart-services.js"
+import renderNumberProductsInWishlist, { initEventPopUpWishlistModal } from "../../../services/wishlist-services.js"
 
 const state = {
     page: 1,
@@ -75,6 +77,10 @@ categoriesBar.addEventListener("click", (e) => {
     fetchProductData(); // refetch with new params
 });
 
+// Init wishlist and cart sync data 
+renderNumberProductsInCart();
 
+renderNumberProductsInWishlist();
 
+initEventPopUpWishlistModal();
 

@@ -1,0 +1,157 @@
+import { getUserInfo } from "../../../services/getData.js";
+
+const inputFile = document.querySelector("#avatarInput");
+
+inputFile.addEventListener('change', function (event) {
+    const input = event.target;
+    const avatarPreview = document.getElementById('avatarPreview');
+
+    // Kiểm tra xem người dùng đã chọn file chưa
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        // Đọc dữ liệu từ file được chọn
+        reader.onload = function (e) {
+            // Cập nhật thuộc tính 'src' của ảnh xem trước với dữ liệu đã đọc
+            avatarPreview.src = e.target.result;
+            // Hiệu ứng mờ dần (fade-in) nhẹ
+            avatarPreview.style.opacity = 0;
+            setTimeout(() => {
+                avatarPreview.style.opacity = 1;
+            }, 50);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+});
+
+// Xử lý sự kiện submit form (Optional: Để test)
+document.getElementById('profileForm').addEventListener('submit',handleUpdateProfile)
+
+function handleUpdateProfile(event) {
+    event.preventDefault();
+
+    // 1. Lấy Token từ userInfo trong localStorage
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo) {
+        alert("Vui lòng đăng nhập!");
+        return;
+    }
+    const token = userInfo.usertoken;
+
+    const saveBtn = event.target.querySelector('button[type="submit"]');
+    const avatarInput = document.getElementById('avatarInput');
+    
+    // Thu thập dữ liệu cơ bản
+    const fullName = document.getElementById('fullName').value;
+    const gender = document.querySelector('input[name="gender"]:checked')?.value;
+    let finalAvatarUrl = document.getElementById('avatarPreview').src;
+
+    saveBtn.disabled = true;
+    saveBtn.innerText = "Processing...";
+
+    // Khởi tạo một Promise để xử lý việc Upload ảnh (nếu có)
+    let uploadPromise = Promise.resolve(finalAvatarUrl);
+
+    if (avatarInput.files && avatarInput.files[0]) {
+        const file = avatarInput.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'cein-website');
+
+        uploadPromise = fetch('https://api.cloudinary.com/v1_1/drfkacsvn/image/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(cloudData => {
+            if (cloudData.secure_url) {
+                return cloudData.secure_url;
+            } else {
+                throw new Error("Upload ảnh thất bại!");
+            }
+        });
+    }
+
+    // Sau khi upload xong (hoặc dùng ảnh cũ), tiến hành gọi API Server
+    uploadPromise
+        .then(avatarUrl => {
+            finalAvatarUrl = avatarUrl; // Cập nhật lại biến url cuối cùng
+
+            return fetch('http://localhost:5000/api/user/profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name: fullName,
+                    gender: gender,
+                    avatar_url: finalAvatarUrl
+                })
+            });
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert("Cập nhập thông tin thành công");
+
+                // Cập nhật lại localStorage ( vẩn đảm bảo giữ nguyên schema )
+                const newUserInfo = { ...userInfo };
+                newUserInfo.username = fullName;
+                newUserInfo.useravatarurl = finalAvatarUrl;
+                localStorage.setItem('userInfo', JSON.stringify(newUserInfo));
+                
+                window.location.reload(); 
+            } else {
+                alert("Lỗi: " + result.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Đã xảy ra lỗi: " + error.message);
+        })
+        .finally(() => {
+            saveBtn.disabled = false;
+            saveBtn.innerText = "SAVE CHANGES";
+        });
+    
+}
+
+// Gán sự kiện
+document.getElementById('profileForm').addEventListener('submit', handleUpdateProfile);
+
+// Gán sự kiện
+document.getElementById('profileForm').addEventListener('submit', handleUpdateProfile);
+
+// ĐANG BỊ LỖI Ở ĐÂY - KHÔNG THỂ GET USER INFO
+async function loadUserProfile() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo)
+        console.warn("User chưa đăng nhập");
+    else {
+        const token = userInfo.usertoken;
+        getUserInfo(token)
+            .then(result => {
+                if (result.success) {
+                    const user = result.data;
+                    // Đổ dữ liệu vào các input
+                    document.getElementById('fullName').value = user.name || '';
+                    document.getElementById('email').value = user.email || '';
+                    document.getElementById('avatarPreview').src = user.avatar_url || 'https://res.cloudinary.com/drfkacsvn/image/upload/v1774757993/default-avatar_ufjtdl.webp';
+
+                    // Chọn radio giới tính tương ứng
+                    if (user.gender) {
+                        const genderRadio = document.querySelector(`input[name="gender"][value="${user.gender}"]`);
+                        if (genderRadio) genderRadio.checked = true;
+                    }
+                }
+                else {
+                    console.log(result.message);
+                }
+            })
+    }
+}
+
+// Gọi hàm tải thông tin người dùng sau khi tải trang
+document.addEventListener('DOMContentLoaded', loadUserProfile);

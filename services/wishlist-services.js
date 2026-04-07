@@ -7,7 +7,6 @@ export function displayWishListModal() {
 
     const wishListBox = document.querySelector('.wish-list-modal-box');
 
-    console.log("hàm này chạy");
     console.log(wishListBox);
 
     wishListContainer.classList.add("wish-list-modal-active");
@@ -186,13 +185,13 @@ function updateNumberProductsInWishlist(total){
 }
 
 export function renderNumberProductsInWishlist() {
-    const token = JSON.parse(localStorage.getItem("userInfo")).usertoken;
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    if (!token) {
+    if (!userInfo) {
         console.warn("User chưa đăng nhập");
     }
     else {
-        getWishListData(token)
+        getWishListData(userInfo.usertoken)
             .then((products) => {
                 if (products.success == true) {
                     let totalProducts = products.data.length;

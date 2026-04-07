@@ -1,11 +1,3 @@
-export default function getData() {
-    return fetch("https://cein-website-server-production.up.railway.app/api/samples")
-        .then((response) => response.json())
-        .then((result) => result)
-        .catch((error) => error)
-}
-
-
 export function getProductsDataFromDb(state) {
 
     const params = new URLSearchParams();
@@ -56,10 +48,39 @@ export function getWishListData(token) {
 }
 
 export function getProductDetailData(slug) {
-    return fetch(`http://localhost:5000/api/products/${slug}`)
+    return fetch(`https://cein-website-server-production.up.railway.app/api/products/${slug}`)
         .then(res => res.json())
         .then(result => result)
         .catch(error => {
             return error;
         })
+}
+
+export function getUserInfo(token){
+    return fetch('https://cein-website-server-production.up.railway.app/api/user/profile', {
+            headers: { 
+                'Authorization': `Bearer ${token}` 
+            }
+        })
+        .then(res => res.json())
+        .then(result => result)
+        .catch(err => err)
+}
+
+export function  getAdminData(userToken) {
+    return fetch("https://cein-website-server-production.up.railway.app/api/admin/statistics", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${userToken}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => { 
+                throw new Error(err.message || "Xác thực thất bại"); 
+            });
+        }
+        return response.json();
+    });
 }

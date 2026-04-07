@@ -17,15 +17,127 @@
   <link rel="stylesheet" href="../../css/global.css">
   <link rel="stylesheet" href="../../components/loading/loading.css">
   <link rel="stylesheet" href="../../components/user-setting-box/user-setting-box.css ">
+  <link rel="stylesheet" href="../../components/wish-list-modal/wish-list-modal.css">
 </head>
 
 <body>
 
+  <!-- Loading modal -->
   <div class="alert-loading-modal">
     <div class="spinner-border text-dark" role="status">
       <span></span>
     </div>
     <p class="sr-only">Loading...</p>
+  </div>
+  <!--  -->
+
+  <!-- wishlist modal -->
+  <div class="wish-list-modal">
+  </div>
+
+  <!-- wshlist modal box -->
+  <div class="wish-list-modal-box">
+    <div class="offcanvas-header" style="padding: 1rem;">
+      <h5 id="offcanvasRightLabel">Wishlist</h5>
+      <button type="button" class="btn-close text-reset wishlist-close" data-bs-dismiss="offcanvas"
+        aria-label="Close"></button>
+    </div>
+    <div class="wish-list-modal-box-items">
+      <div class="wish-list-modal-box-item">
+        <div class="wish-list-modal-box-item-card-image">
+          <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
+            alt="Sweater">
+        </div>
+
+        <div class="wish-list-modal-box-item-card-description">
+          <div class="item-header">
+            <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
+            <button class="remove-btn">✕</button>
+          </div>
+
+          <p class="item-color">Beige</p>
+          <p class="item-price">$248</p>
+
+          <div class="quantity-selector">
+            <button class="qty-btn">−</button>
+            <span class="qty-number">1</span>
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wish-list-modal-box-item">
+        <div class="wish-list-modal-box-item-card-image">
+          <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
+            alt="Sweater">
+        </div>
+
+        <div class="wish-list-modal-box-item-card-description">
+          <div class="item-header">
+            <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
+            <button class="remove-btn">✕</button>
+          </div>
+
+          <p class="item-color">Beige</p>
+          <p class="item-price">$248</p>
+
+          <div class="quantity-selector">
+            <button class="qty-btn">−</button>
+            <span class="qty-number">1</span>
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wish-list-modal-box-item">
+        <div class="wish-list-modal-box-item-card-image">
+          <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
+            alt="Sweater">
+        </div>
+
+        <div class="wish-list-modal-box-item-card-description">
+          <div class="item-header">
+            <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
+            <button class="remove-btn">✕</button>
+          </div>
+
+          <p class="item-color">Beige</p>
+          <p class="item-price">$248</p>
+
+          <div class="quantity-selector">
+            <button class="qty-btn">−</button>
+            <span class="qty-number">1</span>
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wish-list-modal-box-item">
+        <div class="wish-list-modal-box-item-card-image">
+          <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
+            alt="Sweater">
+        </div>
+
+        <div class="wish-list-modal-box-item-card-description">
+          <div class="item-header">
+            <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
+            <button class="remove-btn">✕</button>
+          </div>
+
+          <p class="item-color">Beige</p>
+          <p class="item-price">$248</p>
+
+          <div class="quantity-selector">
+            <button class="qty-btn">−</button>
+            <span class="qty-number">1</span>
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="wishlist-btn-add-to-cart roboto-400">Add To Cart</button>
+
+    </div>
   </div>
 
   <header>
@@ -119,12 +231,14 @@
               <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
             </form>
             <!-- inject user setting box -->
+            <div class="user-setting-box-pseudoclass">
+            </div>
             <div class="user-setting-box">
               <button class="user-setting-box--logoutbutton">
                 Đăng xuất
               </button>
               <button class="user-setting-box--dashboard">
-                Dashboard
+                <a href="#">Dashboard</a>
               </button>
             </div>
             <!--  -->
@@ -136,7 +250,7 @@
               <img src="/assets/images/wishlist.png" width="20px" height="20px" alt="">
               <span>2</span>
             </div>
-            <a href="./pages/cart/cart.html" id="cart" class="left-menu-bag">
+            <a href="./cart.html" id="cart" class="left-menu-bag">
               <img src="/assets/images/bag.png" width="20px" height="20px" alt="">
               <span>2</span>
             </a>
@@ -160,7 +274,7 @@
               </p>
               <div class="cart-order-sumary-subtotal roboto-400">
                 <p>Subtotal</p>
-                <p class="cart-order-sumary-subtotal-cost" >$396</p>
+                <p class="cart-order-sumary-subtotal-cost">$396</p>
               </div>
             </div>
             <div class="cart-order-sumary-section-2 roboto-400">
@@ -271,6 +385,7 @@
   <script type="module" src="../../authen.js"></script>
   <script type="module" src="../../components/loading/loading.js"></script>
   <script type="module" src="../../components/header/js/header.js"></script>
+  <script type="module" src="../../components/user-setting-box/user-setting-box.js"></script>
 </body>
 
 </html>

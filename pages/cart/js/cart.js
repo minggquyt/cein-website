@@ -1,6 +1,8 @@
 import { getCartData } from "../../../services/getData.js";
 import deleteProductsInCart from "../../../services/deleteData.js";
 import renderNumberProductsInCart from "../../../services/cart-services.js";
+import renderNumberProductsInWishlist from "../../../services/wishlist-services.js"
+import { initEventPopUpWishlistModal } from "../../../services/wishlist-services.js";
 
 const token = JSON.parse(localStorage.getItem("userInfo")).usertoken;
 
@@ -242,3 +244,9 @@ function renderQuantityOfCartState(rootEl, quantity) {
   const quantityNumberBoxOfRootEl = rootEl.querySelector(".quantity-control-number");
   quantityNumberBoxOfRootEl.textContent = quantity;
 }
+
+renderNumberProductsInCart();
+
+renderNumberProductsInWishlist();
+
+initEventPopUpWishlistModal();

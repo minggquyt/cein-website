@@ -18,7 +18,6 @@ function onLoginSubmit() {
     postLoginData(userEmail, userPassword)
         .then(data => {
             if (data.usertoken && data.username) {
-                console.log(data);
                 localStorage.setItem("userInfo", JSON.stringify(data));
                 location.reload(); // reload to run updateUIForLoginUser()
             }
@@ -90,9 +89,9 @@ function updateUIForLoginUser() {
 
     if (userInfo) {
 
-        const username = userInfo.username;
+        // const username = userInfo.username;
 
-        const usertoken = userInfo.usertoken;
+        // const usertoken = userInfo.usertoken;
 
         const useravatarurl = userInfo.useravatarurl;
 
@@ -133,6 +132,7 @@ function handleEventClikOnLogOutButton(e){
 function assignUserSettingBoxToUserIcon(){
     // init user setting box 
     const userSettingBox = document.querySelector('.user-setting-box');
+    const userSettingBoxPseudoClass = document.querySelector(".user-setting-box-pseudoclass");
 
     const userIcon = document.querySelector("#login-icon");
     
@@ -141,13 +141,20 @@ function assignUserSettingBoxToUserIcon(){
         e.stopPropagation();
 
         userSettingBox.classList.toggle("visibility-inherit");
-
+        userSettingBoxPseudoClass.classList.toggle("visibility-inherit")
     })
 
     const logOutButton = document.querySelector(".user-setting-box--logoutbutton");
 
     logOutButton.addEventListener("click",handleEventClikOnLogOutButton);
 
+    userSettingBoxPseudoClass.addEventListener("click",(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        userSettingBox.classList.toggle("visibility-inherit");
+        userSettingBoxPseudoClass.classList.toggle("visibility-inherit")
+    })
 }
 
 const loginButton = document.querySelector(".sign-in-button");

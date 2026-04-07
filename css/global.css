@@ -13,9 +13,6 @@ a {
 .homepage-body{
     margin-top: 100px;
 }
-.visibility-inherit{
-    visibility: inherit !important;
-}
 
 body{
     position: relative;

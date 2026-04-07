@@ -18,7 +18,6 @@ export default function postLoginData(userEmail, userPassword) {
             console.log(error)
             return null;
         })
-        .finally(() => console.log("Quá trình gửi thông tin đăng nhập kết thúc"))
 }
 
 export function postRegisterData(userEmail, userName, userPassword, avatar_url) {
@@ -87,7 +86,7 @@ export function postProductToWishlist(productId, token){
 }
 
 export function postProductDetailToCart(productId, quantity, selectedSize, selectedColor, token){
-    return fetch('http://localhost:5000/api/cart', {
+    return fetch('https://cein-website-server-production.up.railway.app/api/cart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

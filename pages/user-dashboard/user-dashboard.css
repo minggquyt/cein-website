@@ -1,0 +1,85 @@
+/* Profile */
+
+/* Tăng chiều cao tối thiểu cho toàn bộ container */
+body {
+    min-height: 100vh;
+}
+
+.profile-container {
+    max-width: 1400px;
+    margin: auto;
+}
+
+/* Sidebar styling */
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+    padding-left: 1.5rem;
+    border-left: 3px solid transparent; /* Tạo viền ẩn bên trái */
+}
+
+/* Kiểu dáng cho mục menu đang hoạt động */
+.sidebar .nav-link.active {
+    background-color: #f8f9fa; /* Màu nền xám nhạt */
+    color: #000;
+    border-left-color: #000; /* Viền đen bên trái nổi lên */
+}
+
+/* Custom styles cho các input */
+.form-control:focus {
+    border-color: #000; /* Viền đen khi focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25); /* Hiệu ứng focus shadow đen */
+}
+
+/* Styles cho nút radio */
+.form-check-input:checked {
+    background-color: #000; /* Nền đen khi được chọn */
+    border-color: #000; /* Viền đen khi được chọn */
+}
+
+.form-check-input:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+/* Hiệu ứng cho nút Save */
+.btn-dark:hover {
+    background-color: #333; /* Đổi màu nền khi hover */
+}
+
+.letter-spacing-1 {
+    letter-spacing: 1px; /* Tăng khoảng cách chữ */
+}
+
+/* Đảm bảo hình ảnh avatar lấp đầy khung tròn */
+#avatarPreview {
+    transition: opacity 0.3s;
+}
+
+/* Change password */
+
+/* Cursor pointer cho input file ẩn */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Tận dụng biến có sẵn của bạn */
+.btn-cancel {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 10px 0;
+}
+
+/* Hiệu ứng focus cho input mật khẩu */
+.form-input[type="password"]:focus {
+    border-color: var(--accent-color);
+    background-color: var(--primary-color);
+}
+
+/* Thêm một chút phản hồi khi nhập sai (tùy chọn) */
+.input-error {
+    border-color: #dc3545 !important; /* Màu đỏ chuẩn thông báo lỗi */
+}

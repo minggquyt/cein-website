@@ -210,17 +210,20 @@
               <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
             </form>
             <!-- inject user setting box -->
+            <div class="user-setting-box-pseudoclass">
+
+            </div>
             <div class="user-setting-box">
               <button class="user-setting-box--logoutbutton">
                 Đăng xuất
               </button>
               <button class="user-setting-box--dashboard">
-                Dashboard
+                <a href="../user-dashboard/user-dashboard.html">Dashboard</a>
               </button>
             </div>
             <!--  -->
             <img src="/assets/images/search.png" width="20px" height="20px" alt="">
-            <a href="./pages/stores/stores.html" class="roboto-400">Stores</a>
+            <a href="../stores/stores.html" class="roboto-400">Stores</a>
             <img src="/assets/images/account.png" id="login-icon" data-bs-toggle="modal"
               data-bs-target="#exampleModalCenter" width="24px" height="24px" alt="">
             <div id="wishlist" class="left-menu-wishlist">
@@ -393,6 +396,7 @@
   <script src="../../pages/shop/js/filter.js"></script>
   <script type="module" src="./js/shop.js"></script>
   <script type="module" src="../../authen.js"></script>
+  <script type="module" src="../../components/user-setting-box/user-setting-box.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEIN</title>
+    <link rel="stylesheet" href="./admin-dashboard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- Modal Edit Product -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true" data-productid="" data-material=""
+        data-categoryid="">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content border-0 rounded-0">
+                <div class="modal-header bg-dark text-white rounded-0">
+                    <h5 id="modal-product-name-title" class="modal-title roboto-600 uppercase">Chỉnh sửa sản phẩm</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 bg-light">
+                    <form id="edit-product-form">
+                        <div class="row g-3">
+                            <!-- CỘT 1: THÔNG TIN CƠ BẢN -->
+                            <div class="col-md-4">
+                                <div class="card border-0 shadow-sm p-3 h-100">
+                                    <h6 class="roboto-600 border-bottom pb-2 mb-3">Thông tin cơ bản</h6>
+                                    <div class="mb-2">
+                                        <label class="small fw-bold">Tên sản phẩm</label>
+                                        <input type="text" class="form-control" id="edit-name">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="small fw-bold">Giá ($)</label>
+                                        <input type="number" class="form-control" id="edit-price">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="small fw-bold">Mô tả</label>
+                                        <textarea class="form-control" id="edit-description" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="small fw-bold text-success">Trạng thái (Tags)</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="tag-new">
+                                            <label class="form-check-label small">Sản phẩm mới (New)</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="tag-sale">
+                                            <label class="form-check-label small">Đang giảm giá (Sale)</label>
+                                        </div>
+                                    </div>
+                                    <!-- Phân loại & Chất liệu -->
+                                    <div class="mb-2">
+                                        <label class="small fw-bold">Phân loại (Category)</label>
+                                        <select class="form-select form-select-sm rounded-0" id="edit-category">
+                                            <option value="69c8da74f49db7940be2f419">T-Shirts</option>
+                                            <option value="69c8da74f49db7940be2f41a">Hoodies</option>
+                                            <option value="69c8da74f49db7940be2f41b">Pants</option>
+                                            <option value="69c9f5192dae594eab9dae7c">Sweater</option>
+                                            <option value="69c9f97382fc7b8e6466f484">Bags</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="small fw-bold">Chất liệu (Material)</label>
+                                        <input type="text" class="form-control form-control-sm rounded-0"
+                                            id="edit-material" placeholder="Ví dụ: Cotton 100%">
+                                    </div>
+                                    <!--  -->
+                                </div>
+
+
+                            </div>
+
+                            <!-- CỘT 2: HÌNH ẢNH & MÀU SẮC -->
+                            <div class="col-md-4">
+                                <div class="card border-0 shadow-sm p-3 mb-3">
+                                    <h6 class="roboto-600 border-bottom pb-2 mb-3">Hình ảnh</h6>
+                                    <div class="input-group input-group-sm mb-2">
+                                        <input type="text" id="input-img-url" class="form-control"
+                                            placeholder="Dán link ảnh...">
+                                        <button class="btn btn-dark" type="button" id="btn-add-img">+</button>
+                                    </div>
+                                    <div id="list-images" class="d-flex flex-wrap gap-2 border p-2 bg-white"
+                                        style="min-height: 80px;">
+                                        <!-- Ảnh sẽ render ở đây -->
+                                    </div>
+                                </div>
+
+                                <div class="card border-0 shadow-sm p-3">
+                                    <h6 class="roboto-600 border-bottom pb-2 mb-3">Màu sắc</h6>
+                                    <div class="d-flex gap-2 mb-2">
+                                        <input type="text" id="input-color-name" class="form-control form-control-sm"
+                                            placeholder="Tên màu">
+                                        <input type="color" id="input-color-hex"
+                                            class="form-control form-control-color form-control-sm" value="#563d7c">
+                                        <button class="btn btn-dark btn-sm" type="button"
+                                            id="btn-add-color">Thêm</button>
+                                    </div>
+                                    <div id="list-colors" class="d-flex flex-wrap gap-2">
+                                        <!-- Màu sẽ render ở đây -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CỘT 3: SIZE & BIẾN THỂ -->
+                            <div class="col-md-4">
+                                <div class="card border-0 shadow-sm p-3 mb-3">
+                                    <h6 class="roboto-600 border-bottom pb-2 mb-3">Kích thước (Sizes)</h6>
+                                    <div id="list-sizes" class="d-flex flex-wrap gap-2 mb-2">
+                                        <!-- Checkbox Sizes -->
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <input type="checkbox" class="btn-check size-checkbox" id="size-S"
+                                                value="S">
+                                            <label class="btn btn-outline-dark" for="size-S">S</label>
+                                            <input type="checkbox" class="btn-check size-checkbox" id="size-M"
+                                                value="M">
+                                            <label class="btn btn-outline-dark" for="size-M">M</label>
+                                            <input type="checkbox" class="btn-check size-checkbox" id="size-L"
+                                                value="L">
+                                            <label class="btn btn-outline-dark" for="size-L">L</label>
+                                            <input type="checkbox" class="btn-check size-checkbox" id="size-XL"
+                                                value="XL">
+                                            <label class="btn btn-outline-dark" for="size-XL">XL</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card border-0 shadow-sm p-3">
+                                    <h6 class="roboto-600 border-bottom pb-2 mb-3">Kho hàng (Variants)</h6>
+                                    <div class="row g-1 mb-2">
+                                        <div class="col-4"><input type="text" id="var-color"
+                                                class="form-control form-control-sm" placeholder="Màu"></div>
+                                        <div class="col-4"><input type="text" id="var-size"
+                                                class="form-control form-control-sm" placeholder="Size"></div>
+                                        <div class="col-4"><input type="number" id="var-stock"
+                                                class="form-control form-control-sm" placeholder="Tồn"></div>
+                                        <button class="btn btn-dark btn-sm mt-2" type="button" id="btn-add-variant">Thêm
+                                            biến thể</button>
+                                    </div>
+                                    <div class="table-responsive" style="max-height: 150px;">
+                                        <table class="table table-sm small" id="table-variants">
+                                            <thead>
+                                                <tr>
+                                                    <th>Màu</th>
+                                                    <th>Size</th>
+                                                    <th>Kho</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0 bg-white">
+                    <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" id="save-product-changes" class="btn btn-dark px-4">Lưu sản phẩm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-white sidebar collapse border-end">
+                <div class="position-sticky pt-4 ps-3">
+                    <h5 class="roboto-600 mb-4">ADMIN PANEL</h5>
+                    <ul class="nav flex-column gap-2">
+                        <li class="nav-item">
+                            <a class="nav-link active text-dark roboto-500" href="#" data-section="system">
+                                <i class="bi bi-gear-fill me-2"></i> Quản lý hệ thống
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted roboto-500" href="#" data-section="customer">
+                                <i class="bi bi-people-fill me-2"></i> Quản lý khách hàng
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4 bg-light min-vh-100">
+
+                <!-- PHẦN 1: QUẢN LÝ HỆ THỐNG -->
+                <div id="system-section">
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                        <h1 class="h3 roboto-600">Hệ Thống & Thống Kê</h1>
+                    </div>
+
+                    <!-- Thống kê dạng biểu đồ -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm p-3">
+                                <h6 class="roboto-500 border-bottom pb-2">Top Giỏ Hàng</h6>
+                                <canvas id="cartChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm p-3">
+                                <h6 class="roboto-500 border-bottom pb-2">Top Wishlist</h6>
+                                <canvas id="wishlistChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm p-3">
+                                <h6 class="roboto-500 border-bottom pb-2">Sản phẩm bán chạy nhất</h6>
+                                <canvas id="bestSellerChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quản lý Sản phẩm (CRUD) -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <h5 class="roboto-600">Danh sách sản phẩm</h5>
+                                <button id="admin-dashboard-add-product-btn"
+                                    class="btn btn-dark btn-sm rounded-0 px-3">ADD NEW PRODUCT</button>
+                            </div>
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr class="roboto-500">
+                                            <th>ID</th>
+                                            <th>Ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="roboto-300">
+                                        <!-- Giả lập dữ liệu -->
+                                        <tr>
+                                            <td>#P001</td>
+                                            <td><img src="https://via.placeholder.com/40" class="rounded" alt=""></td>
+                                            <td>Relaxed Blazer</td>
+                                            <td>$345</td>
+                                            <td>
+                                                <button class="btn btn-outline-secondary btn-sm me-1"><i
+                                                        class="bi bi-pencil">Edit</i></button>
+                                                <button class="btn btn-outline-danger btn-sm"><i
+                                                        class="bi bi-trash">Delete</i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHẦN 2: QUẢN LÝ KHÁCH HÀNG (Mặc định ẩn) -->
+                <div id="customer-section" style="display:none;">
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                        <h1 class="h3 roboto-600">Quản Lý Khách Hàng</h1>
+                    </div>
+
+                    <div class="row">
+                        <!-- Danh sách tài khoản -->
+                        <div class="col-lg-8">
+                            <div class="card border-0 shadow-sm mb-4 text-nowrap table-responsive">
+                                <div class="card-body">
+                                    <h5 class="roboto-600 mb-3">Tài khoản khách hàng</h5>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr class="roboto-500 text-muted" style="font-size: 13px;">
+                                                <th>KHÁCH HÀNG</th>
+                                                <th>GIỎ HÀNG</th>
+                                                <th>WISHLIST</th>
+                                                <th>TỔNG CHI TIÊU</th>
+                                                <th>THAO TÁC</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="roboto-400">
+                                            <tr>
+                                                <td>Nguyen Quy<br><small
+                                                        class="text-muted">maiminhquyn@gmail.com</small></td>
+                                                <td>5 Items</td>
+                                                <td>12 Items</td>
+                                                <td class="fw-bold">$1,250</td>
+                                                <td>
+                                                    <button class="btn btn-link text-dark p-0 me-2">Edit</button>
+                                                    <button class="btn btn-link text-danger p-0">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quản lý đơn hàng (Hóa đơn giả lập) -->
+                        <div class="col-lg-4">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="roboto-600 mb-3">Đơn hàng mới nhất</h5>
+                                    <div class="list-group list-group-flush">
+                                        <div class="list-group-item px-0 border-0 mb-2">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h6 class="mb-1 roboto-500">Order #ORD-992</h6>
+                                                <small class="text-success fw-bold">Paid</small>
+                                            </div>
+                                            <p class="mb-1 text-muted small">Customer: Nguyen Quy - $450</p>
+                                            <button class="btn btn-dark btn-sm rounded-0 w-100 mt-2 py-1"
+                                                style="font-size: 11px;">VIEW DETAILS</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+    <script type="module" src="./js/admin-dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
