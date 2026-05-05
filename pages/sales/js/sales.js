@@ -302,3 +302,47 @@ document.addEventListener("DOMContentLoaded", () => {
     initSortAndFilterEvents();
     fetchProductData();
 })
+
+//Tìm kiếm
+const searchInput = document.getElementById('search-input');
+
+async function performSearch() {
+    const keyword = searchInput.value.trim().toLowerCase();
+    if (!keyword) {
+        fetchProductData();
+        return;
+    }
+
+    try {
+        showLoading();
+        const response = await getProductsDataFromDb({ limit: 1000 });
+        const products = response.data;
+
+        const results = products.filter(product =>
+            product.name?.toLowerCase().includes(keyword)
+        );
+
+        renderProducts({
+            data: results,
+            pagination: {
+                page: 1,
+                totalPages: 1,
+                totalItems: results.length
+            }
+        });
+
+        mapProductsToStore({ data: results });
+    } catch (error) {
+        showDangerAlert("Lỗi tìm kiếm sản phẩm");
+        console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
+    } finally {
+        hideLoading();
+    }
+}
+
+
+searchInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        performSearch();
+    }
+});
