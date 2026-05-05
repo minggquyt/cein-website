@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="../../components/loading/loading.css">
   <link rel="stylesheet" href="./components/user-setting-box/user-setting-box.css">
   <link rel="stylesheet" href="./components/wish-list-modal/wish-list-modal.css">
+  <link rel="stylesheet" href="./components/alert-modal-danger/alert-modal-danger.css">
+  <link rel="stylesheet" href="./components/alert-modal-success/alert-modal-success.css">
+  <link rel="stylesheet" href="./components/alert-modal-warning/alert-modal-warning.css">
   <title>CEIN</title>
 </head>
 
@@ -29,6 +32,22 @@
       <span></span>
     </div>
     <p class="sr-only">Loading...</p>
+  </div>
+
+  <!-- Alert Danger Modal -->
+  <div class="alert alert-danger alert-modal-danger" role="alert">
+    This is a danger alert—check it out!
+  </div>
+
+  <!-- Alert Success Modal -->
+  <div class="alert alert-success alert-modal-success" role="alert">
+    This is a success alert—check it out!
+  </div>
+  <!--  -->
+
+  <!-- Alert Warning Modal -->
+  <div class="alert alert-warning alert-modal-warning" role="alert">
+    This is a warning alert—check it out!
   </div>
 
   <!-- wishlist modal -->
@@ -217,13 +236,10 @@
               <a href="./pages/sales/sales.html" class=" roboto-400">Sales</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="dropdown-toggle roboto-400" href="#" data-bs-toggle="dropdown" aria-expanded="false">Journel</a>
+              <a class="dropdown-toggle roboto-400" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+                <li><a class="dropdown-item" href="./pages/about-us/about-us.html">About Us</a></li>
+                <li><a class="dropdown-item" href="#">Sitemap</a></li>
               </ul>
             </li>
           </ul>
@@ -275,7 +291,7 @@
           Timeless Fashion, Sustainable <br>
           Choices <br>
         </h1>
-        <button class="roboto-400">Shop Now</button>
+        <a href="./pages/shop/shop.html" class="herosection-direct-btn roboto-400">Shop Now</a>
       </div>
     </section>
     <section class="section-2">
@@ -299,66 +315,123 @@
     </section>
     <section class="section-3">
       <h3 class="roboto-400">What to wear now</h3>
-      <div class="section-3-items">
-        <a class="section-3-item">
-          <div class="section-3-item-upper">
-            <img src="/assets/images/section3-item1.png" alt="">
-            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+      <div class="carousel-container">
+        <div class="section-3-items">
+          <!-- Nhóm 1 -->
+          <div class="carousel-track">
+            <a href="./pages/shop/shop.html"  class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item1.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
+            <a href="./pages/shop/shop.html" class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item2.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
+            <a href="./pages/shop/shop.html" class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item3.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
+            <a href="./pages/shop/shop.html" class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item4.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
+            <a href="./pages/shop/shop.html" class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item5.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
+
+            <!-- Nhóm 2 (Copy y hệt nhóm 1 để tạo hiệu ứng nối đuôi vô tận) -->
+            <a href="./pages/shop/shop.html" class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item1.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
+            <a href="./pages/shop/shop.html" class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item2.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
+            <a href="./pages/shop/shop.html" class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item3.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
+            <a href="./pages/shop/shop.html" class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item4.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
+            <a href="./pages/shop/shop.html" class="section-3-item">
+              <div class="section-3-item-upper">
+                <img src="/assets/images/section3-item5.png" alt="">
+                <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+              </div>
+              <div class="section-3-item-lower roboto-400">
+                <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
+                <p class="section-3-item-lower-itemcost">$298</p>
+              </div>
+            </a>
           </div>
-          <div class="section-3-item-lower roboto-400">
-            <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
-            <p class="section-3-item-lower-itemcost">$298</p>
-          </div>
-        </a>
-        <a class="section-3-item">
-          <div class="section-3-item-upper">
-            <img src="/assets/images/section3-item2.png" alt="">
-            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
-          </div>
-          <div class="section-3-item-lower roboto-400">
-            <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
-            <p class="section-3-item-lower-itemcost">$298</p>
-          </div>
-        </a>
-        <a class="section-3-item">
-          <div class="section-3-item-upper">
-            <img src="/assets/images/section3-item3.png" alt="">
-            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
-          </div>
-          <div class="section-3-item-lower roboto-400">
-            <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
-            <p class="section-3-item-lower-itemcost">$298</p>
-          </div>
-        </a>
-        <a class="section-3-item">
-          <div class="section-3-item-upper">
-            <img src="/assets/images/section3-item4.png" alt="">
-            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
-          </div>
-          <div class="section-3-item-lower roboto-400">
-            <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
-            <p class="section-3-item-lower-itemcost">$298</p>
-          </div>
-        </a>
-        <a class="section-3-item">
-          <div class="section-3-item-upper">
-            <img src="/assets/images/section3-item5.png" alt="">
-            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
-          </div>
-          <div class="section-3-item-lower roboto-400">
-            <p class="section-3-item-lower-itemname">Classic Easy Zipper Tote</p>
-            <p class="section-3-item-lower-itemcost">$298</p>
-          </div>
-        </a>
+        </div>
       </div>
     </section>
     <section class="section-4">
-      <div class="section-4-item">
+      <a href="./pages/shop/shop.html" class="section-4-item">
         <p class="roboto-400">The Smart Chic</p>
-      </div>
-      <div class="section-4-item">
+      </a>
+      <a href="./pages/shop/shop.html" class="section-4-item">
         <p class="roboto-400">Ready To Go</p>
-      </div>
+      </a>
     </section>
 
     <section class="section-5 roboto-400">
@@ -374,23 +447,43 @@
 
     <section class="section-6 roboto-400">
       <h3>Shop Instagram</h3>
-      <div class="section-6-list">
-        <div class="section-6-list-item1">
+      <a href="https://www.instagram.com/minggquy/" class="section-6-list">
+        <div class="section-6-carousel-container">
+          <!-- Section 1 -->
+          <div class="section-6-list-item1">
 
-        </div>
-        <div class="section-6-list-item2">
+          </div>
+          <div class="section-6-list-item2">
 
-        </div>
-        <div class="section-6-list-item3">
+          </div>
+          <div class="section-6-list-item3">
 
-        </div>
-        <div class="section-6-list-item4">
+          </div>
+          <div class="section-6-list-item4">
 
-        </div>
-        <div class="section-6-list-item5">
+          </div>
+          <div class="section-6-list-item5">
 
+          </div>
+
+          <!-- Section 2 -->
+          <div class="section-6-list-item1">
+
+          </div>
+          <div class="section-6-list-item2">
+
+          </div>
+          <div class="section-6-list-item3">
+
+          </div>
+          <div class="section-6-list-item4">
+
+          </div>
+          <div class="section-6-list-item5">
+
+          </div>
         </div>
-      </div>
+      </a>
     </section>
 
   </section>

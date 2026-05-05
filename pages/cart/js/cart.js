@@ -3,6 +3,7 @@ import deleteProductsInCart from "../../../services/deleteData.js";
 import renderNumberProductsInCart from "../../../services/cart-services.js";
 import renderNumberProductsInWishlist from "../../../services/wishlist-services.js"
 import { initEventPopUpWishlistModal } from "../../../services/wishlist-services.js";
+import { postPayment } from "../../../services/postData.js";
 
 const token = JSON.parse(localStorage.getItem("userInfo")).usertoken;
 
@@ -80,7 +81,7 @@ function initData() {
               </div>
             </div>`
           }
-          else{
+          else {
             html += `
             <div data-variantid="${item.product._id}_${item.size}_${item.color}" class="card-shopping-cart-page">
               <div class="card-shopping-cart-page-section-1 roboto-400">
@@ -159,12 +160,21 @@ function initValidateNumberProductsOnQuantityContol(item) {
 }
 
 function handleClickOnRemoveItem(e) {
+  const product = e.currentTarget.closest(".card-shopping-cart-page");
+  console.log(product);
   const productId = e.currentTarget.dataset.id;
   deleteProductsInCart(productId, token)
     .then(data => {
-      if (data){
-        initData();
+      if (data) {
+        // remove effect 
+        product.style.transition = "all 0.3s ease";
+        product.style.transform = "scale(0.75)"
+        product.style.opacity = "0";
+
         renderNumberProductsInCart();
+        setTimeout(() => {
+          initData();
+        },300)
       }
       else
         console.warn("Lỗi hệ thống, không thể xóa sản phẩm trong giỏ hàng");
@@ -199,15 +209,15 @@ function updateQuantityOfCartState(rootEl, delta) {
   initValidateNumberProductsOnQuantityContol(rootEl);
 
   // update giá cho item được thay đổi
-  syncCostOfProduct(rootEl,item);
+  syncCostOfProduct(rootEl, item);
 
   // update tổng tiền 
   updateTotalCost();
 }
 
-function initTotalCost(productsData){
+function initTotalCost(productsData) {
   const subTotal = document.querySelector(".cart-order-sumary-subtotal-cost");
-  
+
   let total = 0;
 
   productsData.forEach(item => {
@@ -215,9 +225,9 @@ function initTotalCost(productsData){
   })
 
   subTotal.innerHTML = `$ ${total}`
-} 
+}
 
-function updateTotalCost(){
+function updateTotalCost() {
   const subTotal = document.querySelector(".cart-order-sumary-subtotal-cost");
 
   const cartStateValues = Object.values(cartState.items);
@@ -227,15 +237,15 @@ function updateTotalCost(){
   cartStateValues.forEach(state => {
 
     // lọc field objectSchema của state 
-    if(state.quantity != -1) {
-        totalCost += state.quantity * state.priceOfOneItem;
+    if (state.quantity != -1) {
+      totalCost += state.quantity * state.priceOfOneItem;
     }
   })
 
   subTotal.innerHTML = `$ ${totalCost}`
 }
 
-function syncCostOfProduct(rootEl,currentItem){
+function syncCostOfProduct(rootEl, currentItem) {
   const cost = rootEl.querySelector(".card-shopping-cart-page-section-3-cost");
   cost.innerText = `$ ${currentItem.quantity * currentItem.priceOfOneItem}`
 }
@@ -250,3 +260,4 @@ renderNumberProductsInCart();
 renderNumberProductsInWishlist();
 
 initEventPopUpWishlistModal();
+

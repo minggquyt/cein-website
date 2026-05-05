@@ -250,7 +250,9 @@
 
 .product-item img {
     width: 100%;
+    object-fit: cover;
     height: auto;
+    aspect-ratio: 3/4;
 }
 
 .product-item h3 {
@@ -268,27 +270,31 @@
 .heart-icon,
 .plus-icon {
     position: absolute;
+    width: 36px !important;
+    height: 36px !important;
     padding: 5px;
     cursor: pointer;
     transition: 0.2s all;
 }
 
 .heart-icon {
-    top: 20px;
-    right: 30px;
-
+    top: 1.25rem;
+    right: 1.875rem;
 }
 
 .plus-icon {
-    bottom: 65px;
-    right: 30px;
+    bottom: 4.0625em;
+    right: 1.875em;
 }
 
-.heart-icon:hover,
-.plus-icon:hover {
-    border-radius: 100%;
-    background-color: lightgray;
+.heart-icon:hover {
+    transform: scale(1.4);
+    transition: 0.5s;
+}
 
+.plus-icon:hover {
+    transform: scale(1.4);
+    transition: 0.3s;
 }
 
 .heart-icon:hover {

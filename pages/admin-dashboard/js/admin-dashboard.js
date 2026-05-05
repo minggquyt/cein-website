@@ -1,6 +1,7 @@
 import { getAdminData } from "../../../services/getData.js";
-import { updateProduct } from "../../../services/updateData.js";
+import { synProductWithServer } from "../../../services/updateData.js";
 import { deleteProductRequest } from "../../../services/deleteData.js";
+import { deleteUserRequest } from "../../../services/deleteData.js";
 
 // Biến lưu trữ dữ liệu tập trung (State)
 let state = {
@@ -50,7 +51,43 @@ function renderCharts(chartData) {
         }
     });
 
-    // thêm logic biểu đồ đường cho sales
+    // Giả lập nhãn cho 7 ngày gần nhất vì mảng salesStats của bạn có 7 phần tử
+    const dayLabels = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+
+    const ctxSales = document.getElementById('bestSellerChart').getContext('2d');
+    state.charts.sales = new Chart(ctxSales, {
+        type: 'line',
+        data: {
+            labels: dayLabels, 
+            datasets: [{
+                label: 'Doanh thu ($)',
+                data: chartData.sales, // Mảng [500, 800, 450, 1200, 900, 2000, 1800]
+                borderColor: '#000',
+                backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                fill: true,
+                tension: 0.4, // Tạo độ cong cho đường kẻ
+                pointRadius: 5,
+                pointBackgroundColor: '#000'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) { return '$' + value; }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
+        }
+    });
 }
 
 function renderCustomerTable(customers) {
@@ -59,10 +96,21 @@ function renderCustomerTable(customers) {
 
     tableBody.innerHTML = customers.map(c => `
         <tr>
-            <td>${c.name}<br><small class="text-muted">${c.email}</small></td>
+            <td>
+                <span class="fw-bold">${c.name}</span><br>
+                <small class="text-muted">${c.email}</small>
+            </td>
+            <td>
+                <span class="badge bg-light text-dark border">
+                    <i class="bi bi-telephone me-1"></i>${c.phone || ""}
+                </span>
+            </td>
+            <td class="text-center">
+                <span class="badge bg-info text-white">${c.totalOrders || 0} Đơn</span>
+            </td>
             <td>${c.cartCount || 0} Items</td>
             <td>${c.wishlistCount || 0} Items</td>
-            <td class="fw-bold">$${c.totalSpent || 0}</td>
+            <td class="fw-bold text-success">$${c.totalSpent || 0}</td>
             <td>
                 <button class="btn btn-link text-dark p-0 me-2" data-id="${c._id}">Edit</button>
                 <button class="btn btn-link text-danger p-0" data-id="${c._id}">Delete</button>
@@ -100,6 +148,7 @@ function initDashboard() {
 
             // Lưu dữ liệu vào State để tái sử dụng khi chuyển tab
             state.dashboardData = result.data;
+
 
             // Render giao diện lần đầu (Mặc định trang Hệ thống)
             renderCharts(state.dashboardData.charts);
@@ -145,7 +194,6 @@ function handleAddProduct(e) {
 
 // Hàm render table (Chỉnh lại để lấy ảnh từ mảng images)
 function renderProductTable(products) {
-    console.log(products);
     const tableBody = document.querySelector('#system-section tbody');
     if (!tableBody) return;
 
@@ -228,7 +276,14 @@ function setupProductTableEvents() {
                 deleteProductRequest(productId, userInfo.usertoken)
                     .then(result => {
                         alert("Xóa thành công!");
-                        deleteBtn.closest('tr').remove();
+                        const productRow = deleteBtn.closest('tr');
+                        productRow.style.transition = "all 0.3s ease";
+                        productRow.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            productRow.remove();
+                        },300)
+
                         state.dashboardData.products = state.dashboardData.products.filter(p => p._id !== productId);
                     })
                     .catch(err => alert(err.message));
@@ -374,9 +429,8 @@ saveBtn.addEventListener('click', () => {
     // Quyết định Method dựa trên việc có productId hay không
     const method = productId ? "PUT" : "POST";
 
-    updateProduct(method, productDataForServer, productId)
+    synProductWithServer(method, productDataForServer, productId)
         .then(result => {
-            console.log(result);
             if (result.success) {
                 alert(productId ? "Cập nhật thành công!" : "Thêm sản phẩm mới thành công!");
 
@@ -392,3 +446,121 @@ saveBtn.addEventListener('click', () => {
             alert("Lỗi: " + (err.message || "Không thể lưu sản phẩm"));
         });
 });
+
+// Khởi tạo event edit và lưu user
+// Khởi tạo Modal
+const userModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+
+// Lắng nghe sự kiện click trên bảng User
+document.querySelector('#customer-section tbody').addEventListener('click', (e) => {
+    const editBtn = e.target.closest('button.text-dark'); // Nút Edit
+    if (editBtn) {
+        const userId = editBtn.getAttribute('data-id');
+
+        // Tìm dữ liệu user trong state hiện tại
+        const user = state.dashboardData.customers.find(c => c._id === userId);
+        
+        if (user) {
+            // Đổ dữ liệu vào Form
+            document.getElementById('edit-user-name').value = user.name;
+            document.getElementById('edit-user-email').value = user.email;
+            document.getElementById('edit-user-phone').value = user.phone || "";
+            
+            // Đổ dữ liệu vào các ô bị khóa
+            document.getElementById('edit-user-id').value = user._id;
+            document.getElementById('edit-user-total-orders').value = user.totalOrders + " đơn";
+            document.getElementById('edit-user-total-spent').value = "$" + user.totalSpent;
+
+            // Mở modal
+            userModal.show();
+        }
+    }
+
+    const deleteBtn = e.target.closest("button.text-danger");
+    if(deleteBtn){
+        const userId = deleteBtn.dataset.id;
+        const userRow = deleteBtn.closest("tr");
+        handleDeleteUserUI(userId,userRow);
+    }
+});
+
+// Xử lý sự kiện lưu thông tin user:
+// Gắn sự kiện cho nút Lưu trong Modal Edit User
+document.getElementById('save-user-changes').addEventListener('click', async () => {
+    const userId = document.getElementById('edit-user-id').value;
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+    const updateData = {
+        name: document.getElementById('edit-user-name').value,
+        email: document.getElementById('edit-user-email').value,
+        phone: document.getElementById('edit-user-phone').value
+    };
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Bearer ${userInfo.usertoken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updateData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert("Cập nhật thông tin thành công!");
+            // Đóng modal
+            userModal.hide();
+            // Reload lại bảng hoặc gọi lại hàm render
+            location.reload(); 
+        } else {
+            alert("Lỗi: " + result.message);
+        }
+    } catch (error) {
+        console.error("Update User Error:", error);
+        alert("Không thể kết nối đến server.");
+    }
+});
+
+function handleDeleteUserUI(userId, rowElement) {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+    const isConfirm = confirm("CẢNH BÁO: Xóa người dùng này sẽ xóa sạch Giỏ hàng và Wishlist liên quan. Tiếp tục?");
+    if (!isConfirm) return;
+
+    deleteUserRequest(userId, userInfo.usertoken)
+        .then(result => {
+            // Bước 1: Hiệu ứng UI
+            rowElement.style.transition = "all 0.3s ease";
+            rowElement.style.opacity = "0";
+            
+            setTimeout(() => {
+                rowElement.remove();
+                alert(result.message);
+            }, 300);
+
+            // Bước 2: Cập nhật State toàn cục (nếu có)
+            if (state.dashboardData && state.dashboardData.customers) {
+                state.dashboardData.customers = state.dashboardData.customers.filter(c => c._id !== userId);
+            }
+        })
+        .catch(error => {
+            // Xử lý khi có lỗi (Ví dụ: Xóa nhầm Admin sẽ nhảy vào đây)
+            console.error("Lỗi xóa user:", error);
+            alert("Lỗi: " + error);
+        })
+        .finally(() => {
+            console.log("Hoàn tất tiến trình xóa ID:", userId);
+        });
+}
+
+// Khởi tạo event click edit và 
+
+// BỔ SUNG PHẦN QUẢN LÝ USER:
+// - THÊM TOTAL ORDERS ( GIẢ LẬP DỮ LIỆU CỨNG Ở DATABASE )
+// - THÊM SỐ ĐIỆN THOẠI ( THÔNG TIN LIÊN LẠC )
+// - THÊM BỘ LỌC ĐỂ SEARCH THEO:
+// + TRẠNG THÁI TÀI KHOẢN 
+// + SEARCH THEO TỔNG CHI TIÊU 
+// - PHÂN TRANG 

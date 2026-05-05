@@ -252,6 +252,7 @@
     width: 100%;
     height: auto;
     aspect-ratio: 3/4;
+    object-fit: cover;
 }
 
 .product-item h3 {
@@ -269,27 +270,21 @@
 .heart-icon,
 .plus-icon {
     position: absolute;
+    width: 36px !important;
+    height: 36px !important;
     padding: 5px;
     cursor: pointer;
     transition: 0.2s all;
 }
 
 .heart-icon {
-    top: 20px;
-    right: 30px;
-
+    top: 1.25rem;
+    right: 1.875rem;
 }
 
 .plus-icon {
-    bottom: 65px;
-    right: 30px;
-}
-
-.heart-icon:hover,
-.plus-icon:hover {
-    border-radius: 100%;
-    background-color: lightgray;
-
+    bottom: 4.0625em;
+    right: 1.875em;
 }
 
 .heart-icon:hover {
@@ -365,7 +360,8 @@ footer {
         right: 100px;
         bottom: 10px;
     }
-    .filter-panel{
+
+    .filter-panel {
         width: 40%;
     }
 
@@ -474,6 +470,7 @@ footer {
         padding-right: 20px;
         color: #212529;
     }
+
     #overlay-filter.active {
         opacity: 0;
         pointer-events: auto;
@@ -495,6 +492,7 @@ footer {
     .filter-header #btn-close-filter {
         top: -32px;
     }
+
     #btn-see-results {
         margin: 0;
     }

@@ -3,7 +3,7 @@ import { getCartData } from "./getData.js";
 export default function renderNumberProductsInCart() {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    if (!userInfo) {
+    if (!userInfo || userInfo.userrole == 'admin') {
         console.warn("User chưa đăng nhập");
     }
     else {

@@ -18,10 +18,59 @@
   <link rel="stylesheet" href="../../css/variable.css">
   <link rel="stylesheet" href="../../components/user-setting-box/user-setting-box.css">
   <link rel="stylesheet" href="../../components/wish-list-modal/wish-list-modal.css">
+  <link rel="stylesheet" href="../../components/loading/loading.css">
+  <link rel="stylesheet" href="../../components/alert-modal-danger/alert-modal-danger.css">
+  <link rel="stylesheet" href="../../components/alert-modal-success/alert-modal-success.css">
+  <link rel="stylesheet" href="../../components/alert-modal-warning/alert-modal-warning.css">
+  
   <title>CEIN</title>
 </head>
 
 <body>
+
+  <!-- ALERT LOADING MODAL -->
+  <div class="alert-loading-modal">
+    <div class="spinner-border text-dark" role="status">
+      <span></span>
+    </div>
+    <p class="sr-only">Loading...</p>
+  </div>
+
+   <!-- wishlist modal -->
+    <div class="wish-list-modal">
+    </div>
+    <!-- wshlist modal box -->
+    <div class="wish-list-modal-box">
+        <div class="offcanvas-header" style="padding: 1rem;">
+            <h5 id="offcanvasRightLabel">Wishlist</h5>
+            <button type="button" class="btn-close text-reset wishlist-close" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+        <div class="wish-list-modal-box-items">
+
+            <button class="wishlist-btn-add-to-cart roboto-400">Add To Cart</button>
+
+        </div>
+    </div>
+    <!--  -->
+
+    <!-- alert danger modal -->
+    <div class="alert alert-danger alert-modal-danger" role="alert">
+        This is a danger alert—check it out!
+    </div>
+    <!--  -->
+
+    <!-- alert success modal -->
+    <div class="alert alert-success alert-modal-success" role="alert">
+        This is a success alert—check it out!
+    </div>
+    <!--  -->
+
+    <!-- alert warning modal -->
+    <div class="alert alert-warning alert-modal-warning" role="alert">
+        This is a warning alert—check it out!
+    </div>
+    <!--  -->
 
   <header>
     <!-- Login Modal -->
@@ -75,115 +124,115 @@
     </div>
 
     <!-- wishlist modal -->
-     <!-- wishlist modal -->
-<div class="wish-list-modal">
-</div>
+    <!-- wishlist modal -->
+    <div class="wish-list-modal">
+    </div>
 
-<!-- wshlist modal box -->
-<div class="wish-list-modal-box">
-    <div class="offcanvas-header" style="padding: 1rem;">
+    <!-- wshlist modal box -->
+    <div class="wish-list-modal-box">
+      <div class="offcanvas-header" style="padding: 1rem;">
         <h5 id="offcanvasRightLabel">Wishlist</h5>
         <button type="button" class="btn-close text-reset wishlist-close" data-bs-dismiss="offcanvas"
-            aria-label="Close"></button>
-    </div>
-    <div class="wish-list-modal-box-items">
+          aria-label="Close"></button>
+      </div>
+      <div class="wish-list-modal-box-items">
         <div class="wish-list-modal-box-item">
-            <div class="wish-list-modal-box-item-card-image">
-                <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
-                    alt="Sweater">
+          <div class="wish-list-modal-box-item-card-image">
+            <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
+              alt="Sweater">
+          </div>
+
+          <div class="wish-list-modal-box-item-card-description">
+            <div class="item-header">
+              <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
+              <button class="remove-btn">✕</button>
             </div>
 
-            <div class="wish-list-modal-box-item-card-description">
-                <div class="item-header">
-                    <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
-                    <button class="remove-btn">✕</button>
-                </div>
+            <p class="item-color">Beige</p>
+            <p class="item-price">$248</p>
 
-                <p class="item-color">Beige</p>
-                <p class="item-price">$248</p>
-
-                <div class="quantity-selector">
-                    <button class="qty-btn">−</button>
-                    <span class="qty-number">1</span>
-                    <button class="qty-btn">+</button>
-                </div>
+            <div class="quantity-selector">
+              <button class="qty-btn">−</button>
+              <span class="qty-number">1</span>
+              <button class="qty-btn">+</button>
             </div>
+          </div>
         </div>
 
         <div class="wish-list-modal-box-item">
-            <div class="wish-list-modal-box-item-card-image">
-                <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
-                    alt="Sweater">
+          <div class="wish-list-modal-box-item-card-image">
+            <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
+              alt="Sweater">
+          </div>
+
+          <div class="wish-list-modal-box-item-card-description">
+            <div class="item-header">
+              <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
+              <button class="remove-btn">✕</button>
             </div>
 
-            <div class="wish-list-modal-box-item-card-description">
-                <div class="item-header">
-                    <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
-                    <button class="remove-btn">✕</button>
-                </div>
+            <p class="item-color">Beige</p>
+            <p class="item-price">$248</p>
 
-                <p class="item-color">Beige</p>
-                <p class="item-price">$248</p>
-
-                <div class="quantity-selector">
-                    <button class="qty-btn">−</button>
-                    <span class="qty-number">1</span>
-                    <button class="qty-btn">+</button>
-                </div>
+            <div class="quantity-selector">
+              <button class="qty-btn">−</button>
+              <span class="qty-number">1</span>
+              <button class="qty-btn">+</button>
             </div>
+          </div>
         </div>
 
         <div class="wish-list-modal-box-item">
-            <div class="wish-list-modal-box-item-card-image">
-                <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
-                    alt="Sweater">
+          <div class="wish-list-modal-box-item-card-image">
+            <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
+              alt="Sweater">
+          </div>
+
+          <div class="wish-list-modal-box-item-card-description">
+            <div class="item-header">
+              <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
+              <button class="remove-btn">✕</button>
             </div>
 
-            <div class="wish-list-modal-box-item-card-description">
-                <div class="item-header">
-                    <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
-                    <button class="remove-btn">✕</button>
-                </div>
+            <p class="item-color">Beige</p>
+            <p class="item-price">$248</p>
 
-                <p class="item-color">Beige</p>
-                <p class="item-price">$248</p>
-
-                <div class="quantity-selector">
-                    <button class="qty-btn">−</button>
-                    <span class="qty-number">1</span>
-                    <button class="qty-btn">+</button>
-                </div>
+            <div class="quantity-selector">
+              <button class="qty-btn">−</button>
+              <span class="qty-number">1</span>
+              <button class="qty-btn">+</button>
             </div>
+          </div>
         </div>
 
         <div class="wish-list-modal-box-item">
-            <div class="wish-list-modal-box-item-card-image">
-                <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
-                    alt="Sweater">
+          <div class="wish-list-modal-box-item-card-image">
+            <img src="https://res.cloudinary.com/drfkacsvn/image/upload/v1774772543/section3-item5_st11xl.png"
+              alt="Sweater">
+          </div>
+
+          <div class="wish-list-modal-box-item-card-description">
+            <div class="item-header">
+              <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
+              <button class="remove-btn">✕</button>
             </div>
 
-            <div class="wish-list-modal-box-item-card-description">
-                <div class="item-header">
-                    <h3 class="item-title">Alpaca Wool Crewneck Sweater</h3>
-                    <button class="remove-btn">✕</button>
-                </div>
+            <p class="item-color">Beige</p>
+            <p class="item-price">$248</p>
 
-                <p class="item-color">Beige</p>
-                <p class="item-price">$248</p>
-
-                <div class="quantity-selector">
-                    <button class="qty-btn">−</button>
-                    <span class="qty-number">1</span>
-                    <button class="qty-btn">+</button>
-                </div>
+            <div class="quantity-selector">
+              <button class="qty-btn">−</button>
+              <span class="qty-number">1</span>
+              <button class="qty-btn">+</button>
             </div>
+          </div>
         </div>
 
         <button class="wishlist-btn-add-to-cart roboto-400">Add To Cart</button>
 
+      </div>
     </div>
-</div>
-<!--  -->
+    <!--  -->
 
     <div class="header-top">
       <p clas="roboto-400">Complimentary U.S. No-Rush Shipping on orders of $95 or more. Shop now</p>
@@ -210,13 +259,10 @@
               <a href="../sales/sales.html" class=" roboto-400">Sales</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="dropdown-toggle roboto-400" href="#" data-bs-toggle="dropdown" aria-expanded="false">Journel</a>
+              <a class="dropdown-toggle roboto-400" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+                <li><a class="dropdown-item" href="../about-us/about-us.html">About us</a></li>
+                <li><a class="dropdown-item" href="#">Sitemap</a></li>
               </ul>
             </li>
           </ul>
@@ -277,28 +323,33 @@
     </section>
     <section class="stores-section-3 roboto-400">
       <div class="stores-section-3-item">
-        <img src="/assets/images/section6-item3.jpg" alt="">
-        <p>24 Vân Côi</p>
+        <img src="https://www.brandboy.com.au/wp-content/uploads/2023/06/retail-1-scaled.jpg" alt="">
+        <p>Union Square - San Francisco, CA</p>
       </div>
       <div class="stores-section-3-item">
-        <img src="/assets/images/section6-item3.jpg" alt="">
-        <p>24 Vân Côi</p>
+        <img src="https://i.pinimg.com/originals/cb/c2/ec/cbc2ec2f2086ff76c744555baeb097a1.png" alt="">
+        <p>Filmore St - San Francisco, CA</p>
       </div>
       <div class="stores-section-3-item">
-        <img src="/assets/images/section6-item3.jpg" alt="">
-        <p>24 Vân Côi</p>
+        <img src="https://www.contemporist.com/wp-content/uploads/2023/04/modern-retail-store-plants-050423-1222-01.jpg"
+          alt="">
+        <p>Stanford Shopping Center - Palo Alto, CA</p>
       </div>
       <div class="stores-section-3-item">
-        <img src="/assets/images/section6-item3.jpg" alt="">
-        <p>24 Vân Côi</p>
+        <img src="https://wallpaperaccess.com/full/7578122.jpg" alt="">
+        <p>Union Square - San Francisco, CA</p>
       </div>
       <div class="stores-section-3-item">
-        <img src="/assets/images/section6-item3.jpg" alt="">
-        <p>24 Vân Côi</p>
+        <img
+          src="https://www.iointeriors.in/assets/img/the-perfect-boutique-retail-interior-design-for-small-fashion-businesses.webp"
+          alt="">
+        <p>Filmore St - San Francisco, CA</p>
       </div>
       <div class="stores-section-3-item">
-        <img src="/assets/images/section6-item3.jpg" alt="">
-        <p>24 Vân Côi</p>
+        <img
+          src="https://fabriclore.com/cdn/shop/articles/Blog-Banner-for-graphics_41_269a77d2-df3d-40f5-9541-c5577e4b10fa.jpg?v=1674804467&width=2048"
+          alt="">
+        <p>Union Square - San Francisco, CA</p>
       </div>
     </section>
     <section class="stores-section-4">

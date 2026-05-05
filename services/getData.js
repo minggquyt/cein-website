@@ -9,14 +9,14 @@ export function getProductsDataFromDb(state) {
         }
     }
 
-    return fetch(`https://cein-website-server-production.up.railway.app/api/products?${params.toString()}`)
+    return fetch(`http://localhost:5000/api/products?${params.toString()}`)
         .then((res) => res.json())
         .then(data => data)
         .catch(error => error)
 }
 
 export function getCartData(token) {
-    return fetch("https://cein-website-server-production.up.railway.app/api/cart", {
+    return fetch("http://localhost:5000/api/cart", {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -32,7 +32,7 @@ export function getCartData(token) {
 }
 
 export function getWishListData(token) {
-    return fetch("https://cein-website-server-production.up.railway.app/api/wishlist", {
+    return fetch("http://localhost:5000/api/wishlist", {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -48,7 +48,7 @@ export function getWishListData(token) {
 }
 
 export function getProductDetailData(slug) {
-    return fetch(`https://cein-website-server-production.up.railway.app/api/products/${slug}`)
+    return fetch(`http://localhost:5000/api/products/${slug}`)
         .then(res => res.json())
         .then(result => result)
         .catch(error => {
@@ -57,7 +57,7 @@ export function getProductDetailData(slug) {
 }
 
 export function getUserInfo(token){
-    return fetch('https://cein-website-server-production.up.railway.app/api/user/profile', {
+    return fetch('http://localhost:5000/api/user/profile', {
             headers: { 
                 'Authorization': `Bearer ${token}` 
             }
@@ -68,7 +68,7 @@ export function getUserInfo(token){
 }
 
 export function  getAdminData(userToken) {
-    return fetch("https://cein-website-server-production.up.railway.app/api/admin/statistics", {
+    return fetch("http://localhost:5000/api/admin/statistics", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -1,5 +1,5 @@
 export default function updateNumberProductsVariant(variantId, quantity, token) {
-    return fetch(`https://cein-website-server-production.up.railway.app/api/cart/${variantId}`, {
+    return fetch(`http://localhost:5000/api/cart/${variantId}`, {
         method: "PUT", 
         headers: {
             "Content-Type": "application/json",
@@ -13,11 +13,11 @@ export default function updateNumberProductsVariant(variantId, quantity, token) 
         .catch(error => console.log(error))
 }
 
-export function updateProduct(method, productData, productId = null) {
+export function synProductWithServer(method, productData, productId = null) {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     const url = productId 
-        ? `https://cein-website-server-production.up.railway.app/api/products/${productId}` 
-        : `https://cein-website-server-production.up.railway.app/api/products`;
+        ? `http://localhost:5000/api/products/${productId}` 
+        : `http://localhost:5000/api/products`;
 
     const payload = {
         name: productData.name,

@@ -1,0 +1,121 @@
+  <header>
+    <!-- Login Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">
+              Login
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                  else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1"
+                  placeholder="Password">
+              </div>
+              <div class="form-check">
+                <input name="isrember" type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="sign-in-button">
+              Sign In
+            </button>
+            <button type="button" class="sign-up-button">
+              <a href="./pages/sign-up/sigp-up.html">Sign up</a>
+            </button>
+            <a href="#">forgot password ?</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="header-top">
+      <p clas="roboto-400">Complimentary U.S. No-Rush Shipping on orders of $95 or more. Shop now</p>
+    </div>
+    <nav class="navbar navbar-expand-md navbar-dark header-bottom" aria-label="Fourth navbar example">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="/assets/images/logo.png" width="85px" height="20px" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
+          aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon header-bottom-menu-icon material-symbols-outlined">
+            menu
+          </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExample04">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0 header-bottom-list">
+            <li class="nav-item">
+              <a class="active roboto-400" aria-current="page" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="active roboto-400" aria-current="page" href="./pages/shop/shop.html">Shop</a>
+            </li>
+            <li class="nav-item"><a class="roboto-400" href="./pages/new-arrivals/new-arrivals.html">New Arrivals</a>
+            </li>
+            <li class="nav-item">
+              <a href="./pages/sales/sales.html" class=" roboto-400">Sales</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="dropdown-toggle roboto-400" href="#" data-bs-toggle="dropdown" aria-expanded="false">Journel</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="header-bottom-left-menu">
+            <form role="search" style="display: none;">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
+            </form>
+            <!-- inject user setting box -->
+            <div class="user-setting-box-pseudoclass">
+            </div>
+            <div class="user-setting-box">
+              <button class="user-setting-box--logoutbutton">
+                Đăng xuất
+              </button>
+              <button class="user-setting-box--dashboard">
+                <a href="../../pages/dashboard/dashboard.html">Dashboard</a>
+              </button>
+            </div>
+            <!--  -->
+            <img src="/assets/images/search.png" width="20px" height="20px" alt="">
+            <a href="./pages/stores/stores.html" class="roboto-400">Stores</a>
+            <img src="/assets/images/account.png" id="login-icon" data-bs-toggle="modal"
+              data-bs-target="#exampleModalCenter" width="24px" height="24px" alt="">
+            <div id="wishlist" class="left-menu-wishlist">
+              <img src="/assets/images/wishlist.png" width="20px" height="20px" alt="">
+              <span>2</span>
+            </div>
+            <a href="./pages/cart/cart.html" id="cart" class="left-menu-bag">
+              <img src="/assets/images/bag.png" width="20px" height="20px" alt="">
+              <span>2</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+  </header>

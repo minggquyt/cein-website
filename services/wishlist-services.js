@@ -1,13 +1,14 @@
 import { getCartData } from "./getData.js";
 import { getWishListData } from "./getData.js";
 import { deleteProductsInWishlist } from "./deleteData.js";
+import { postProductToWishlist } from "./postData.js";
+import { showWarningAlert, showDangerAlert } from "./alert.js";
+import showSuccessAlert from "./alert.js";
 
 export function displayWishListModal() {
     const wishListContainer = document.querySelector(".wish-list-modal");
 
     const wishListBox = document.querySelector('.wish-list-modal-box');
-
-    console.log(wishListBox);
 
     wishListContainer.classList.add("wish-list-modal-active");
 
@@ -53,7 +54,8 @@ function handleEventClickOnRemoveItemBtnInWishlist(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    const productId = e.currentTarget.closest(".wish-list-modal-box-item").dataset.productid;
+    const currentProduct = e.currentTarget.closest(".wish-list-modal-box-item");
+    const productId = currentProduct.dataset.productid;
 
     const userToken = JSON.parse(localStorage.getItem("userInfo")).usertoken;
 
@@ -61,7 +63,13 @@ function handleEventClickOnRemoveItemBtnInWishlist(e) {
         deleteProductsInWishlist(productId, userToken)
             .then(result => {
                 if (result.success == true) {
-                    syncDataOfWishlist();
+                    // remove effect 
+                    currentProduct.style.transition = "all 0.3s ease";
+                    currentProduct.style.transform = "scale(0.75)"
+                    currentProduct.style.opacity = '0';
+                    setTimeout(() => {
+                        syncDataOfWishlist();
+                    }, (300));
                 }
                 else if (result.success == false) {
                     console.log(result.message);
@@ -98,7 +106,7 @@ function renderProductsInWishList(wishlistItems) {
             || product.images[0]?.url;
 
         return `
-            <div class="wish-list-modal-box-item" data-productid="${product._id}">
+            <a href="/pages/product-detail/product-detail.html?slug=${product.slug}" class="wish-list-modal-box-item" data-slug=${product.slug} data-productid="${product._id}">
                 <div class="wish-list-modal-box-item-card-image">
                     <img src="${displayImage}" alt="${product.name}">
                 </div>
@@ -111,7 +119,7 @@ function renderProductsInWishList(wishlistItems) {
                     <p class="item-price">$${product.price}</p>
 
                 </div>
-            </div>
+            <a>
         `;
     }).join('');
 
@@ -122,6 +130,7 @@ function renderProductsInWishList(wishlistItems) {
 
     initEventRemoveItemInWishList();
 }
+
 
 function syncDataOfWishlist() {
     // logic fetch data từ server để render ra wishlist 
@@ -187,7 +196,7 @@ function updateNumberProductsInWishlist(total){
 export function renderNumberProductsInWishlist() {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    if (!userInfo) {
+    if (!userInfo && userInfo.userrole == 'admin') {
         console.warn("User chưa đăng nhập");
     }
     else {
@@ -202,6 +211,41 @@ export function renderNumberProductsInWishlist() {
                 console.log(error)
             ])
     }
+}
+
+function handleEventClickButtonAddToWishlist(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const userToken = JSON.parse(localStorage.getItem("userInfo")).usertoken;
+    const productId = e.target.closest(".product-item").dataset.productid;
+
+    if (userToken && productId) {
+        postProductToWishlist(productId, userToken)
+            .then(result => {
+                if (result != null && result.success == true) {
+                    showSuccessAlert(result.message);
+                    renderNumberProductsInWishlist();
+                }
+                else if (result != null && result.success == false) {
+                    showWarningAlert(result.message);
+                }
+                else {
+                    showDangerAlert("Lỗi trong quá trình kết nối tới server");
+                }
+            })
+    }
+    else {
+        console.warn("Lỗi khi thêm sản phẩm vào giỏ hàng");
+    }
+}
+
+
+export function initEventClickButtonAddToWishlist() {
+    const buttonAddToWishList = document.querySelectorAll(".heart-icon");
+    buttonAddToWishList.forEach(button => {
+        button.addEventListener("click", handleEventClickButtonAddToWishlist);
+    })
 }
 
 // using this to create wishlist modal and update number products in wishlist realtime

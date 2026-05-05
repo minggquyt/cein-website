@@ -3,106 +3,146 @@ import showLoading from "../../../components/loading/loading.js";
 import { hideLoading } from "../../../components/loading/loading.js";
 import { postProductToCart } from "../../../services/postData.js"
 import renderNumberProductsInCart from '../../../services/cart-services.js'
-import { postProductToWishlist } from "../../../services/postData.js";
 import showSuccessAlert from "../../../services/alert.js";
 import { showDangerAlert, showWarningAlert } from "../../../services/alert.js";
-import { renderNumberProductsInWishlist } from "../../../services/wishlist-services.js"
-import { initEventPopUpWishlistModal } from "../../../services/wishlist-services.js";
+import { initEventClickButtonAddToWishlist } from "../../../services/wishlist-services.js";
 
 const state = {
-    page: 1,
-    limit: 12,
-    category: null,
-    sort: null,
-    color: null,
-    material: null,
-    size: null
-};
-
-let productStore = {
-    "69c9f6df2dae594eab9dae7f": {
-        name: 'Classic Easy Zipper Tote',
-        price: 200,
-        colors: [{ name: 'Gray', hex: '#cccccc' }, { name: 'Black', hex: '#000000' }],
-        sizes: ['L', 'XL'],
-        variants: [{ color: 'Gray', size: 'L', stock: 15 }]
+    allProducts: [],
+    filteredProducts: [],
+    filters: {
+        page: 1,
+        limit: 12,
+        category: null,
+        sort: null,
+        color: null,
+        material: null,
+        size: null
     }
 };
 
-function renderVariantModal(productId) {
-    const product = productStore[productId];
-    if (!product) return;
+let productStore = {};
 
-    const modal = document.getElementById('variantBox');
+function applyLogicAndRender() {
+    return new Promise((resolve) => {
 
-    // 1. Render Màu sắc
-    const colorContainer = modal.querySelector('.variant-group:nth-child(3) .option-list');
-    colorContainer.innerHTML = product.colors.map((color, index) => `
-        <input type="radio" name="color" id="color-${index}" value="${color.name}" hidden ${index === 0 ? 'checked' : ''}>
-        <label for="color-${index}" class="color-swatch" 
-               style="background-color: ${color.hex};" 
-               title="${color.name}">
-        </label>
-    `).join('');
+        let result = [...state.allProducts];
 
-    // 2. Render Kích thước
-    const sizeContainer = modal.querySelector('.variant-group:nth-child(4) .option-list');
-    sizeContainer.innerHTML = product.sizes.map((size, index) => `
-        <input type="radio" name="size" id="size-${size}" value="${size}" hidden ${index === 0 ? 'checked' : ''}>
-        <label for="size-${size}" class="size-box">${size}</label>
-    `).join('');
+        console.log(state);
 
-    // 3. Cập nhật ID vào nút Submit để biết đang thêm sản phẩm nào
-    const submitBtn = modal.querySelector('.add-to-cart-submit');
-    submitBtn.setAttribute('data-productid', productId);
-
-    // 4. Hiển thị modal
-    modal.style.display = 'block';
-
-    // 5. Gán event cho button submit 
-    submitBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const colorChecked = variantBox.querySelector(`input[name="color"]:checked`).value;
-
-        const sizeChecked = variantBox.querySelector(`input[name="size"]:checked`).value;
-
-        const productId = e.target.dataset.productid;
-
-        const userToken = JSON.parse(localStorage.getItem("userInfo")).usertoken;
-
-        if (userToken) {
-            // chỉnh logic UI theo từng variant 
-            postProductToCart(productId, 1, sizeChecked, colorChecked, userToken)
-                .then(result => {
-                    if (result != null) {
-                        if (result.success == true) {
-                            showSuccessAlert(result.message)
-                            renderNumberProductsInCart();
-                        }
-                        else
-                            showWarningAlert(result.message);
-                    }
-                    else 
-                        showDangerAlert("Lỗi trong quá trình kết nối tới server");
-                })
-        }
-        else {
-            console.warn("Thiếu user token");
+        // 1. Filter theo Category
+        if (state.filters.category) {
+            result = result.filter(p => {
+                console.log(p.categoryDetails.slug.includes(state.filters.category));
+                return p.categoryDetails.slug.includes(state.filters.category)
+            });
         }
 
-    })
+        console.log(result);
+
+        // 2. Filter theo Color
+        if (state.filters.color) {
+            result = result.filter(p =>
+                p.colors && p.colors.some(c => c.name.toLowerCase() === state.filters.color.toLowerCase())
+            );
+        }
+
+        // 3. Filter theo Material
+        if (state.filters.material) {
+            // so sánh theo tất cả chữ thường
+            result = result.filter(p => p.material.toLowerCase() === state.filters.material.toLowerCase());
+        }
+
+        // 4. Filter theo Size
+        if (state.filters.size) {
+            result = result.filter(p => p.sizes && p.sizes.includes(state.filters.size));
+        }
+        // 5. Sort
+        switch (state.filters.sort) {
+            case "Price: Low to High":
+                result.sort((a, b) => a.price - b.price);
+                break;
+            case "Price: High to Low":
+                result.sort((a, b) => b.price - a.price);
+                break;
+            case "Sales":
+                result = result.filter(p => p.tags.isSale == true);
+                break;
+            case "Featured":
+                result = result.filter(p => p.tags.isNew == true);
+                break;
+        }
+
+        state.filteredProducts = result;
+
+        // 6. Pagination dựa trên data đã được filter 
+        const start = (state.filters.page - 1) * state.filters.limit;
+        const end = start + state.filters.limit;
+        const displayData = result.slice(start, end);
+
+
+        // Render UI
+        renderProducts({
+            data: displayData,
+            pagination: {
+                page: state.filters.page,
+                totalPages: Math.ceil(result.length / state.filters.limit),
+                totalItems: result.length
+            }
+        });
+
+        mapProductsToStore({ data: displayData });
+        resolve(displayData);
+    });
+}
+
+function fetchProductData() {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = "";
+    showLoading();
+
+    // Lấy một lượng lớn sản phẩm để làm việc ở FE (ví dụ limit: 1000)
+    getProductsDataFromDb({ limit: 1000 })
+        .then((response) => {
+            state.allProducts = response.data;
+            return applyLogicAndRender();
+        })
+        .then(() => {
+            hideLoading();
+        })
+        .catch(err => {
+            hideLoading();
+            showDangerAlert("Lỗi tải dữ liệu từ server");
+        });
+}
+
+function renderProducts(products) {
+    const productList = document.getElementById('product-list');
+    let html = "";
+    const userInfoInLS = JSON.parse(localStorage.getItem("userInfo"));
+
+    products.data.forEach(product => {
+        const isHidden = (!userInfoInLS || userInfoInLS.userrole == 'admin') ? 'style="visibility: hidden"' : '';
+        html += `
+        <a data-productid="${product._id}" href="../product-detail/product-detail.html?slug=${product.slug}" class="product-item">
+            <img src="/assets/icon/Heart.png" class="heart-icon" ${isHidden} width="36px" height="36px">
+            <img src="${product.images[0]?.url || ''}">
+            <img src="/assets/icon/Plus.png" ${isHidden} class="plus-icon add-variant-btn" width="36px" height="36px" >
+            <h3>${product.name}</h3>
+            <p>$${product.price}</p>
+        </a>`;
+    });
+
+    productList.innerHTML = html;
+
+    if (userInfoInLS && userInfoInLS.userrole !== 'admin') {
+        initEventClickButtonAddToCart();
+        initEventClickButtonAddToWishlist();
+    }
 }
 
 function mapProductsToStore(apiResponse) {
-    // Kiểm tra nếu apiResponse có tồn tại và có mảng data
-    if (!apiResponse || !Array.isArray(apiResponse.data)) {
-        console.error("Dữ liệu API không đúng định dạng mong đợi.");
-        return;
-    }
-
-    // Sử dụng reduce để chuyển mảng thành Object với key là _id
+    if (!apiResponse || !Array.isArray(apiResponse.data)) return;
     productStore = apiResponse.data.reduce((acc, product) => {
         acc[product._id] = {
             name: product.name,
@@ -116,96 +156,112 @@ function mapProductsToStore(apiResponse) {
     }, {});
 }
 
-function fetchProductData() {
-    // clear product + show loading
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = "";
-    showLoading();
+function initSortAndFilterEvents() {
+    // 1. Sort Panel Events
+    const sortOptions = document.querySelectorAll(".sort-panel ul li a");
+    sortOptions.forEach(option => {
+        option.addEventListener("click", (e) => {
+            e.preventDefault();
+            state.filters.sort = e.target.innerText;
 
-    getProductsDataFromDb(state)
-        .then((data) => {
-            hideLoading();
-            renderProducts(data);
-            mapProductsToStore(data);
-        })
-}
+            applyLogicAndRender();
+        });
+    });
 
-function renderProducts(products) {
-    const productList = document.getElementById('product-list');
+    // 2. Category Filter (Dải button trên cùng)
+    const categoriesBar = document.querySelector(".filter-options");
+    categoriesBar.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn-filter")) {
+            e.preventDefault();
+            const categoryText = e.target.innerText.toLowerCase();
+            state.filters.category = categoryText;
+            state.filters.page = 1;
+            applyLogicAndRender();
+        }
+    });
 
-    let html = "";
+    // 3. Filter Panel - Color (Radio buttons)
+    const colorInputs = document.querySelectorAll('input[name="filter-color"]');
+    colorInputs.forEach(input => {
+        input.addEventListener("change", (e) => {
+            state.filters.color = e.target.value;
+        });
+    });
 
-    const userInfoInLS = JSON.parse(localStorage.getItem("userInfo"));
+    // 4. Filter Panel - Material
+    const materialOptions = document.querySelectorAll(".material-option ul li label");
+    materialOptions.forEach(opt => {
+        opt.addEventListener("click", (e) => {
+            e.preventDefault();
+            state.filters.material = e.target.innerText;
+        });
+    });
 
-    // User chưa login
-    if (!userInfoInLS) {
-        products.data.forEach(product => {
-            html += `
-        <a data-productid="${product._id}" href="../product-detail/product-detail.html?slug=${product.slug}" class="product-item">
-            <img src="/assets/icon/Heart.png" class="heart-icon" style="visibility: hidden" width="36px" height="36px">
-            <img src="${product.images[0].url}">
-            <img src="/assets/icon/Plus.png" style="visibility: hidden" class="plus-icon add-variant-btn" width="36px" height="36px" >
-            <h3>${product.name}</h3>
-            <p>$${product.price}</p>
-        </a>`;
+    // 5. Filter Panel - Size
+    const sizeOptions = document.querySelectorAll(".size-option ul li label");
+    sizeOptions.forEach(opt => {
+        opt.addEventListener("click", (e) => {
+            e.preventDefault();
+            state.filters.size = e.target.innerText;
+        });
+    });
+
+    // 6. Button "See Results"
+    const btnSeeResults = document.getElementById("btn-see-results");
+    if (btnSeeResults) {
+        btnSeeResults.addEventListener("click", () => {
+            state.filters.page = 1;
+            applyLogicAndRender().then(() => {
+                // Đóng filter panel sau khi áp dụng
+                document.querySelector(".filter-panel").style.display = 'none';
+                document.getElementById("overlay-filter").style.display = 'none';
+            });
         });
     }
-    // User đã login
-    else {
-        products.data.forEach(product => {
-            html += `
-        <a data-productid="${product._id}" href="../product-detail/product-detail.html?slug=${product.slug}" class="product-item">
-            <img src="/assets/icon/Heart.png" class="heart-icon" width="36px" height="36px">
-            <img src="${product.images[0].url}">
-            <img src="/assets/icon/Plus.png" class="plus-icon add-variant-btn" width="36px" height="36px" >
-            <h3>${product.name}</h3>
-            <p>$${product.price}</p>
-        </a>`;
-        });
-    }
-
-    productList.innerHTML = html;
-
-    // Khởi tạo event click add To Cart & Wishlist cho user login 
-    if (userInfoInLS) {
-        initEventClickButtonAddToCart();
-        initEventClickButtonAddToWishlist();
-    }
 }
 
-const categoriesBar = document.querySelector(".filter-options");
-categoriesBar.addEventListener("click", (e) => {
-    e.preventDefault();
+function renderVariantModal(productId) {
+    const product = productStore[productId];
+    if (!product) return;
 
-    if (e.target.classList.contains("btn-filter-sweater")) {
-        state.category = "sweater";
-    }
+    const modal = document.getElementById('variantBox');
+    const colorContainer = modal.querySelector('.variant-group:nth-child(3) .option-list');
+    colorContainer.innerHTML = product.colors.map((color, index) => `
+        <input type="radio" name="color" id="color-${index}" value="${color.name}" hidden ${index === 0 ? 'checked' : ''}>
+        <label for="color-${index}" class="color-swatch" style="background-color: ${color.hex};" title="${color.name}"></label>
+    `).join('');
 
-    if (e.target.classList.contains("btn-filter-t-shirts")) {
-        state.category = "t-shirts";
-    }
+    const sizeContainer = modal.querySelector('.variant-group:nth-child(4) .option-list');
+    sizeContainer.innerHTML = product.sizes.map((size, index) => `
+        <input type="radio" name="size" id="size-${size}" value="${size}" hidden ${index === 0 ? 'checked' : ''}>
+        <label for="size-${size}" class="size-box">${size}</label>
+    `).join('');
 
-    if (e.target.classList.contains("btn-filter-hoodies")) {
-        state.category = "hoodies";
-    }
+    const submitBtn = modal.querySelector('.add-to-cart-submit');
+    submitBtn.setAttribute('data-productid', productId);
 
-    if (e.target.classList.contains("btn-filter-pants")) {
-        state.category = "pants";
-    }
+    // Xử lý nút Add to Cart trong Modal (sửa lỗi gán chồng event bằng cách dùng onclick hoặc clear cũ)
+    submitBtn.onclick = (e) => {
+        e.preventDefault();
+        const colorChecked = modal.querySelector(`input[name="color"]:checked`).value;
+        const sizeChecked = modal.querySelector(`input[name="size"]:checked`).value;
+        const userToken = JSON.parse(localStorage.getItem("userInfo"))?.usertoken;
 
-    if (e.target.classList.contains("btn-filter-bags")) {
-        state.category = "bags";
-    }
-
-    state.page = 1; // reset page
-
-    fetchProductData(); // refetch with new params
-});
+        if (userToken) {
+            postProductToCart(productId, 1, sizeChecked, colorChecked, userToken)
+                .then(result => {
+                    if (result?.success) {
+                        showSuccessAlert(result.message);
+                        renderNumberProductsInCart();
+                    } else showWarningAlert(result?.message || "Thất bại");
+                });
+        }
+    };
+}
 
 function handleEventClickButtonAddToCart(e) {
     e.preventDefault();
     e.stopPropagation();
-
     const variantBox = document.querySelector("#variantBox");
     const variantBoxPseudoClass = document.querySelector(".variant-modal-pseudoclass");
 
@@ -235,51 +291,14 @@ function handleEventClickButtonAddToCart(e) {
     renderVariantModal(productId);
 }
 
-function handleEventClickButtonAddToWishlist(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const userToken = JSON.parse(localStorage.getItem("userInfo")).usertoken;
-    const productId = e.target.closest(".product-item").dataset.productid;
-
-    if (userToken && productId) {
-        postProductToWishlist(productId, userToken)
-            .then(result => {
-                if (result != null && result.success == true) {
-                    showSuccessAlert(result.message);
-                    renderNumberProductsInWishlist();
-                }
-                else if (result != null && result.success == false) {
-                    showWarningAlert(result.message);
-                }
-                else {
-                    showDangerAlert("Lỗi trong quá trình kết nối tới server");
-                }
-            })
-    }
-    else {
-        console.warn("Lỗi khi thêm sản phẩm vào giỏ hàng");
-    }
-}
-
-function initEventClickButtonAddToWishlist() {
-    const buttonAddToWishList = document.querySelectorAll(".heart-icon");
-    buttonAddToWishList.forEach(button => {
-        button.addEventListener("click", handleEventClickButtonAddToWishlist);
-    })
-}
-
 function initEventClickButtonAddToCart() {
     const buttonAddToCarts = document.querySelectorAll(".plus-icon");
-    buttonAddToCarts.forEach((button) => {
+    buttonAddToCarts.forEach(button => {
         button.addEventListener("click", handleEventClickButtonAddToCart);
-    })
+    });
 }
 
-fetchProductData();
-
-renderNumberProductsInCart();
-
-renderNumberProductsInWishlist();
-
-initEventPopUpWishlistModal();
+document.addEventListener("DOMContentLoaded", () => {
+    initSortAndFilterEvents();
+    fetchProductData();
+})

@@ -5,7 +5,7 @@ export default function postLoginData(userEmail, userPassword) {
         password: userPassword,
     }
 
-    return fetch("https://cein-website-server-production.up.railway.app/api/authen/login", {
+    return fetch("http://localhost:5000/api/authen/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -29,7 +29,7 @@ export function postRegisterData(userEmail, userName, userPassword, avatar_url) 
         avatar_url: avatar_url
     }
 
-    return fetch("https://cein-website-server-production.up.railway.app/api/authen/register", {
+    return fetch("http://localhost:5000/api/authen/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -47,7 +47,7 @@ export function postRegisterData(userEmail, userName, userPassword, avatar_url) 
 }
 
 export function postProductToCart(productId, quantity, size, color, token) {
-    return fetch("https://cein-website-server-production.up.railway.app/api/cart/", {
+    return fetch("http://localhost:5000/api/cart/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export function postProductToCart(productId, quantity, size, color, token) {
 }
 
 export function postProductToWishlist(productId, token){
-    return fetch('https://cein-website-server-production.up.railway.app/api/wishlist', { 
+    return fetch('http://localhost:5000/api/wishlist', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export function postProductToWishlist(productId, token){
 }
 
 export function postProductDetailToCart(productId, quantity, selectedSize, selectedColor, token){
-    return fetch('https://cein-website-server-production.up.railway.app/api/cart', {
+    return fetch('http://localhost:5000/api/cart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -102,4 +102,20 @@ export function postProductDetailToCart(productId, quantity, selectedSize, selec
             .then(res => res.json())
             .then(result => result)
             .catch(err => err);
+}
+
+export async function postPayment() {
+    const response = await fetch('http://localhost:5000/api/payment/create_payment_url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            amount: 50000, 
+            orderDescription: "Thanh toan don hang 123"
+        })
+    });
+    const result = await response.json();
+    if (result.success) {
+        // Chuyển hướng sang trang VNPAY
+        window.location.href = result.url;
+    }
 }

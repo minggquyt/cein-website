@@ -19,6 +19,10 @@
   <link rel="stylesheet" href="../../components/loading/loading.css">
   <link rel="stylesheet" href="../../components/user-setting-box/user-setting-box.css">
   <link rel="stylesheet" href="../../components/wish-list-modal/wish-list-modal.css">
+  <link rel="stylesheet" href="../../components/alert-modal-danger/alert-modal-danger.css">
+  <link rel="stylesheet" href="../../components/alert-modal-success/alert-modal-success.css">
+  <link rel="stylesheet" href="../../components/alert-modal-warning/alert-modal-warning.css">
+  <link rel="stylesheet" href="../../components/product-variant-modal/product-variant-modal.css">
   <title>CEIN</title>
 </head>
 
@@ -134,6 +138,67 @@
   </div>
   <!--  -->
 
+  <!-- Product Variant Modal -->
+  <div class="variant-modal" id="variantBox">
+    <div class="variant-content">
+      <button class="close-btn-variant">&times;</button>
+
+      <h3>Select Options</h3>
+
+      <!-- Chọn màu sắc -->
+      <div class="variant-group">
+        <label>Color</label>
+        <div class="option-list">
+          <input type="radio" name="color" id="red" hidden checked>
+          <label for="red" class="color-swatch" style="background-color: #ff4d4d;"></label>
+
+          <input type="radio" name="color" id="blue" hidden>
+          <label for="blue" class="color-swatch" style="background-color: #4d79ff;"></label>
+        </div>
+      </div>
+
+      <!-- Chọn kích thước -->
+      <div class="variant-group">
+        <label>Size</label>
+        <div class="option-list">
+          <input type="radio" name="size" id="size-s" hidden>
+          <label for="size-s" class="size-box">S</label>
+
+          <input type="radio" name="size" id="size-m" hidden checked>
+          <label for="size-m" class="size-box">M</label>
+
+          <input type="radio" name="size" id="size-l" hidden>
+          <label for="size-l" class="size-box">L</label>
+
+          <input type="radio" name="size" id="size-xl" hidden>
+          <label for="size-xl" class="size-box">XL</label>
+        </div>
+      </div>
+
+      <button class="add-to-cart-submit roboto-400">ADD TO CART</button>
+    </div>
+  </div>
+  <div class="variant-modal-pseudoclass"></div>
+  <!--  -->
+
+  <!-- Modal alert success -->
+  <div class="alert alert-success alert-modal-success" role="alert">
+    This is a success alert—check it out!
+  </div>
+  <!--  -->
+
+  <!-- Modal alert warning -->
+  <div class="alert alert-warning alert-modal-warning" role="alert">
+    This is a warning alert—check it out!
+  </div>
+  <!--  -->
+
+  <!-- Modal alert danger -->
+  <div class="alert alert-danger alert-modal-danger" role="alert">
+    This is a danger alert—check it out!
+  </div>
+  <!--  -->
+
   <!-- Loading Model -->
   <div class="alert-loading-modal">
     <div class="spinner-border text-dark" role="status">
@@ -218,20 +283,20 @@
               <a class="roboto-400" href="./sales.html">Sales</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="dropdown-toggle roboto-400" href="#" data-bs-toggle="dropdown" aria-expanded="false">Journel</a>
+              <a class="dropdown-toggle roboto-400" href="#" data-bs-toggle="dropdown" aria-expanded="false">More</a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+                <li><a class="dropdown-item" href="../about-us/about-us.html">About us</a></li>
+                <li><a class="dropdown-item" href="#">Sitemap</a></li>
               </ul>
             </li>
           </ul>
           <div class="header-bottom-left-menu">
-            <form role="search" style="display: none;">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-            </form>
+            <div class="search-container">
+              <input type="text" id="search-input" placeholder="Tìm sản phẩm..." class="search-input">
+              <button id="btn-search-trigger">
+                <img src="../../assets/images/search.png" alt="Search" style="width: 20px;">
+              </button>
+            </div>
             <!-- inject user setting box -->
             <div class="user-setting-box-pseudoclass">
             </div>
@@ -244,7 +309,6 @@
               </button>
             </div>
             <!--  -->
-            <img src="/assets/images/search.png" width="20px" height="20px" alt="">
             <a href="../stores/stores.html" class="roboto-400">Stores</a>
             <img src="/assets/images/account.png" id="login-icon" data-bs-toggle="modal"
               data-bs-target="#exampleModalCenter" width="24px" height="24px" alt="">
@@ -264,7 +328,7 @@
   </header>
   <section class="filter-product">
     <div>
-      <h3>Shop</h3>
+      <h3>Sales</h3>
       <div class="filter-options">
         <button class="btn-filter btn-filter-sweater">Sweater</button>
         <button class="btn-filter btn-filter-t-shirts">T-Shirts</button>
@@ -286,9 +350,9 @@
             </div>
             <ul>
               <li><a href="">Featured</a></li>
-              <li><a href="">Best selling</a></li>
-              <li><a href="">Price, low to high</a></li>
-              <li><a href="">Price, high to low</a></li>
+              <li><a href="">Sales</a></li>
+              <li><a href="">Price: Low to High</a></li>
+              <li><a href="">Price: High to Low</a></li>
             </ul>
           </div>
         </span>
@@ -302,6 +366,7 @@
             <button id="btn-close-filter">X</button>
           </div>
           <div class="filter-content">
+
             <div class="color-option">
               <h5>Color</h5>
               <div class="color-list">
@@ -313,52 +378,43 @@
                   <input type="radio" name="filter-color" value="black">
                   <span style="background-color:#000000;"></span>
                 </label>
-                <label class="color-item">
-                  <input type="radio" name="filter-color" value="blue">
-                  <span style="background-color:#3176b7;"></span>
-                </label>
-                <label class="color-item">
-                  <input type="radio" name="filter-color" value="brown">
-                  <span style="background-color:#915c43;"></span>
-                </label>
-                <label class="color-item">
-                  <input type="radio" name="filter-color" value="green">
-                  <span style="background-color:#4f823f;"></span>
-                </label>
-                <label class="color-item">
-                  <input type="radio" name="filter-color" value="lightyellow">
-                  <span style="background-color:#d9e091;"></span>
-                </label>
-                <label class="color-item">
-                  <input type="radio" name="filter-color" value="orange">
-                  <span style="background-color:#eb602a;"></span>
-                </label>
-                <label class="color-item">
-                  <input type="radio" name="filter-color" value="red">
-                  <span style="background-color:#d52f39;"></span>
-                </label>
-                <label class="color-item">
-                  <input type="radio" name="filter-color" value="lightpink">
-                  <span style="background-color:#f5e1d3;"></span>
-                </label>
+                <!-- ... các màu khác giữ nguyên cấu trúc ... -->
               </div>
             </div>
+
             <div class="material-option">
               <h5>Material</h5>
               <ul>
-                <li><a href="">Cotton (4)</a></li>
-                <li><a href="">Pima (6)</a></li>
-                <li><a href="">Silk (2)</a></li>
+                <li>
+                  <input type="radio" name="filter-material" id="material-cotton" value="Cotton" hidden>
+                  <label for="material-cotton">Cotton</label>
+                </li>
+                <li>
+                  <input type="radio" name="filter-material" id="material-fleece" value="Fleece" hidden>
+                  <label for="material-fleece">Fleece</label>
+                </li>
               </ul>
             </div>
+
             <div class="size-option">
               <h5>Size</h5>
               <ul>
-                <li><a href="">Extra Small (99)</a></li>
-                <li><a href="">Small (239)</a></li>
-                <li><a href="">Medium (309)</a></li>
-                <li><a href="">Large (103)</a></li>
-                <li><a href="">Extra Large (72)</a></li>
+                <li>
+                  <input type="radio" name="filter-size" id="size-s" value="S" hidden>
+                  <label for="size-s">S</label>
+                </li>
+                <li>
+                  <input type="radio" name="filter-size" id="size-m" value="M" hidden>
+                  <label for="size-m">M</label>
+                </li>
+                <li>
+                  <input type="radio" name="filter-size" id="size-l" value="L" hidden>
+                  <label for="size-l">L</label>
+                </li>
+                <li>
+                  <input type="radio" name="filter-size" id="size-xl" value="XL" hidden>
+                  <label for="size-xl">XL</label>
+                </li>
               </ul>
             </div>
 
@@ -417,6 +473,7 @@
   <script src="../../pages/sales/js/sort.js"></script>
   <script type="module" src="../../authen.js"></script>
   <script type="module" src="../../components/user-setting-box/user-setting-box.js"></script>
+  <script type="module" src="../../components/header/header.js"></script>
 
 </body>
 

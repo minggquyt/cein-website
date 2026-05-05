@@ -1,6 +1,7 @@
 import { postRegisterData } from "../../services/postData.js";
 import showLoading from "../../components/loading/loading.js";
 import { hideLoading } from "../../components/loading/loading.js";
+import { showDangerAlert } from "../../services/alert.js";
 
 function handleClickButtonSignUp(e) {
     e.preventDefault();
@@ -35,12 +36,8 @@ function handleClickButtonSignUp(e) {
                 }
                 else{
                     hideLoading();
-                    // alert server error
-                    const alertModal = document.querySelector('.alert-modal');
-                    alertModal.classList.add("active-alert-modal");
-                    setTimeout(() => {
-                        alertModal.classList.remove("active-alert-modal");
-                    },4000);
+
+                    showDangerAlert("Lỗi hệ thống ! Vui lòng thử lại sau")
                 }
             })
         

@@ -13,11 +13,11 @@
     font-weight: 400;
 }
 
-.filter-options{
+.filter-options {
     display: flex;
     gap: 0.3125em;
     flex-wrap: wrap;
-    max-width:100%;
+    max-width: 100%;
 }
 
 .filter-options .btn-filter {
@@ -198,10 +198,41 @@
     box-shadow: 0 0 0 0.125em #fff, 0 0 0 0.21875em #000;
 }
 
+/* Bug Here */
+.material-option input[type="checkbox"]:checked+label,
+.size-option input[type="checkbox"]:checked+label {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #000 !important;
+    font-weight: 600;
+}
+
+.material-option input[hidden],
+.size-option input[hidden] {
+    display: none !important;
+}
+
+.material-option label,
+.size-option label {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    /* Viền mặc định */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+    min-width: 45px;
+}
+
 .material-option ul,
 .size-option ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    gap: 10px;
 }
 
 .material-option ul li a,
@@ -224,11 +255,11 @@
 .filter-footer {
     border-top: 1px solid lightgray;
     height: 100%;
+    padding-inline: 0.625em;
 }
 
 #btn-see-results {
     width: 100%;
-    margin-left: 0.625em;
     padding: 0.625em;
     background-color: black;
     color: white;
@@ -318,18 +349,23 @@ footer {
     html {
         font-size: 14px;
     }
+
     .filter-product {
         height: auto;
     }
+
     .btn-filter {
         margin-bottom: 0.714em;
     }
+
     #product-list {
         grid-template-columns: repeat(4, 1fr);
     }
+
     .sort-option {
         margin-left: 8.571em;
     }
+
     .sort-option,
     .action-filter button {
         margin-top: 3.571em;
@@ -337,7 +373,8 @@ footer {
         right: 7.143em;
         bottom: 0.714em;
     }
-    .filter-panel{
+
+    .filter-panel {
         width: 40%;
     }
 }
@@ -346,37 +383,46 @@ footer {
     html {
         font-size: 12px;
     }
+
     #product-list {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .filter-product {
         display: block;
     }
+
     .filter-options {
         width: 90%;
         padding-right: 1.667em;
     }
+
     .sort-option {
         margin-left: 0;
         margin-top: 1.667em;
     }
+
     .action-filter button {
         padding: 0;
         margin-top: 1.667em;
     }
+
     .option {
         display: flex;
         justify-content: center;
         align-items: center;
     }
+
     .sort-option,
     .action-filter button {
         position: static;
         padding-bottom: 1.667em;
     }
+
     .sort-option span:hover ul {
         display: none;
     }
+
     #overlay-sort {
         position: fixed;
         inset: 0;
@@ -386,10 +432,12 @@ footer {
         transition: 0.3s;
         z-index: 9;
     }
+
     #overlay-sort.active {
         opacity: 1;
         pointer-events: auto;
     }
+
     .sort-panel {
         position: fixed;
         left: 0;
@@ -403,6 +451,7 @@ footer {
         z-index: 10;
         padding: 1.333em;
     }
+
     .sort-option span ul {
         display: block !important;
         width: 100%;
@@ -411,19 +460,23 @@ footer {
         position: absolute;
         left: 0;
     }
+
     .sort-option span ul li {
         border-bottom: 1px solid #eee;
         padding: 0;
     }
+
     .sort-panel.active {
         transform: translateY(0);
     }
+
     .sort-header {
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 0.833em 0;
     }
+
     .sort-header #btn-close-sort {
         position: absolute;
         top: 0;
@@ -432,10 +485,12 @@ footer {
         padding-right: 1.667em;
         color: #212529;
     }
+
     #overlay-filter.active {
         opacity: 0;
         pointer-events: auto;
     }
+
     .filter-panel {
         position: fixed;
         top: 0;
@@ -448,9 +503,11 @@ footer {
         z-index: 13;
         padding: 1.333em 0;
     }
+
     .filter-header #btn-close-filter {
         top: -2.667em;
     }
+
     #btn-see-results {
         margin: 0;
     }

@@ -1,5 +1,5 @@
 export default function deleteProductsInCart(productCartId, token) {
-  return fetch(`https://cein-website-server-production.up.railway.app/api/cart/${productCartId}`, {
+  return fetch(`http://localhost:5000/api/cart/${productCartId}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`
@@ -13,7 +13,7 @@ export default function deleteProductsInCart(productCartId, token) {
 }
 
 export function deleteProductsInWishlist(productId, token) {
-  return fetch(`https://cein-website-server-production.up.railway.app/api/wishlist/${productId}`, {
+  return fetch(`http://localhost:5000/api/wishlist/${productId}`, {
     method: 'DELETE',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -29,7 +29,7 @@ export function deleteProductsInWishlist(productId, token) {
 }
 
 export function deleteProductRequest(productId, token) {
-    return fetch(`https://cein-website-server-production.up.railway.app/api/products/${productId}`, {
+    return fetch(`http://localhost:5000/api/products/${productId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Bearer ${token}`
@@ -39,3 +39,22 @@ export function deleteProductRequest(productId, token) {
         return res.json();
     });
 }
+
+export function deleteUserRequest(userId, token){
+    return fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        return response.json().then(data => {
+            if (!response.ok) {
+                // Nếu server trả về lỗi (400, 403, 404, 500...), ném lỗi vào .catch()
+                return Promise.reject(data.message || "Không thể xóa người dùng");
+            }
+            return data; 
+        });
+    });
+};

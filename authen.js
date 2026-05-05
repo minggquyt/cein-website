@@ -1,4 +1,10 @@
 import postLoginData from "./services/postData.js";
+import renderNumberProductsInCart from "./services/cart-services.js";
+import { renderNumberProductsInWishlist } from "./services/wishlist-services.js";
+import { initEventPopUpWishlistModal } from "./services/wishlist-services.js";
+import { showDangerAlert, showWarningAlert } from "./services/alert.js";
+import showSuccessAlert from "./services/alert.js";
+import showLoading from "./components/loading/loading.js";
 
 function onLoginSubmit() {
     const inputs = document.querySelectorAll(".modal-body input");
@@ -13,7 +19,7 @@ function onLoginSubmit() {
             userPassword = input.value
     })
 
-    // Thiếu validate dữ liệu đầu vào 
+    showLoading();
 
     postLoginData(userEmail, userPassword)
         .then(data => {
@@ -22,61 +28,15 @@ function onLoginSubmit() {
                 location.reload(); // reload to run updateUIForLoginUser()
             }
             else if (data.message == 'Wrong password') {
-                wrongPasswordAlert();
+                showWarningAlert("Sai mật khẩu");
             }
             else if (data.message == 'User not found') {
-                userNotFound();
+                showWarningAlert("Không tìm thấy người dùng");
             }
         })
 
 }
 
-function wrongPasswordAlert() {
-    const bodyHTML = document.querySelector('body');
-
-    const modal = document.createElement('div');
-    modal.classList.add('pop-up-modal');
-
-    modal.innerHTML = `
-    <h3>Wrong password !</h3>
-    <button class="pop-up-modal-confirm-button">Confirm</button>
-    `
-    bodyHTML.appendChild(modal);
-
-    const confirmButton = document.querySelector('.pop-up-modal-confirm-button');
-
-    confirmButton.addEventListener('click', (e) => {
-
-        e.stopPropagation();
-
-        modal.remove();
-
-    })
-
-}
-
-function userNotFound() {
-    const bodyHTML = document.querySelector('body');
-
-    const modal = document.createElement('div');
-    modal.classList.add('pop-up-modal');
-
-    modal.innerHTML = `
-        <h3>User not found !</h3>
-        <button class="pop-up-modal-confirm-button">Confirm</button>
-    `
-    bodyHTML.appendChild(modal);
-
-    const confirmButton = document.querySelector('.pop-up-modal-confirm-button');
-
-    confirmButton.addEventListener('click', (e) => {
-
-        e.stopPropagation();
-
-        modal.remove();
-
-    })
-}
 
 function updateUIForLoginUser() {
     const loginIcon = document.querySelector("#login-icon");
@@ -89,17 +49,24 @@ function updateUIForLoginUser() {
 
     if (userInfo) {
 
-        // const username = userInfo.username;
-
-        // const usertoken = userInfo.usertoken;
-
         const useravatarurl = userInfo.useravatarurl;
 
         loginIcon.src = useravatarurl;
 
-        wisthListIcon.style.display = "inline-block";
+        // chỉ hiển thị wishlist và cart cho user khác admin 
+        if (userInfo.userrole != 'admin') {
+            wisthListIcon.style.display = "inline-block";
+            cartIcon.style.display = "inline-block"
+            renderNumberProductsInCart();
+            
+            renderNumberProductsInWishlist();
 
-        cartIcon.style.display = "inline-block"
+            initEventPopUpWishlistModal();
+        }
+        else {
+            wisthListIcon.style.display = "none";
+            cartIcon.style.display = "none"
+        }
 
         loginIcon.setAttribute("data-bs-toggle", "#");
         loginIcon.setAttribute("data-bs-target", "#");
@@ -121,7 +88,7 @@ function updateUIForLoginUser() {
     }
 }
 
-function handleEventClikOnLogOutButton(e){
+function handleEventClikOnLogOutButton(e) {
     e.stopPropagation();
 
     localStorage.clear();
@@ -129,14 +96,14 @@ function handleEventClikOnLogOutButton(e){
     location.reload(); // reload to run updateUIForLoginUser()
 }
 
-function assignUserSettingBoxToUserIcon(){
+function assignUserSettingBoxToUserIcon() {
     // init user setting box 
     const userSettingBox = document.querySelector('.user-setting-box');
     const userSettingBoxPseudoClass = document.querySelector(".user-setting-box-pseudoclass");
 
     const userIcon = document.querySelector("#login-icon");
-    
-    userIcon.addEventListener('click',(e) => {
+
+    userIcon.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -146,9 +113,9 @@ function assignUserSettingBoxToUserIcon(){
 
     const logOutButton = document.querySelector(".user-setting-box--logoutbutton");
 
-    logOutButton.addEventListener("click",handleEventClikOnLogOutButton);
+    logOutButton.addEventListener("click", handleEventClikOnLogOutButton);
 
-    userSettingBoxPseudoClass.addEventListener("click",(e) => {
+    userSettingBoxPseudoClass.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
 

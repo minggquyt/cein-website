@@ -18,11 +18,20 @@
     <link rel="stylesheet" href="../../components/alert-modal-danger/alert-modal-danger.css">
     <link rel="stylesheet" href="../../components/alert-modal-success/alert-modal-success.css">
     <link rel="stylesheet" href="../../components/alert-modal-warning/alert-modal-warning.css">
+    <link rel="stylesheet" href="../../components/loading/loading.css">
     <link rel="stylesheet" href="../../css/global.css">
     <title>CEIN</title>
 </head>
 
 <body>
+
+    <!-- Alert loading modal -->
+    <div class="alert-loading-modal">
+        <div class="spinner-border text-dark" role="status">
+            <span></span>
+        </div>
+        <p class="sr-only">Loading...</p>
+    </div>
 
     <!-- wishlist modal -->
     <div class="wish-list-modal">
@@ -218,7 +227,8 @@
             <div class="elegant-image-item"></div>
             <div class="elegant-image-item"></div>
         </section>
-        <section class="product-detail-page-section-5 section-evalute mt-5 pt-lg-4 px-3">
+        <!-- Comments -->
+        <!-- <section class="product-detail-page-section-5 section-evalute mt-5 pt-lg-4 px-3">
             <div class="row pt-4 pb-5 ">
                 <div class="col-4">
                     <p>5.0 &#9733; &#9733; &#9733; &#9733; &#9733; </p>
@@ -318,88 +328,205 @@
                     </li>
                 </ul>
             </nav>
-        </section>
-        <section class="product-detail-page-section-6 style-with border-top p-5">
+        </section> -->
+        <!--  -->
+        <section class="product-detail-page-section-6 style-with border-top">
             <h2 class="roboto-700 text-center">Style With</h2>
             <div class="style-with-items w-100 mx-auto">
-                <div class="style-with-item">
-                    <div class="style-with-item-upper">
-                        <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                <a href="../shop/shop.html" class="style-with-items-carousel-container">
+                    <!-- Phần 1 -->
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
-                    <div class="style-with-item-lower roboto-400">
-                        <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
-                        <p class="style-with-item-lower-itemcost">$298</p>
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
-                </div>
-                <div class="style-with-item">
-                    <div class="style-with-item-upper">
-                        <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
-                    <div class="style-with-item-lower roboto-400">
-                        <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
-                        <p class="style-with-item-lower-itemcost">$298</p>
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
-                </div>
-                <div class="style-with-item">
-                    <div class="style-with-item-upper">
-                        <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
-                    <div class="style-with-item-lower roboto-400">
-                        <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
-                        <p class="style-with-item-lower-itemcost">$298</p>
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
-                </div>
-                <div class="style-with-item">
-                    <div class="style-with-item-upper">
-                        <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                    <!-- Phần 2 -->
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
-                    <div class="style-with-item-lower roboto-400">
-                        <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
-                        <p class="style-with-item-lower-itemcost">$298</p>
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
-                </div>
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                    <div class="style-with-item">
+                        <div class="style-with-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="style-with-item-lower roboto-400">
+                            <p class="style-with-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="style-with-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </section>
-        <section class="product-detail-page-section-7 recently-view border-top p-5">
+        <section class="product-detail-page-section-7 recently-view border-top">
             <h2 class="roboto-700 text-center">Recently viewed</h2>
-            <div class="recently-view-items w-100 mx-auto">
-                <div class="recently-view-item">
-                    <div class="recently-view-item-upper">
-                        <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+            <a href="../shop/shop.html" class="recently-view-items w-100 mx-auto">
+                <!-- Section 1 -->
+                <div class="recently-view-items-carousel-container">
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
-                    <div class="recently-view-item-lower roboto-400">
-                        <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
-                        <p class="recently-view-item-lower-itemcost">$298</p>
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                    <!-- Section 2 -->
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
+                    </div>
+                    <div class="recently-view-item">
+                        <div class="recently-view-item-upper">
+                            <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
+                        </div>
+                        <div class="recently-view-item-lower roboto-400">
+                            <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
+                            <p class="recently-view-item-lower-itemcost">$298</p>
+                        </div>
                     </div>
                 </div>
-                <div class="recently-view-item">
-                    <div class="recently-view-item-upper">
-                        <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
-                    </div>
-                    <div class="recently-view-item-lower roboto-400">
-                        <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
-                        <p class="recently-view-item-lower-itemcost">$298</p>
-                    </div>
-                </div>
-                <div class="recently-view-item">
-                    <div class="recently-view-item-upper">
-                        <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
-                    </div>
-                    <div class="recently-view-item-lower roboto-400">
-                        <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
-                        <p class="recently-view-item-lower-itemcost">$298</p>
-                    </div>
-                </div>
-                <div class="recently-view-item">
-                    <div class="recently-view-item-upper">
-                        <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
-                    </div>
-                    <div class="recently-view-item-lower roboto-400">
-                        <p class="recently-view-item-lower-itemname">Classic Easy Zipper Tote</p>
-                        <p class="recently-view-item-lower-itemcost">$298</p>
-                    </div>
-                </div>
-            </div>
+            </a>
         </section>
 
     </section>

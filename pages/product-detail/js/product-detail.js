@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (result.success == true) {
                     // 3. Render dữ liệu
                     renderProductDetail(result.data, productDetailContainer);
+                    setupAddToCart(result.data._id);
                 }
                 else {
                     console.warn("Lỗi trong quá trình truy vấn")
@@ -76,7 +77,7 @@ function renderProductDetail(productData, container) {
     </div>
     `).join('');
     
-    const buttonAddToCart = userInfo ? `<button class="btn btn-dark w-100 py-3 rounded-0 fw-bold mb-5" id="addToCartBtn">Add to Cart</button>` : "";
+    const buttonAddToCart = userInfo && userInfo.userrole != 'admin' ? `<button class="btn btn-dark w-100 py-3 rounded-0 fw-bold mb-5" id="addToCartBtn">Add to Cart</button>` : ""; 
 
     // Đổ toàn bộ HTML vào container
     container.innerHTML = `
@@ -87,7 +88,7 @@ function renderProductDetail(productData, container) {
                             <div class="carousel-indicators flex-column m-0 justify-content-center h-100 left-0 ms-3" style="width: fit-content; right: auto;">
                                 ${indicatorsHTML}
                             </div>
-                            <div class="carousel-inner bg-light">
+                            <div class="carousel-inner carousel-inner-product-detail  bg-light">
                                 ${imagesHTML}
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
