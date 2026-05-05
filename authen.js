@@ -3,7 +3,6 @@ import renderNumberProductsInCart from "./services/cart-services.js";
 import { renderNumberProductsInWishlist } from "./services/wishlist-services.js";
 import { initEventPopUpWishlistModal } from "./services/wishlist-services.js";
 import { showDangerAlert, showWarningAlert } from "./services/alert.js";
-import showSuccessAlert from "./services/alert.js";
 import showLoading from "./components/loading/loading.js";
 
 function onLoginSubmit() {
