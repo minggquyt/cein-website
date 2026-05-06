@@ -127,8 +127,10 @@ document.getElementById('profileForm').addEventListener('submit', handleUpdatePr
 // ĐANG BỊ LỖI Ở ĐÂY - KHÔNG THỂ GET USER INFO
 async function loadUserProfile() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    if (!userInfo)
+    if (!userInfo){
+        window.location.href = "/index.html"
         console.warn("User chưa đăng nhập");
+    }
     else {
         const token = userInfo.usertoken;
         getUserInfo(token)

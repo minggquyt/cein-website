@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="./components/alert-modal-danger/alert-modal-danger.css">
   <link rel="stylesheet" href="./components/alert-modal-success/alert-modal-success.css">
   <link rel="stylesheet" href="./components/alert-modal-warning/alert-modal-warning.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <title>CEIN</title>
 </head>
 
@@ -159,7 +160,7 @@
     </div>
   </div>
 
-  <header>
+  <header data-aos="fade-down">
     <!-- Login Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
@@ -265,11 +266,11 @@
               data-bs-target="#exampleModalCenter" width="24px" height="24px" alt="">
             <div id="wishlist" class="left-menu-wishlist">
               <img src="/assets/images/wishlist.png" width="20px" height="20px" alt="">
-              <span>2</span>
+              <span></span>
             </div>
             <a href="./pages/cart/cart.html" id="cart" class="left-menu-bag">
               <img src="/assets/images/bag.png" width="20px" height="20px" alt="">
-              <span>2</span>
+              <span></span>
             </a>
           </div>
 
@@ -281,7 +282,7 @@
 
   <section class="homepage-body">
 
-    <section class="herosection">
+    <section class="herosection" data-aos="zoom-in-down">
       <a href="/pages/shop/shop.html">
         <img src="/assets/images/herosecion.png" alt="">
       </a>
@@ -295,20 +296,18 @@
       </div>
     </section>
     <section class="section-2">
-      <p>Elevate your lifestyle with a more intelligent, superior wardrobe. <br>
-        Our range is crafted sustainably with longevity in mind.
-      </p>
+      <p data-aos="fade-up">Elevate your lifestyle...</p>
       <div class="section-2-items roboto-400">
-        <a href="/pages/shop/shop.html" class="section-2-items-item">
-          <img src="/assets/images/banner.png" alt="">
+        <a href="..." class="section-2-items-item" data-aos="fade-up" data-aos-delay="100">
+          <img src="./assets/images/banner.png" alt="">
           <p>New Arrivals</p>
         </a>
-        <a href="/pages/shop/shop.html" class="section-2-items-item">
-          <img src="/assets/images/banner-1.jpg" alt="">
+        <a href="..." class="section-2-items-item" data-aos="fade-up" data-aos-delay="300">
+          <img src="./assets/images/banner-1.jpg" alt="">
           <p>The Casual Edit</p>
         </a>
-        <a href="/pages/shop/shop.html" class="section-2-items-item">
-          <img src="/assets/images/banner-2.jpg" alt="">
+        <a href="..." class="section-2-items-item" data-aos="fade-up" data-aos-delay="500">
+          <img src="./assets/images/banner-2.jpg" alt="">
           <p>Best-Sellers</p>
         </a>
       </div>
@@ -319,7 +318,7 @@
         <div class="section-3-items">
           <!-- Nhóm 1 -->
           <div class="carousel-track">
-            <a href="./pages/shop/shop.html"  class="section-3-item">
+            <a href="./pages/shop/shop.html" class="section-3-item">
               <div class="section-3-item-upper">
                 <img src="/assets/images/section3-item1.png" alt="">
                 <img src="/assets/images/plus-icon.png" width="20px" height="20px" alt="">
@@ -426,15 +425,15 @@
       </div>
     </section>
     <section class="section-4">
-      <a href="./pages/shop/shop.html" class="section-4-item">
+      <a href="./pages/shop/shop.html" class="section-4-item" data-aos="fade-right">
         <p class="roboto-400">The Smart Chic</p>
       </a>
-      <a href="./pages/shop/shop.html" class="section-4-item">
+      <a href="./pages/shop/shop.html" class="section-4-item" data-aos="fade-left">
         <p class="roboto-400">Ready To Go</p>
       </a>
     </section>
 
-    <section class="section-5 roboto-400">
+    <section class="section-5 roboto-400" data-aos="zoom-in-up">
       <h3 class="section-5-title">
         The Art of Fewer, Better Choices
       </h3>
@@ -528,6 +527,15 @@
     </div>
     <p class="footer-logo"> &copy; CEIN</p>
   </footer>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000, // Độ dài hiệu ứng (ms)
+      once: true,     // Hiệu ứng chỉ chạy 1 lần khi cuộn xuống
+    });
+  </script>
 
   <script src="/assets/dist/js/bootstrap.bundle.min.js" class="astro-vvvwv3sm"></script>
   <script type="module" src="./authen.js"></script>

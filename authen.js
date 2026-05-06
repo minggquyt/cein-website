@@ -61,9 +61,10 @@ function updateUIForLoginUser() {
     const wisthListIcon = document.querySelector('#wishlist');
     const cartIcon = document.querySelector('#cart');
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    
 
     if (userInfo) {
-        loginIcon.src = userInfo.useravatarurl;
+        loginIcon.src = userInfo.useravatarurl
         
         if (userInfo.userrole !== 'admin') {
             wisthListIcon.style.display = "inline-block";

@@ -11,6 +11,7 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="../../components/header/header.css">
   <link rel="stylesheet" href="../../components/footer/footer.css">
   <link rel="stylesheet" href="../../pages/stores/stores.css">
@@ -72,7 +73,7 @@
     </div>
     <!--  -->
 
-  <header>
+  <header data-aos="fade-down">
     <!-- Login Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
@@ -411,6 +412,13 @@
   <script type="module" src="../../authen.js"></script>
   <script type="module" src="./js/stores.js"></script>
   <script type="module" src="../../components/user-setting-box/user-setting-box.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800, // Thời gian chạy hiệu ứng (ms)
+      once: true,    // Chỉ chạy một lần khi cuộn qua
+    });
+  </script>
 </body>
 
 </html>

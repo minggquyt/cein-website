@@ -137,7 +137,7 @@ function initDashboard() {
 
     // Kiểm tra login ngay lập tức
     if (!userInfo) {
-        window.location.href = "/login.html";
+        window.location.href = "/index.html";
         return;
     }
 
