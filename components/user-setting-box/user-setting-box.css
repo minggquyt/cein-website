@@ -12,8 +12,9 @@
 .user-setting-box-pseudoclass{
     position: fixed;
     content: "";
+    z-index: 4;
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 100px);
     top: 100px;  
     left: 0;
     background-color: black;
