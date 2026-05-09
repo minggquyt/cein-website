@@ -5,7 +5,7 @@ export default function postLoginData(userEmail, userPassword) {
         password: userPassword,
     }
 
-    return fetch("http://localhost:5000/api/authen/login", {
+    return fetch("https://cein-website-server.onrender.com/api/authen/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -29,7 +29,7 @@ export function postRegisterData(userEmail, userName, userPassword, avatar_url) 
         avatar_url: avatar_url
     }
 
-    return fetch("http://localhost:5000/api/authen/register", {
+    return fetch("https://cein-website-server.onrender.com/api/authen/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -47,7 +47,7 @@ export function postRegisterData(userEmail, userName, userPassword, avatar_url) 
 }
 
 export function postProductToCart(productId, quantity, size, color, token) {
-    return fetch("http://localhost:5000/api/cart/", {
+    return fetch("https://cein-website-server.onrender.com/api/cart/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export function postProductToCart(productId, quantity, size, color, token) {
 }
 
 export function postProductToWishlist(productId, token){
-    return fetch('http://localhost:5000/api/wishlist', { 
+    return fetch('https://cein-website-server.onrender.com/api/wishlist', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export function postProductToWishlist(productId, token){
 }
 
 export function postProductDetailToCart(productId, quantity, selectedSize, selectedColor, token){
-    return fetch('http://localhost:5000/api/cart', {
+    return fetch('https://cein-website-server.onrender.com/api/cart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export function postProductDetailToCart(productId, quantity, selectedSize, selec
 }
 
 export async function postPayment() {
-    const response = await fetch('http://localhost:5000/api/payment/create_payment_url', {
+    const response = await fetch('https://cein-website-server.onrender.com/api/payment/create_payment_url', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

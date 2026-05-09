@@ -1,5 +1,5 @@
 export default function deleteProductsInCart(productCartId, token) {
-  return fetch(`http://localhost:5000/api/cart/${productCartId}`, {
+  return fetch(`https://cein-website-server.onrender.com/api/cart/${productCartId}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`
@@ -13,7 +13,7 @@ export default function deleteProductsInCart(productCartId, token) {
 }
 
 export function deleteProductsInWishlist(productId, token) {
-  return fetch(`http://localhost:5000/api/wishlist/${productId}`, {
+  return fetch(`https://cein-website-server.onrender.com/api/wishlist/${productId}`, {
     method: 'DELETE',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -29,7 +29,7 @@ export function deleteProductsInWishlist(productId, token) {
 }
 
 export function deleteProductRequest(productId, token) {
-    return fetch(`http://localhost:5000/api/products/${productId}`, {
+    return fetch(`https://cein-website-server.onrender.com/api/products/${productId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Bearer ${token}`
@@ -41,7 +41,7 @@ export function deleteProductRequest(productId, token) {
 }
 
 export function deleteUserRequest(userId, token){
-    return fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+    return fetch(`https://cein-website-server.onrender.com/api/admin/users/${userId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Bearer ${token}`,

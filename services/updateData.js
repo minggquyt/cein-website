@@ -1,5 +1,5 @@
 export default function updateNumberProductsVariant(variantId, quantity, token) {
-    return fetch(`http://localhost:5000/api/cart/${variantId}`, {
+    return fetch(`https://cein-website-server.onrender.com/api/cart/${variantId}`, {
         method: "PUT", 
         headers: {
             "Content-Type": "application/json",
@@ -16,8 +16,8 @@ export default function updateNumberProductsVariant(variantId, quantity, token) 
 export function synProductWithServer(method, productData, productId = null) {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     const url = productId 
-        ? `http://localhost:5000/api/products/${productId}` 
-        : `http://localhost:5000/api/products`;
+        ? `https://cein-website-server.onrender.com/api/products/${productId}` 
+        : `https://cein-website-server.onrender.com/api/products`;
 
     const payload = {
         name: productData.name,

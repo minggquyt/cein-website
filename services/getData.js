@@ -9,14 +9,14 @@ export function getProductsDataFromDb(state) {
         }
     }
 
-    return fetch(`http://localhost:5000/api/products?${params.toString()}`)
+    return fetch(`https://cein-website-server.onrender.com/api/products?${params.toString()}`)
         .then((res) => res.json())
         .then(data => data)
         .catch(error => error)
 }
 
 export function getCartData(token) {
-    return fetch("http://localhost:5000/api/cart", {
+    return fetch("https://cein-website-server.onrender.com/api/cart", {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -32,7 +32,7 @@ export function getCartData(token) {
 }
 
 export function getWishListData(token) {
-    return fetch("http://localhost:5000/api/wishlist", {
+    return fetch("https://cein-website-server.onrender.com/api/wishlist", {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -48,7 +48,7 @@ export function getWishListData(token) {
 }
 
 export function getProductDetailData(slug) {
-    return fetch(`http://localhost:5000/api/products/${slug}`)
+    return fetch(`https://cein-website-server.onrender.com/api/products/${slug}`)
         .then(res => res.json())
         .then(result => result)
         .catch(error => {
@@ -57,7 +57,7 @@ export function getProductDetailData(slug) {
 }
 
 export function getUserInfo(token){
-    return fetch('http://localhost:5000/api/user/profile', {
+    return fetch('https://cein-website-server.onrender.com/api/user/profile', {
             headers: { 
                 'Authorization': `Bearer ${token}` 
             }
@@ -68,7 +68,7 @@ export function getUserInfo(token){
 }
 
 export function  getAdminData(userToken) {
-    return fetch("http://localhost:5000/api/admin/statistics", {
+    return fetch("https://cein-website-server.onrender.com/api/admin/statistics", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
