@@ -96,7 +96,6 @@ function fetchProductData() {
     productList.innerHTML = "";
     showLoading();
 
-    // Lấy một lượng lớn sản phẩm để làm việc ở FE (ví dụ limit: 1000)
     getProductsDataFromDb({ limit: 1000 })
         .then((response) => {
             state.allProducts = response.data;
@@ -253,7 +252,6 @@ function renderVariantModal(productId) {
     const submitBtn = modal.querySelector('.add-to-cart-submit');
     submitBtn.setAttribute('data-productid', productId);
 
-    // Xử lý nút Add to Cart trong Modal (sửa lỗi gán chồng event bằng cách dùng onclick hoặc clear cũ)
     submitBtn.onclick = (e) => {
         e.preventDefault();
         const colorChecked = modal.querySelector(`input[name="color"]:checked`).value;

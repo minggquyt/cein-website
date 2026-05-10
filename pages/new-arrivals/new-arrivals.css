@@ -213,6 +213,28 @@
     font-weight: 600;
 }
 
+.material-option label,
+.size-option label {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    /* Viền mặc định */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+    min-width: 45px;
+}
+.material-option ul,
+.size-option ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
 .filter-footer {
     border-top: 1px solid lightgray;
     height: 100%;
@@ -324,7 +346,10 @@
     transform: scale(1.4);
     transition: 0.3s;
 }
-
+.active-filter{
+    background-color: black !important;
+    color: white !important;
+}
 footer {
     margin-top: 80px;
 }

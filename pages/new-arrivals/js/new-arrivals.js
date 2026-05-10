@@ -189,6 +189,7 @@ function initSortAndFilterEvents() {
             applyLogicAndRender();
         }
     });
+    
 
     // 3. Filter Panel - Color (Radio buttons)
     const colorInputs = document.querySelectorAll('input[name="filter-color"]');
@@ -199,11 +200,15 @@ function initSortAndFilterEvents() {
     });
 
     // 4. Filter Panel - Material
-    const materialOptions = document.querySelectorAll(".material-option ul li label");
+    const materialOptions = document.querySelectorAll(".material-option-item");
+    console.log(materialOptions);
     materialOptions.forEach(opt => {
         opt.addEventListener("click", (e) => {
+            console.log("người dùng click")
             e.preventDefault();
-            state.filters.material = e.target.innerText;
+            e.target.classList.toggle('active-filter');
+            state.filters.material = e.target.innerText
+            console.log(state)
         });
     });
 
@@ -213,6 +218,7 @@ function initSortAndFilterEvents() {
         opt.addEventListener("click", (e) => {
             e.preventDefault();
             state.filters.size = e.target.innerText;
+            e.target.classList.toggle("active-filter")
         });
     });
 
@@ -222,10 +228,8 @@ function initSortAndFilterEvents() {
         btnSeeResults.addEventListener("click", () => {
             state.filters.page = 1;
             applyLogicAndRender().then(() => {
-                // Đóng filter panel sau khi áp dụng
-                document.querySelector(".filter-panel").style.display = 'none';
-                document.getElementById("overlay-filter").style.display = 'none';
-            });
+                closeFilter();
+            })
         });
     }
 }
