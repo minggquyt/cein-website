@@ -27,9 +27,6 @@ function applyLogicAndRender() {
     return new Promise((resolve) => {
 
         let result = [...state.allProducts];
-
-        console.log(state);
-
         // 1. Filter theo Category
         if (state.filters.category) {
             result = result.filter(p => {
@@ -37,8 +34,6 @@ function applyLogicAndRender() {
                 return p.categoryDetails.slug.includes(state.filters.category)
             });
         }
-
-        console.log(result);
 
         // 2. Filter theo Color
         if (state.filters.color) {
@@ -101,7 +96,6 @@ function fetchProductData() {
     productList.innerHTML = "";
     showLoading();
 
-    // Lấy một lượng lớn sản phẩm để làm việc ở FE (ví dụ limit: 1000)
     getProductsDataFromDb({ limit: 1000 })
         .then((response) => {
             state.allProducts = response.data;
@@ -121,12 +115,26 @@ function renderProducts(products) {
     let html = "";
     const userInfoInLS = JSON.parse(localStorage.getItem("userInfo"));
 
-    products.data.forEach(product => {
+    products.data.filter(p => p.tags.isSale == true).forEach(product => {
         const isHidden = (!userInfoInLS || userInfoInLS.userrole == 'admin') ? 'style="visibility: hidden"' : '';
+        
+        let tagsHtml = "";
+        if (product.tags) {
+            if (product.tags.isNew) {
+                tagsHtml += `<span class="badge badge-new">New</span>`;
+            }
+            if (product.tags.isSale) {
+                tagsHtml += `<span class="badge badge-sale">Sale</span>`;
+            }
+        }
+
         html += `
         <a data-productid="${product._id}" href="../product-detail/product-detail.html?slug=${product.slug}" class="product-item">
+            <div class="product-badges">
+                ${tagsHtml}
+            </div>
             <img src="/assets/icon/Heart.png" class="heart-icon" ${isHidden} width="36px" height="36px">
-            <img src="${product.images[0]?.url || ''}">
+            <img src="${product.images[0]?.url || ''}" class="product-main-img">
             <img src="/assets/icon/Plus.png" ${isHidden} class="plus-icon add-variant-btn" width="36px" height="36px" >
             <h3>${product.name}</h3>
             <p>$${product.price}</p>

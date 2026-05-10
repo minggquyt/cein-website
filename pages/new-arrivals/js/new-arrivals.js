@@ -117,12 +117,26 @@ function renderProducts(products) {
     let html = "";
     const userInfoInLS = JSON.parse(localStorage.getItem("userInfo"));
 
-    products.data.forEach(product => {
+    products.data.filter(p => p.tags.isNew == true).forEach(product => {
         const isHidden = (!userInfoInLS || userInfoInLS.userrole == 'admin') ? 'style="visibility: hidden"' : '';
+        
+        let tagsHtml = "";
+        if (product.tags) {
+            if (product.tags.isNew) {
+                tagsHtml += `<span class="badge badge-new">New</span>`;
+            }
+            if (product.tags.isSale) {
+                tagsHtml += `<span class="badge badge-sale">Sale</span>`;
+            }
+        }
+
         html += `
         <a data-productid="${product._id}" href="../product-detail/product-detail.html?slug=${product.slug}" class="product-item">
+            <div class="product-badges">
+                ${tagsHtml}
+            </div>
             <img src="/assets/icon/Heart.png" class="heart-icon" ${isHidden} width="36px" height="36px">
-            <img src="${product.images[0]?.url || ''}">
+            <img src="${product.images[0]?.url || ''}" class="product-main-img">
             <img src="/assets/icon/Plus.png" ${isHidden} class="plus-icon add-variant-btn" width="36px" height="36px" >
             <h3>${product.name}</h3>
             <p>$${product.price}</p>
