@@ -19,22 +19,6 @@ export function displayWishListModal() {
 
 }
 
-function handleAddAllProductInWishlistToCart() {
-    const button = document.querySelector('.wishlist-btn-add-to-cart');
-
-    if (!button) return;
-
-   button.addEventListener('click',(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        if (currentWishlistData.length !== 0) {
-            // logic thêm ở đây
-        }
-
-
-   })
-}
 
 
 function updateNumberProductsInCart(total) {
@@ -145,9 +129,7 @@ function renderProductsInWishList(wishlistItems) {
     }).join('');
 
     // 3. Đổ HTML vào container và thêm nút Add To Cart ở cuối
-    container.innerHTML = htmlContent + `
-        <button class="wishlist-btn-add-to-cart roboto-400">Add All To Cart</button>
-    `;
+    container.innerHTML = htmlContent;
 
     initEventRemoveItemInWishList();
 }
@@ -165,7 +147,6 @@ function syncDataOfWishlist() {
                 console.log(currentWishlistData);
                 renderProductsInWishList(result.data);
                 renderNumberProductsInWishlist();
-                handleAddAllProductInWishlistToCart();
             }
             else {
                 console.warn("Lỗi server không render ra products trong wishlist");
