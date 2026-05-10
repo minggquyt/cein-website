@@ -294,7 +294,6 @@
                   <input type="radio" name="filter-color" value="black">
                   <span style="background-color:#000000;"></span>
                 </label>
-                <!-- ... các màu khác giữ nguyên cấu trúc ... -->
               </div>
             </div>
 
@@ -303,11 +302,11 @@
               <ul>
                 <li>
                   <input type="radio" name="filter-material" id="material-cotton" value="Cotton" hidden>
-                  <label for="material-cotton">Cotton</label>
+                  <label class="material-option-item" for="material-cotton">Cotton</label>
                 </li>
                 <li>
                   <input type="radio" name="filter-material" id="material-fleece" value="Fleece" hidden>
-                  <label for="material-fleece">Fleece</label>
+                  <label class="material-option-item" for="material-fleece">Fleece</label>
                 </li>
               </ul>
             </div>
@@ -385,7 +384,7 @@
   </footer>
   <script src="/assets/dist/js/bootstrap.bundle.min.js" class="astro-vvvwv3sm"></script>
   <script src="../../pages/shop/js/sort.js"></script>
-  <script src="../../pages/shop/js/filter.js"></script>
+  <script type="module" src="../../pages/shop/js/filter.js"></script>
   <script type="module" src="./js/shop.js"></script>
   <script type="module" src="../../authen.js"></script>
   <script type="module" src="../../components/user-setting-box/user-setting-box.js"></script>

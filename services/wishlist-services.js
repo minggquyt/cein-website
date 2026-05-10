@@ -5,6 +5,9 @@ import { postProductToWishlist } from "./postData.js";
 import { showWarningAlert, showDangerAlert } from "./alert.js";
 import showSuccessAlert from "./alert.js";
 
+// Biến lưu trữ dữ liệu wishlist trong RAM
+let currentWishlistData = [];
+
 export function displayWishListModal() {
     const wishListContainer = document.querySelector(".wish-list-modal");
 
@@ -13,6 +16,24 @@ export function displayWishListModal() {
     wishListContainer.classList.add("wish-list-modal-active");
 
     wishListBox.classList.add("wish-list-modal-box-active");
+
+}
+
+function handleAddAllProductInWishlistToCart() {
+    const button = document.querySelector('.wishlist-btn-add-to-cart');
+
+    if (!button) return;
+
+   button.addEventListener('click',(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (currentWishlistData.length !== 0) {
+            // logic thêm ở đây
+        }
+
+
+   })
 }
 
 
@@ -139,8 +160,12 @@ function syncDataOfWishlist() {
     getWishListData(userToken)
         .then(result => {
             if (result.success == true) {
+                // Update biến toàn cục
+                currentWishlistData = result.data;
+                console.log(currentWishlistData);
                 renderProductsInWishList(result.data);
                 renderNumberProductsInWishlist();
+                handleAddAllProductInWishlistToCart();
             }
             else {
                 console.warn("Lỗi server không render ra products trong wishlist");
@@ -158,7 +183,6 @@ export function initEventPopUpWishlistModal() {
     wishlistIcon.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-
         // hiển thị wishlist
         displayWishListModal();
 
@@ -188,7 +212,7 @@ export default function renderNumberProductsInCart() {
 
 }
 
-function updateNumberProductsInWishlist(total){
+function updateNumberProductsInWishlist(total) {
     const wishlistNumber = document.querySelector(".left-menu-wishlist span");
     wishlistNumber.innerHTML = total;
 }

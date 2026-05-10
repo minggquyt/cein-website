@@ -25,3 +25,5 @@ export function updateNumberProductsInCart(total) {
     const cartNumber = document.querySelector(".left-menu-bag span");
     cartNumber.innerHTML = total;
 }
+
+
