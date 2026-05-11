@@ -58,7 +58,7 @@ function renderCharts(chartData) {
     state.charts.sales = new Chart(ctxSales, {
         type: 'line',
         data: {
-            labels: dayLabels, 
+            labels: dayLabels,
             datasets: [{
                 label: 'Doanh thu ($)',
                 data: chartData.sales, // Mảng [500, 800, 450, 1200, 900, 2000, 1800]
@@ -76,7 +76,7 @@ function renderCharts(chartData) {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        callback: function(value) { return '$' + value; }
+                        callback: function (value) { return '$' + value; }
                     }
                 }
             },
@@ -222,7 +222,7 @@ function renderProductTable(products) {
 // thay hàm này thành chàm get Product Detail của mình
 function getProductDetailRequest(slug, token) {
     // Gọi đến router GET /:slug mà bạn đã viết ở BE
-    return fetch(`http://localhost:5000/api/products/${slug}`, {
+    return fetch(`https://cein-website-server.onrender.com/api/products/${slug}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${token}`,
@@ -279,10 +279,10 @@ function setupProductTableEvents() {
                         const productRow = deleteBtn.closest('tr');
                         productRow.style.transition = "all 0.3s ease";
                         productRow.style.opacity = '0';
-                        
+
                         setTimeout(() => {
                             productRow.remove();
-                        },300)
+                        }, 300)
 
                         state.dashboardData.products = state.dashboardData.products.filter(p => p._id !== productId);
                     })
@@ -313,25 +313,90 @@ function setupProductTableEvents() {
     });
 }
 
+const variantTableBody = document.querySelector('#table-variants tbody');
+
+variantTableBody.addEventListener('click', (e) => {
+
+    const removeBtn = e.target.closest('.btn-remove-variant');
+
+    if (removeBtn) {
+        // Lấy index từ data-attribute
+        const index = parseInt(removeBtn.dataset.index);
+
+        // 1. Xóa trong mảng dữ liệu tạm
+        tempProductData.variants.splice(index, 1);
+
+        // 2. Gọi lại hàm render để cập nhật UI
+        renderTempListsUI();
+    }
+});
+
+// Lắng nghe sự kiện click trên container chứa ảnh
+const imgListContainer = document.getElementById('list-images');
+
+imgListContainer.addEventListener('click', (e) => {
+    // Kiểm tra nếu click trúng nút x
+    const removeBtn = e.target.closest('.btn-remove-img');
+
+    if (removeBtn) {
+        const index = parseInt(removeBtn.dataset.index);
+
+        // 1. Kiểm tra xem ảnh bị xóa có phải là thumbnail không
+        const wasThumbnail = tempProductData.images[index].isThumbnail;
+
+        // 2. Xóa ảnh khỏi mảng tạm
+        tempProductData.images.splice(index, 1);
+
+        if (wasThumbnail && tempProductData.images.length > 0) {
+            tempProductData.images[0].isThumbnail = true;
+        }
+
+        renderTempListsUI();
+
+    }
+});
+
+const colorListContainer = document.getElementById('list-colors');
+
+colorListContainer.addEventListener('click', (e) => {
+    // Kiểm tra nếu click trúng icon x (bi-x)
+    const removeBtn = e.target.closest('.btn-remove-color');
+    
+    if (removeBtn) {
+        // Chặn hành vi mặc định nếu cần
+        e.preventDefault();
+
+        // Lấy index từ data-attribute
+        const index = parseInt(removeBtn.dataset.index);
+        
+        // 1. Xóa màu khỏi mảng dữ liệu tạm
+        tempProductData.colors.splice(index, 1);
+        
+        // 2. Vẽ lại giao diện để cập nhật danh sách và index mới
+        renderTempListsUI();
+    }
+});
+
 // HÀM RENDER UI TẠM THỜI 
 function renderTempListsUI() {
-    // Render Hình ảnh
+
     const imgContainer = document.getElementById('list-images');
     imgContainer.innerHTML = tempProductData.images.map((img, idx) => `
-        <div class="position-relative border">
-            <img src="${img.url}" style="width:50px;height:50px;object-fit:cover">
-            <span class="badge bg-danger position-absolute top-0 end-0 cursor-pointer" onclick="removeImg(${idx})">x</span>
-            ${img.isThumbnail ? '<small class="d-block text-center bg-primary text-white" style="font-size:10px">Thumb</small>' : ''}
-        </div>
+    <div class="position-relative border">
+        <img src="${img.url}" style="width:50px;height:50px;object-fit:cover">
+        <!-- Thay đổi ở dòng dưới đây -->
+        <span class="badge bg-danger position-absolute top-0 end-0 cursor-pointer btn-remove-img" data-index="${idx}">x</span>
+        ${img.isThumbnail ? '<small class="d-block text-center bg-primary text-white" style="font-size:10px">Thumb</small>' : ''}
+    </div>
     `).join('');
 
-    // Render Màu sắc
     const colorContainer = document.getElementById('list-colors');
     colorContainer.innerHTML = tempProductData.colors.map((c, idx) => `
-        <span class="badge d-flex align-items-center gap-1 border text-dark" style="background:#f8f9fa">
-            <div style="width:12px;height:12px;background:${c.hex};border-radius:50%"></div>
-            ${c.name} <i class="bi bi-x cursor-pointer" onclick="removeColor(${idx})"></i>
-        </span>
+    <span class="badge d-flex align-items-center gap-1 border text-dark" style="background:#f8f9fa">
+        <div style="width:12px;height:12px;background:${c.hex};border-radius:50%"></div>
+        ${c.name} 
+        <i class="bi bi-x cursor-pointer btn-remove-color" data-index="${idx}"></i>
+    </span>
     `).join('');
 
     // Render Variants Table
@@ -341,7 +406,9 @@ function renderTempListsUI() {
             <td>${v.color}</td>
             <td>${v.size}</td>
             <td>${v.stock}</td>
-            <td class="text-danger cursor-pointer" onclick="removeVariant(${idx})">X</td>
+            <td>
+                <span class="text-danger cursor-pointer btn-remove-variant" data-index="${idx}">X</span>
+            </td>
         </tr>
     `).join('');
 }
@@ -397,7 +464,7 @@ btnAddProduct.addEventListener('click', handleAddProduct);
 const saveBtn = document.getElementById('save-product-changes')
 saveBtn.addEventListener('click', () => {
     const modalElement = document.getElementById('editProductModal');
-    const productId = modalElement.dataset.productid; 
+    const productId = modalElement.dataset.productid;
     // có productId -> update || không có productId -> add 
 
     const selectedSizes = Array.from(document.querySelectorAll('.size-checkbox:checked')).map(cb => cb.value);
@@ -418,13 +485,8 @@ saveBtn.addEventListener('click', () => {
         }
     };
 
-    // Validation nhẹ
-    if (!productDataForServer.name || !productDataForServer.price) {
-        alert("Vui lòng nhập tên và giá sản phẩm!");
-        return;
-    }
-
     // THÊM LOGIC VALIDATION Ở ĐÂY - KHÔNG CHO CÁC FIELD RỖNG !
+    if (!validateProduct(productDataForServer)) return;
 
     // Quyết định Method dựa trên việc có productId hay không
     const method = productId ? "PUT" : "POST";
@@ -459,13 +521,13 @@ document.querySelector('#customer-section tbody').addEventListener('click', (e) 
 
         // Tìm dữ liệu user trong state hiện tại
         const user = state.dashboardData.customers.find(c => c._id === userId);
-        
+
         if (user) {
             // Đổ dữ liệu vào Form
             document.getElementById('edit-user-name').value = user.name;
             document.getElementById('edit-user-email').value = user.email;
             document.getElementById('edit-user-phone').value = user.phone || "";
-            
+
             // Đổ dữ liệu vào các ô bị khóa
             document.getElementById('edit-user-id').value = user._id;
             document.getElementById('edit-user-total-orders').value = user.totalOrders + " đơn";
@@ -477,10 +539,10 @@ document.querySelector('#customer-section tbody').addEventListener('click', (e) 
     }
 
     const deleteBtn = e.target.closest("button.text-danger");
-    if(deleteBtn){
+    if (deleteBtn) {
         const userId = deleteBtn.dataset.id;
         const userRow = deleteBtn.closest("tr");
-        handleDeleteUserUI(userId,userRow);
+        handleDeleteUserUI(userId, userRow);
     }
 });
 
@@ -496,8 +558,10 @@ document.getElementById('save-user-changes').addEventListener('click', async () 
         phone: document.getElementById('edit-user-phone').value
     };
 
+    if (!validateUser(updateData)) return;
+
     try {
-        const response = await fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+        const response = await fetch(`https://cein-website-server.onrender.com/api/admin/users/${userId}`, {
             method: "PATCH",
             headers: {
                 "Authorization": `Bearer ${userInfo.usertoken}`,
@@ -513,7 +577,7 @@ document.getElementById('save-user-changes').addEventListener('click', async () 
             // Đóng modal
             userModal.hide();
             // Reload lại bảng hoặc gọi lại hàm render
-            location.reload(); 
+            location.reload();
         } else {
             alert("Lỗi: " + result.message);
         }
@@ -534,7 +598,7 @@ function handleDeleteUserUI(userId, rowElement) {
             // Bước 1: Hiệu ứng UI
             rowElement.style.transition = "all 0.3s ease";
             rowElement.style.opacity = "0";
-            
+
             setTimeout(() => {
                 rowElement.remove();
                 alert(result.message);
@@ -555,12 +619,81 @@ function handleDeleteUserUI(userId, rowElement) {
         });
 }
 
-// Khởi tạo event click edit và 
 
-// BỔ SUNG PHẦN QUẢN LÝ USER:
-// - THÊM TOTAL ORDERS ( GIẢ LẬP DỮ LIỆU CỨNG Ở DATABASE )
-// - THÊM SỐ ĐIỆN THOẠI ( THÔNG TIN LIÊN LẠC )
-// - THÊM BỘ LỌC ĐỂ SEARCH THEO:
-// + TRẠNG THÁI TÀI KHOẢN 
-// + SEARCH THEO TỔNG CHI TIÊU 
-// - PHÂN TRANG 
+// --- VALIDATION UTILS ---
+const validateProduct = (data) => {
+    // Regex cho tên: ít nhất 1 chữ cái, dài 3-100
+    const nameRegex = /^(?=.*[a-zA-ZÀ-ỹ]).{3,100}$/;
+    // Regex cho giá: Số dương
+    const priceRegex = /^[1-9]\d*(\.\d+)?$/;
+    
+    const variantSizeRegex = /^[a-zA-ZÀ-ỹ\s]+$/;
+
+    const variantStockRegex = /^[1-9]\d*$/;
+
+    // 1. Kiểm tra các trường cơ bản
+    if (!nameRegex.test(data.name)) {
+        alert("Tên sản phẩm không hợp lệ (3-100 ký tự, phải có chữ).");
+        return false;
+    }
+    if (!priceRegex.test(data.price)) {
+        alert("Giá sản phẩm phải là số dương.");
+        return false;
+    }
+    if (!data.images?.length) {
+        alert("Vui lòng thêm ít nhất một hình ảnh.");
+        return false;
+    }
+    if (!data.colors?.length) {
+        alert("Vui lòng thêm ít nhất một màu sắc.");
+        return false;
+    }
+
+    // 2. KIỂM TRA CHI TIẾT VARIANTS (Ràng buộc sâu)
+    if (!data.variants || data.variants.length === 0) {
+        alert("Vui lòng thêm ít nhất một biến thể.");
+        return false;
+    }
+
+    for (let i = 0; i < data.variants.length; i++) {
+        const v = data.variants[i];
+        const displayIndex = i + 1; 
+
+        // Kiểm tra Size của variant
+        if (!variantSizeRegex.test(v.size)) {
+            alert(`Dòng biến thể thứ ${displayIndex}: Kích thước (Size) "${v.size}" không hợp lệ. Size phải là chữ.`);
+            return false;
+        }
+
+        // Kiểm tra Stock của variant
+        if (!variantStockRegex.test(v.stock)) {
+            alert(`Dòng biến thể thứ ${displayIndex}: Số lượng "${v.stock}" không hợp lệ. Phải là số nguyên dương.`);
+            return false;
+        }
+    }
+
+    return true;
+};
+
+const validateUser = (data) => {
+    // Regex: Email chuẩn RFC 5322
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Regex: Số điện thoại Việt Nam (10 số, bắt đầu bằng 03, 05, 07, 08, 09)
+    const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+    // Regex: Tên không chứa số hoặc ký tự đặc biệt, 2-50 ký tự
+    const nameRegex = /^[a-zA-ZÀ-ỹ\s]{2,50}$/;
+
+    if (!nameRegex.test(data.name)) {
+        alert("Tên người dùng không hợp lệ (2-50 ký tự, không chứa số).");
+        return false;
+    }
+    if (!emailRegex.test(data.email)) {
+        alert("Email không đúng định dạng.");
+        return false;
+    }
+    if (data.phone && !phoneRegex.test(data.phone)) {
+        alert("Số điện thoại không đúng định dạng Việt Nam.");
+        return false;
+    }
+    return true;
+};

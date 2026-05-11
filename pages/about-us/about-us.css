@@ -132,6 +132,7 @@
 
 /* Hiệu ứng cho hình ảnh Shop */
 .shop-img-container {
+    height: 100vh;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -143,6 +144,7 @@
 .shop-preview-img {
     transition: transform 1s ease;
     width: 100%;
+
 }
 
 .shop-img-container:hover .shop-preview-img {

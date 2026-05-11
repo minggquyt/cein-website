@@ -199,7 +199,6 @@ function initSortAndFilterEvents() {
 
     // 4. Filter Panel - Material
     const materialOptions = document.querySelectorAll(".material-option-item");
-    console.log(materialOptions);
     materialOptions.forEach(opt => {
         opt.addEventListener("click", (e) => {
             console.log("người dùng click")
