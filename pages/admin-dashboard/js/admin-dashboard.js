@@ -3,12 +3,11 @@ import { synProductWithServer } from "../../../services/updateData.js";
 import { deleteProductRequest } from "../../../services/deleteData.js";
 import { deleteUserRequest } from "../../../services/deleteData.js";
 
-// Biến lưu trữ dữ liệu tập trung (State)
 let state = {
     dashboardData: null,
-    charts: {}
+    charts: {},
+    isExpanded: false 
 };
-
 let tempProductData = {
     images: [],
     colors: [],
@@ -192,17 +191,19 @@ function handleAddProduct(e) {
     modalInstance.show();
 }
 
-// Hàm render table (Chỉnh lại để lấy ảnh từ mảng images)
 function renderProductTable(products) {
-    const tableBody = document.querySelector('#system-section tbody');
+    const tableContainer = document.querySelector('#system-section'); // Container chứa bảng
+    const tableBody = tableContainer.querySelector('tbody');
     if (!tableBody) return;
 
-    tableBody.innerHTML = products.map(p => {
-        // Tìm ảnh thumbnail trong mảng images
-        const thumb = p.images?.find(img => img.isThumbnail)?.url || 'https://via.placeholder.com/40';
+    // 1. Logic giới hạn sản phẩm
+    const displayProducts = state.isExpanded ? products : products.slice(0, 10);
 
+    // 2. Render hàng trong bảng
+    tableBody.innerHTML = displayProducts.map(p => {
+        const thumb = p.images?.find(img => img.isThumbnail)?.url || 'https://via.placeholder.com/40';
         return `
-        <tr slug=${p.slug} >
+        <tr slug="${p.slug}">
             <td>#${p._id.toString().slice(-4)}</td>
             <td><img src="${thumb}" class="rounded" style="width:40px"></td>
             <td>${p.name}</td>
@@ -217,6 +218,28 @@ function renderProductTable(products) {
             </td>
         </tr>`;
     }).join('');
+
+    // 3. Xử lý nút "Xem thêm"
+    // Xóa nút cũ nếu có để tránh lặp
+    const oldBtn = document.getElementById('btn-show-more-products');
+    if (oldBtn) oldBtn.remove();
+
+    // Nếu tổng sản phẩm > 10, mới hiển thị nút
+    if (products.length > 10) {
+        const btnHtml = `
+            <div class="text-center mt-3" id="btn-show-more-products">
+                <button class="btn btn-link text-dark text-decoration-none">
+                    ${state.isExpanded ? 'Thu gọn <i class="bi bi-chevron-up"></i>' : 'Xem thêm ' + (products.length - 10) + ' sản phẩm khác <i class="bi bi-chevron-down"></i>'}
+                </button>
+            </div>
+        `;
+        tableContainer.insertAdjacentHTML('beforeend', btnHtml);
+
+        document.querySelector('#btn-show-more-products button').onclick = () => {
+            state.isExpanded = !state.isExpanded;
+            renderProductTable(state.dashboardData.products); 
+        };
+    }
 }
 
 // thay hàm này thành chàm get Product Detail của mình
@@ -676,7 +699,6 @@ const validateProduct = (data) => {
 };
 
 const validateUser = (data) => {
-    // Regex: Email chuẩn RFC 5322
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     // Regex: Số điện thoại Việt Nam (10 số, bắt đầu bằng 03, 05, 07, 08, 09)
     const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
