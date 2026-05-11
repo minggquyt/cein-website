@@ -1,5 +1,5 @@
 .user-setting-box{
-    width: 250px;
+    width: 200px;
     position: absolute;
     visibility: hidden;
     top: 32.5px;
@@ -14,8 +14,8 @@
     content: "";
     z-index: 4;
     width: 100%;
-    height: calc(100vh - 100px);
-    top: 100px;  
+    height: calc(100vh - 90px);
+    top: 95px;  
     left: 0;
     background-color: black;
     opacity: 0.3;
@@ -30,4 +30,14 @@
 }
 .visibility-inherit{
     visibility: inherit !important;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+    .user-setting-box-pseudoclass{
+        top: 0;
+        height: 100vh;
+    }
+    .user-setting-box{
+        left: calc((100% - 200px) / 2);
+    }
 }

@@ -61,11 +61,11 @@ function updateUIForLoginUser() {
     const wisthListIcon = document.querySelector('#wishlist');
     const cartIcon = document.querySelector('#cart');
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    
+
 
     if (userInfo) {
         loginIcon.src = userInfo.useravatarurl
-        
+
         if (userInfo.userrole !== 'admin') {
             wisthListIcon.style.display = "inline-block";
             cartIcon.style.display = "inline-block";
@@ -134,6 +134,23 @@ if (passwordInput) {
     });
 }
 
+function handleToggleHeaderOnMobileWhenUserClickLoginIcon(){
+    const loginIcon = document.getElementById('login-icon');
+    const navbarCollapse = document.getElementById('navbarsExample04');
+
+    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false
+    });
+
+    loginIcon.addEventListener('click', () => {
+        // Kiểm tra nếu class 'show' đang tồn tại (nghĩa là menu mobile đang mở)
+        if (navbarCollapse.classList.contains('show') && loginIcon.src.includes("account.png")) {
+            bsCollapse.hide();
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updateUIForLoginUser();
+    handleToggleHeaderOnMobileWhenUserClickLoginIcon();
 });
