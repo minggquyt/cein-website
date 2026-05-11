@@ -1,4 +1,4 @@
-//Sort Responsive Mobile
+
 function openSort() {
     if (window.innerWidth <= 600) {
         const panel = document.querySelector('.sort-panel');
@@ -7,7 +7,8 @@ function openSort() {
         if(overlay) overlay.classList.add('active');
     }
 }
-function closeSort() {
+export default function closeSort() {
+  console.log("hàm này chạy");
     if (window.innerWidth > 600) return;
   document.getElementsByClassName('sort-panel')[0].classList.remove('active');
   document.getElementById('overlay-sort').classList.remove('active');

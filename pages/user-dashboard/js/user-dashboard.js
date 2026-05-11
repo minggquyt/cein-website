@@ -78,7 +78,7 @@ function handleUpdateProfile(event) {
         .then(avatarUrl => {
             finalAvatarUrl = avatarUrl; // Cập nhật lại biến url cuối cùng
 
-            return fetch('http://localhost:5000/api/user/profile', {
+            return fetch('https://cein-website-server.onrender.com/api/user/profile', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

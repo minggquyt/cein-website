@@ -6,6 +6,7 @@ import renderNumberProductsInCart from '../../../services/cart-services.js'
 import showSuccessAlert from "../../../services/alert.js";
 import { showDangerAlert, showWarningAlert } from "../../../services/alert.js";
 import { initEventClickButtonAddToWishlist } from "../../../services/wishlist-services.js";
+import closeSort from "./sort.js";
 
 const state = {
     allProducts: [],
@@ -173,6 +174,8 @@ function initSortAndFilterEvents() {
         option.addEventListener("click", (e) => {
             e.preventDefault();
             state.filters.sort = e.target.innerText;
+
+            closeSort();
 
             applyLogicAndRender();
         });

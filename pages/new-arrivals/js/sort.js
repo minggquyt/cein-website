@@ -7,7 +7,7 @@ function openSort() {
         if(overlay) overlay.classList.add('active');
     }
 }
-function closeSort() {
+export default function closeSort() {
     if (window.innerWidth > 600) return;
   document.getElementsByClassName('sort-panel')[0].classList.remove('active');
   document.getElementById('overlay-sort').classList.remove('active');

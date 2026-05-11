@@ -75,7 +75,7 @@
     width: 15.625em;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 0 1.25em 0 rgba(0, 0, 0, 0.1);
-    z-index: 1;
+    z-index: 4;
 }
 
 .sort-option span ul li {
