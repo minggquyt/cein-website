@@ -2,6 +2,8 @@ import { getAdminData } from "../../../services/getData.js";
 import { synProductWithServer } from "../../../services/updateData.js";
 import { deleteProductRequest } from "../../../services/deleteData.js";
 import { deleteUserRequest } from "../../../services/deleteData.js";
+import showSuccessAlert,{ showWarningAlert, showDangerAlert } from "../../../services/alert.js";
+
 
 let state = {
     dashboardData: null,
@@ -156,7 +158,7 @@ function initDashboard() {
         })
         .catch(error => {
             console.error("Lỗi khởi tạo Dashboard:", error);
-            alert(error.message);
+            showDangerAlert(error.message)
             window.location.href = "/login.html";
         });
 }
@@ -298,7 +300,7 @@ function setupProductTableEvents() {
             if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
                 deleteProductRequest(productId, userInfo.usertoken)
                     .then(result => {
-                        alert("Xóa thành công!");
+                        showSuccessAlert("Xóa thành công")
                         const productRow = deleteBtn.closest('tr');
                         productRow.style.transition = "all 0.3s ease";
                         productRow.style.opacity = '0';
@@ -331,7 +333,7 @@ function setupProductTableEvents() {
                     // 3. Hiển thị Modal
                     editModal.show();
                 })
-                .catch(err => alert("Lỗi: " + err.message));
+                .catch(err => showDangerAlert("Lỗi: " + err.message));
         }
     });
 }
@@ -517,7 +519,7 @@ saveBtn.addEventListener('click', () => {
     synProductWithServer(method, productDataForServer, productId)
         .then(result => {
             if (result.success) {
-                alert(productId ? "Cập nhật thành công!" : "Thêm sản phẩm mới thành công!");
+                showSuccessAlert(productId ? "Cập nhật thành công!" : "Thêm sản phẩm mới thành công!");
 
                 // Đóng modal
                 bootstrap.Modal.getInstance(modalElement).hide();
@@ -596,17 +598,17 @@ document.getElementById('save-user-changes').addEventListener('click', async () 
         const result = await response.json();
 
         if (result.success) {
-            alert("Cập nhật thông tin thành công!");
+            showSuccessAlert("Cập nhật thông tin thành công")
             // Đóng modal
             userModal.hide();
             // Reload lại bảng hoặc gọi lại hàm render
             location.reload();
         } else {
-            alert("Lỗi: " + result.message);
+            showDangerAlert("Lỗi: " + result.message);
         }
     } catch (error) {
         console.error("Update User Error:", error);
-        alert("Không thể kết nối đến server.");
+        showDangerAlert("Không thể kết nối đến server");
     }
 });
 
@@ -624,7 +626,7 @@ function handleDeleteUserUI(userId, rowElement) {
 
             setTimeout(() => {
                 rowElement.remove();
-                alert(result.message);
+                showSuccessAlert(result.message);
             }, 300);
 
             // Bước 2: Cập nhật State toàn cục (nếu có)
@@ -656,25 +658,25 @@ const validateProduct = (data) => {
 
     // 1. Kiểm tra các trường cơ bản
     if (!nameRegex.test(data.name)) {
-        alert("Tên sản phẩm không hợp lệ (3-100 ký tự, phải có chữ).");
+        showWarningAlert("Tên sản phẩm không hợp lệ (3-100 ký tự, phải có chữ)");
         return false;
     }
     if (!priceRegex.test(data.price)) {
-        alert("Giá sản phẩm phải là số dương.");
+        showWarningAlert("Giá sản phẩm phải là số dương");
         return false;
     }
     if (!data.images?.length) {
-        alert("Vui lòng thêm ít nhất một hình ảnh.");
+        showWarningAlert("Vui lòng thêm ít nhất một hình ảnh");
         return false;
     }
     if (!data.colors?.length) {
-        alert("Vui lòng thêm ít nhất một màu sắc.");
+        showWarningAlert("Vui lòng thêm ít nhất một màu sắc");
         return false;
     }
 
     // 2. KIỂM TRA CHI TIẾT VARIANTS (Ràng buộc sâu)
     if (!data.variants || data.variants.length === 0) {
-        alert("Vui lòng thêm ít nhất một biến thể.");
+        showWarningAlert("Vui lòng thêm ít nhất một biến thể");
         return false;
     }
 
@@ -684,13 +686,13 @@ const validateProduct = (data) => {
 
         // Kiểm tra Size của variant
         if (!variantSizeRegex.test(v.size)) {
-            alert(`Dòng biến thể thứ ${displayIndex}: Kích thước (Size) "${v.size}" không hợp lệ. Size phải là chữ.`);
+            showWarningAlert(`Dòng biến thể thứ ${displayIndex}: Kích thước (Size) "${v.size}" không hợp lệ. Size phải là chữ.`);
             return false;
         }
 
         // Kiểm tra Stock của variant
         if (!variantStockRegex.test(v.stock)) {
-            alert(`Dòng biến thể thứ ${displayIndex}: Số lượng "${v.stock}" không hợp lệ. Phải là số nguyên dương.`);
+            showWarningAlert(`Dòng biến thể thứ ${displayIndex}: Số lượng "${v.stock}" không hợp lệ. Phải là số nguyên dương.`);
             return false;
         }
     }
@@ -706,15 +708,15 @@ const validateUser = (data) => {
     const nameRegex = /^[a-zA-ZÀ-ỹ\s]{2,50}$/;
 
     if (!nameRegex.test(data.name)) {
-        alert("Tên người dùng không hợp lệ (2-50 ký tự, không chứa số).");
+        showWarningAlert("Tên người dùng không hợp lệ (2-50 ký tự, không chứa số)");
         return false;
     }
     if (!emailRegex.test(data.email)) {
-        alert("Email không đúng định dạng.");
+        showWarningAlert("Email không đúng định dạng");
         return false;
     }
     if (data.phone && !phoneRegex.test(data.phone)) {
-        alert("Số điện thoại không đúng định dạng Việt Nam.");
+        showWarningAlert("Số điện thoại không đúng định dạng Việt Nam")
         return false;
     }
     return true;

@@ -31,10 +31,11 @@ function applyLogicAndRender() {
 
         // 1. Filter theo Category
         if (state.filters.category) {
-            result = result.filter(p => {
-                console.log(p.categoryDetails.slug.includes(state.filters.category));
-                return p.categoryDetails.slug.includes(state.filters.category)
-            });
+            if (!state.filters.category.includes("all")) {
+                result = result.filter(p => {
+                    return p.categoryDetails.slug.includes(state.filters.category)
+                });
+            }
         }
 
         // 2. Filter theo Color
@@ -120,7 +121,7 @@ function renderProducts(products) {
 
     products.data.filter(p => p.tags.isNew == true).forEach(product => {
         const isHidden = (!userInfoInLS || userInfoInLS.userrole == 'admin') ? 'style="visibility: hidden"' : '';
-        
+
         let tagsHtml = "";
         if (product.tags) {
             if (product.tags.isNew) {
@@ -132,7 +133,7 @@ function renderProducts(products) {
         }
 
         html += `
-        <a data-productid="${product._id}" href="../product-detail/product-detail.html?slug=${product.slug}" class="product-item">
+        <a data-productid="${product._id}" data-aos="fade-up" href="../product-detail/product-detail.html?slug=${product.slug}" class="product-item">
             <div class="product-badges">
                 ${tagsHtml}
             </div>
@@ -192,7 +193,7 @@ function initSortAndFilterEvents() {
             applyLogicAndRender();
         }
     });
-    
+
 
     // 3. Filter Panel - Color (Radio buttons)
     const colorInputs = document.querySelectorAll('input[name="filter-color"]');
@@ -354,6 +355,18 @@ async function performSearch() {
         console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
     } finally {
         hideLoading();
+    }
+
+    // logic clode header trên mobile
+    const navbarCollapse = document.getElementById('navbarsExample04');
+
+    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false
+    });
+
+    console.log(navbarCollapse.classList.contains('show'));
+    if (navbarCollapse.classList.contains('show')) {
+        bsCollapse.hide();
     }
 }
 

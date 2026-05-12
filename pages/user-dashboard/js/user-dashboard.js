@@ -1,3 +1,4 @@
+import showSuccessAlert, { showDangerAlert, showWarningAlert } from "../../../services/alert.js";
 import { getUserInfo } from "../../../services/getData.js";
 
 const inputFile = document.querySelector("#avatarInput");
@@ -26,7 +27,18 @@ inputFile.addEventListener('change', function (event) {
 });
 
 // Xử lý sự kiện submit form (Optional: Để test)
-document.getElementById('profileForm').addEventListener('submit',handleUpdateProfile)
+document.getElementById('profileForm').addEventListener('submit',handleUpdateProfile);
+
+const validators = {
+    username: (value) => {
+        if (!value.trim()) return "Username không được để trống";
+        if (value.trim().length < 4) return "Username tối thiểu 4 ký tự";
+        if (value.trim().length > 30) return "Username tối đa 30 ký tự";
+        if (!/^[a-zA-ZÀ-ỹ ]+$/.test(value.trim()))
+            return "Username chỉ được chứa chữ và khoảng trắng";
+        return "";
+    },
+}
 
 function handleUpdateProfile(event) {
     event.preventDefault();
@@ -34,7 +46,7 @@ function handleUpdateProfile(event) {
     // 1. Lấy Token từ userInfo trong localStorage
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (!userInfo) {
-        alert("Vui lòng đăng nhập!");
+        showWarningAlert("Vui lòng đăng nhập!");
         return;
     }
     const token = userInfo.usertoken;
@@ -44,6 +56,14 @@ function handleUpdateProfile(event) {
     
     // Thu thập dữ liệu cơ bản
     const fullName = document.getElementById('fullName').value;
+
+    // validate user name
+    const messageValid = validators.username(fullName);
+    if(messageValid != ""){
+        showWarningAlert(messageValid);
+        return;
+    }
+
     const gender = document.querySelector('input[name="gender"]:checked')?.value;
     let finalAvatarUrl = document.getElementById('avatarPreview').src;
 
@@ -94,7 +114,7 @@ function handleUpdateProfile(event) {
         .then(response => response.json())
         .then(result => {
             if (result.success) {
-                alert("Cập nhập thông tin thành công");
+                showSuccessAlert("Cập nhập thông tin thành công");
 
                 // Cập nhật lại localStorage ( vẩn đảm bảo giữ nguyên schema )
                 const newUserInfo = { ...userInfo };
@@ -104,12 +124,12 @@ function handleUpdateProfile(event) {
                 
                 window.location.reload(); 
             } else {
-                alert("Lỗi: " + result.message);
+                showDangerAlert("Lỗi: " + result.message);
             }
         })
         .catch(error => {
             console.error("Error:", error);
-            alert("Đã xảy ra lỗi: " + error.message);
+            showDangerAlert("Đã xảy ra lỗi: " + error.message);
         })
         .finally(() => {
             saveBtn.disabled = false;

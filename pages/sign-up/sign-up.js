@@ -1,7 +1,8 @@
 import { postRegisterData } from "../../services/postData.js";
 import showLoading from "../../components/loading/loading.js";
 import { hideLoading } from "../../components/loading/loading.js";
-import { showDangerAlert } from "../../services/alert.js";
+import { showDangerAlert, showWarningAlert } from "../../services/alert.js";
+import showSuccessAlert from "../../services/alert.js";
 
 const inputs = {
     username: document.getElementById("form3Example1c"),
@@ -15,8 +16,8 @@ const validators = {
         if (!value.trim()) return "Username không được để trống";
         if (value.trim().length < 4) return "Username tối thiểu 4 ký tự";
         if (value.trim().length > 30) return "Username tối đa 30 ký tự";
-        if (!/^[a-zA-Z0-9_]+$/.test(value.trim()))
-            return "Username chỉ được chứa chữ, số và dấu _";
+        if (!/^[a-zA-ZÀ-ỹ ]+$/.test(value.trim()))
+            return "Username chỉ được chứa chữ và khoảng trắng";
         return "";
     },
 

@@ -150,7 +150,24 @@ function handleToggleHeaderOnMobileWhenUserClickLoginIcon(){
     });
 }
 
+function displaySearchIconInSpecificPages(){
+    const currentURL = window.location.href;
+    console.log(currentURL);
+
+    const searchIcon = document.querySelector('img[src="/assets/images/search.png"]');
+
+    if(currentURL.includes("shop") || currentURL.includes("new-arrivals") || currentURL.includes("sales")){
+        searchIcon.style.display = "inline";
+        return;
+    }
+    else{
+        searchIcon.style.display = "none";
+        return;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updateUIForLoginUser();
     handleToggleHeaderOnMobileWhenUserClickLoginIcon();
+    displaySearchIconInSpecificPages();
 });
