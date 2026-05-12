@@ -1,14 +1,10 @@
 //Click btn-filter de mo filter panel tren desktop
 function openFilter() {
-    console.log("Hàm này chạy")
     // if (window.innerWidth >= 600) {
         const panel = document.querySelector('.filter-panel');
         const overlay = document.getElementById('overlay-filter');
         if (panel) panel.classList.add('active');
         if (overlay) overlay.classList.add('active');
-
-        console.log(panel);
-        console.log(overlay);
     // }
 }
 export function closeFilter() {

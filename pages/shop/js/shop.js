@@ -15,15 +15,25 @@ const state = {
     filters: {
         page: 1,
         limit: 12,
-        category: null,
+        category: null, // Giữ nguyên nếu category chỉ chọn 1 dải button
         sort: null,
-        color: null,
-        material: null,
-        size: null
+        colors: [],
+        materials: [],
+        sizes: []
     }
 };
 
 let productStore = {};
+
+function clearFilter(filter){
+    filter.page = 1;
+    filter.limit = 12;
+    filter.category = null;
+    filter.sort = null;
+    filter.colors = [];
+    filter.materials = [];
+    filter.sizes = [];
+}
 
 function applyLogicAndRender() {
     return new Promise((resolve) => {
@@ -40,23 +50,29 @@ function applyLogicAndRender() {
             }
         }
 
-        // 2. Filter theo Color
-        if (state.filters.color) {
+        // 2. Filter theo Colors (Nhiều lựa chọn)
+        if (state.filters.colors.length > 0) {
             result = result.filter(p =>
-                p.colors && p.colors.some(c => c.name.toLowerCase() === state.filters.color.toLowerCase())
+                p.colors && p.colors.some(c =>
+                    state.filters.colors.includes(c.name.toLowerCase())
+                )
             );
         }
 
-        // 3. Filter theo Material
-        if (state.filters.material) {
-            // so sánh theo tất cả chữ thường
-            result = result.filter(p => p.material.toLowerCase() === state.filters.material.toLowerCase());
+       // 3. Filter theo Material (Chỉ cần thỏa 1 trong các chất liệu)
+        if (state.filters.materials.length > 0) {
+            result = result.filter(p => 
+                state.filters.materials.includes(p.material.toLowerCase())
+            );
         }
 
-        // 4. Filter theo Size
-        if (state.filters.size) {
-            result = result.filter(p => p.sizes && p.sizes.includes(state.filters.size));
+        // 4. Filter theo Sizes (Nhiều lựa chọn)
+        if (state.filters.sizes.length > 0) {
+            result = result.filter(p =>
+                p.sizes && p.sizes.some(s => state.filters.sizes.includes(s))
+            );
         }
+
         // 5. Sort
         switch (state.filters.sort) {
             case "Price: Low to High":
@@ -92,6 +108,15 @@ function applyLogicAndRender() {
         });
         mapProductsToStore({ data: displayData });
         resolve(displayData);
+
+        console.log("Trước khi clear: ");
+        console.log(state.filters);
+
+        // clear filter cũ sau khi render xong products
+        clearFilter(state.filters);
+
+        console.log("sau khi clear: ");
+        console.log(state.filters);
     });
 }
 
@@ -199,29 +224,44 @@ function initSortAndFilterEvents() {
     const colorInputs = document.querySelectorAll('input[name="filter-color"]');
     colorInputs.forEach(input => {
         input.addEventListener("change", (e) => {
-            state.filters.color = e.target.value;
+            const val = e.target.value;
+            if (e.target.checked) {
+                state.filters.colors.push(val);
+            } else {
+                state.filters.colors = state.filters.colors.filter(c => c !== val);
+            }
         });
     });
 
-    // 4. Filter Panel - Material
+    // 4. Material
     const materialOptions = document.querySelectorAll(".material-option-item");
     materialOptions.forEach(opt => {
         opt.addEventListener("click", (e) => {
-            console.log("người dùng click")
             e.preventDefault();
+            const val = e.target.innerText.trim();
             e.target.classList.toggle('active-filter');
-            state.filters.material = e.target.innerText
-            console.log(state)
+
+            if (e.target.classList.contains('active-filter')) {
+                state.filters.materials.push(val);
+            } else {
+                state.filters.materials = state.filters.materials.filter(m => m !== val);
+            }
         });
     });
 
-    // 5. Filter Panel - Size
+    // 5. Size
     const sizeOptions = document.querySelectorAll(".size-option ul li label");
     sizeOptions.forEach(opt => {
         opt.addEventListener("click", (e) => {
             e.preventDefault();
-            state.filters.size = e.target.innerText;
-            e.target.classList.toggle("active-filter")
+            const val = e.target.innerText.trim();
+            e.target.classList.toggle("active-filter");
+
+            if (e.target.classList.contains("active-filter")) {
+                state.filters.sizes.push(val);
+            } else {
+                state.filters.sizes = state.filters.sizes.filter(s => s !== val);
+            }
         });
     });
 
