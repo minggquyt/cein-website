@@ -67,7 +67,7 @@
 }
 
 .sort-option span ul {
-    display: none;
+    display: block;
     padding: 1.875em 0;
     list-style: none;
     position: absolute;
@@ -75,6 +75,8 @@
     width: 15.625em;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 0 1.25em 0 rgba(0, 0, 0, 0.1);
+    transition: opacity 0.2s ease;
+    opacity: 0;
     z-index: 4;
 }
 
@@ -96,7 +98,7 @@
 }
 
 .sort-option span:hover ul {
-    display: block;
+    opacity: 1;
 }
 
 .sort-header {

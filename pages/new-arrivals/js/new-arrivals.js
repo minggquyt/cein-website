@@ -16,13 +16,25 @@ const state = {
         limit: 12,
         category: null,
         sort: null,
-        color: null,
-        material: null,
-        size: null
+        colors: [],
+        materials: [],
+        sizes: []
     }
 };
 
 let productStore = {};
+
+function clearFilter(filter){
+    filter.page = 1;
+    filter.limit = 12;
+    filter.category = null;
+    filter.sort = null;
+    filter.colors = [];
+    filter.materials = [];
+    filter.sizes = [];
+}
+
+
 
 function applyLogicAndRender() {
     return new Promise((resolve) => {
@@ -31,6 +43,7 @@ function applyLogicAndRender() {
 
         // 1. Filter theo Category
         if (state.filters.category) {
+
             if (!state.filters.category.includes("all")) {
                 result = result.filter(p => {
                     return p.categoryDetails.slug.includes(state.filters.category)
@@ -38,23 +51,29 @@ function applyLogicAndRender() {
             }
         }
 
-        // 2. Filter theo Color
-        if (state.filters.color) {
+        // 2. Filter theo Colors (Nhiều lựa chọn)
+        if (state.filters.colors.length > 0) {
             result = result.filter(p =>
-                p.colors && p.colors.some(c => c.name.toLowerCase() === state.filters.color.toLowerCase())
+                p.colors && p.colors.some(c =>
+                    state.filters.colors.includes(c.name.toLowerCase())
+                )
             );
         }
 
-        // 3. Filter theo Material
-        if (state.filters.material) {
-            // so sánh theo tất cả chữ thường
-            result = result.filter(p => p.material.toLowerCase() === state.filters.material.toLowerCase());
+       // 3. Filter theo Material (Chỉ cần thỏa 1 trong các chất liệu)
+        if (state.filters.materials.length > 0) {
+            result = result.filter(p => 
+                state.filters.materials.includes(p.material.toLowerCase())
+            );
         }
 
-        // 4. Filter theo Size
-        if (state.filters.size) {
-            result = result.filter(p => p.sizes && p.sizes.includes(state.filters.size));
+        // 4. Filter theo Sizes (Nhiều lựa chọn)
+        if (state.filters.sizes.length > 0) {
+            result = result.filter(p =>
+                p.sizes && p.sizes.some(s => state.filters.sizes.includes(s))
+            );
         }
+
         // 5. Sort
         switch (state.filters.sort) {
             case "Price: Low to High":
@@ -88,9 +107,11 @@ function applyLogicAndRender() {
                 totalItems: result.length
             }
         });
-
         mapProductsToStore({ data: displayData });
         resolve(displayData);
+
+        // clear filter cũ sau khi render xong products
+        clearFilter(state.filters);
     });
 }
 

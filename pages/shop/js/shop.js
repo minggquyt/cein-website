@@ -109,14 +109,8 @@ function applyLogicAndRender() {
         mapProductsToStore({ data: displayData });
         resolve(displayData);
 
-        console.log("Trước khi clear: ");
-        console.log(state.filters);
-
         // clear filter cũ sau khi render xong products
         clearFilter(state.filters);
-
-        console.log("sau khi clear: ");
-        console.log(state.filters);
     });
 }
 
@@ -402,7 +396,6 @@ async function performSearch() {
         toggle: false
     });
 
-    console.log(navbarCollapse.classList.contains('show'));
     if (navbarCollapse.classList.contains('show')) {
         bsCollapse.hide();
     }
